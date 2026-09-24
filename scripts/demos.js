@@ -333,7 +333,7 @@ export function initProjectCalculator() {
       const text = encodeURIComponent(
         `Привет, Сергей! Хочу обсудить внедрение:\n• Направление: ${typeInfo.name}\n• Дополнительно: ${featNames || 'Базовый комплект'}\n• Оценка: от ${totalPrice.toLocaleString('ru-RU')} ₽ (~${totalDays} раб. дней)`
       );
-      sendTelegramBtn.href = `https://t.me/gremzaa?text=${text}`;
+      sendTelegramBtn.href = `https://t.me/ssharonovv?text=${text}`;
     }
   }
 

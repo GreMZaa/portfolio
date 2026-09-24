@@ -4,7 +4,7 @@
 > Собираю готовые бизнес-системы, Telegram Mini Apps и автоматизации за дни вместо месяцев. Без корпоративной бюрократии, ТЗ на 40 страниц и раздутых смет от IT-агентств.
 
 🌐 **Сайт-витрина:** [https://gremzaa.github.io/portfolio/](https://gremzaa.github.io/portfolio/)  
-✈️ **Прямой контакт в Telegram:** [@gremzaa](https://t.me/gremzaa)  
+✈️ **Прямой контакт в Telegram:** [@ssharonovv](https://t.me/ssharonovv)  
 ✉️ **Email:** [sergey.nez00@gmail.com](mailto:sergey.nez00@gmail.com)
 
 ---

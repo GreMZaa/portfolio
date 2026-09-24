@@ -14,8 +14,7 @@ const projectDetails = {
       'База клиентов остается у бизнеса: прямой контакт для бесплатных повторных рассылок',
       'Оформление заказа за 30 секунд с автосохранением адреса гостя',
       'AI-консультант меню помогает выбрать подходящий рацион и увеличивает средний чек'
-    ],
-    github: 'https://github.com/GreMZaa/balance-food'
+    ]
   },
   'cdek-crm': {
     title: 'Складская система маркировки и трекинга отправлений',
@@ -27,8 +26,7 @@ const projectDetails = {
       'Ноль пересортов: сверка штрихкода перед отправкой исключает возвраты и штрафы',
       'Автоматическое информирование покупателей о трек-номере',
       'Полная прозрачность остатков по ячейкам склада в реальном времени'
-    ],
-    github: 'https://github.com/GreMZaa/cdek-warehouse-ai-crm'
+    ]
   },
   '1c-b2b': {
     title: 'B2B Каталог и сквозная синхронизация с 1С:Предприятие',
@@ -40,8 +38,7 @@ const projectDetails = {
       'Фоновая синхронизация остатков: исключены заказы отсутствующих товаров',
       'Моментальный поиск по фильтрам для оптовых клиентов',
       'Экономия десятков часов ручного труда операторов контента'
-    ],
-    github: 'https://github.com/GreMZaa/33sport-prototype'
+    ]
   },
   'ai-da-umnichka': {
     title: 'Веб-сервис детского центра: запись и сбор лидов',
@@ -52,8 +49,7 @@ const projectDetails = {
       '100 из 100 баллов скорости Google Lighthouse: мгновенная загрузка даже на слабом 3G',
       'Удобная форма записи на пробные занятия с высокой конверсией в заявку',
       'Прямая отправка уведомлений администраторам в Telegram без задержек'
-    ],
-    github: 'https://github.com/GreMZaa/ai-da-umnichka'
+    ]
   }
 };
 
@@ -98,14 +94,9 @@ window.openProjectModal = function(projectId) {
     </div>
 
     <div style="display: flex; gap: 12px; flex-wrap: wrap; padding-top: 18px; border-top: 1px solid #E4E4E7;">
-      <a href="https://t.me/gremzaa" target="_blank" rel="noopener noreferrer" class="btn-blue-pill" style="font-size:0.88rem; padding:10px 20px;">
+      <a href="https://t.me/ssharonovv" target="_blank" rel="noopener noreferrer" class="btn-blue-pill" style="font-size:0.88rem; padding:10px 20px;">
         Обсудить внедрение в Telegram ↗
       </a>
-      ${p.github ? `
-        <a href="${p.github}" target="_blank" rel="noopener noreferrer" class="btn-clean-link" style="align-self:center;">
-          Репозиторий на GitHub →
-        </a>
-      ` : ''}
     </div>
   `;
 
