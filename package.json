@@ -1,0 +1,26 @@
+{
+  "name": "gremzaa-developer-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Interactive Full-Stack, Telegram Mini Apps & AI Automation Developer Portfolio",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^5.4.0"
+  },
+  "keywords": [
+    "portfolio",
+    "telegram-mini-apps",
+    "tma",
+    "fullstack",
+    "ai-automation",
+    "threejs",
+    "typescript",
+    "react"
+  ],
+  "author": "Sergey (GreMZaa)",
+  "license": "MIT"
+}

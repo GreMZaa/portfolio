@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Сергей (GreMZaa) — Full-Stack, Telegram Mini Apps & AI Automation Разработчик</title>
+  <meta name="description" content="Портфолио Full-Stack разработчика: Telegram Mini Apps (TMA), AI-агенты, CRM и складские системы, интеграции с 1С и СДЭК, интерактивные 3D веб-приложения на Three.js.">
+  <meta name="keywords" content="Telegram Mini Apps, TMA, React, TypeScript, Three.js, 1C интеграция, CDEK CRM, AI боты, Full-stack разработчик">
+  <meta name="author" content="Сергей (GreMZaa)">
+
+  <!-- Open Graph / Meta -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Сергей (GreMZaa) — Telegram Mini Apps & Full-Stack Инженер">
+  <meta property="og:description" content="Разработка Telegram Mini Apps, AI-сервисов, складских CRM и сложных веб-систем. Смотрите интерактивные демо и реальные кейсы.">
+  <meta property="og:image" content="https://gremzaa.github.io/portfolio/assets/og-cover.png">
+  <meta name="theme-color" content="#07080c">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2300f0ff'><path d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/></svg>">
+
+  <!-- Google Fonts: Syne (Display), Plus Jakarta Sans (Body), JetBrains Mono (Code) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+
+  <!-- Ambient Animated Background Canvas & Grid -->
+  <canvas id="ambient-canvas"></canvas>
+  <div class="bg-grid-overlay"></div>
+
+  <!-- ==========================================================================
+       SITE HEADER
+       ========================================================================== -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="#" class="logo">
+        <span class="logo-badge">DEV</span>
+        <span class="logo-text">GREMZAA<span>.IO</span></span>
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#services" class="nav-link">Услуги</a></li>
+          <li><a href="#projects" class="nav-link">Кейсы</a></li>
+          <li><a href="#laboratory" class="nav-link">Лаборатория Демо</a></li>
+          <li><a href="#calculator" class="nav-link">Калькулятор</a></li>
+          <li><a href="#stack" class="nav-link">Стек</a></li>
+          <li><a href="#contact" class="nav-link">Контакты</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-cta-group">
+        <a href="https://github.com/GreMZaa" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" title="GitHub Профиль">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+          <span>GitHub</span>
+        </a>
+        <a href="https://t.me/gremzaa" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+          <span>Обсудить проект</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <button class="mobile-menu-btn" aria-label="Открыть меню">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       HERO SECTION
+       ========================================================================== -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-text-col">
+        <div class="status-pill">
+          <span class="pulse-dot"></span>
+          <span>Доступен для новых проектов и контрактов</span>
+        </div>
+
+        <h1 class="hero-title">
+          Разработка <span class="gradient-text">Telegram Mini Apps</span>, AI-сервисов и Web-систем
+        </h1>
+
+        <p class="hero-desc">
+          Превращаю бизнес-задачи в высокопроизводительные цифровые продукты. Создаю интерактивные приложения внутри Telegram под ключ, складские CRM-платформы, интеграционные шлюзы с 1C и СДЭК, а также 3D WebGL проекты.
+        </p>
+
+        <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+          <a href="#projects" class="btn btn-primary">
+            <span>Изучить реализованные кейсы</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#calculator" class="btn btn-secondary">
+            <span>Рассчитать бюджет проекта</span>
+          </a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat-item">
+            <div class="stat-num">100<span>%</span></div>
+            <div class="stat-label">// Сдача в срок</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">&lt;80<span>ms</span></div>
+            <div class="stat-label">// Скорость отклика UI</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">Full<span>Stack</span></div>
+            <div class="stat-label">// От БД до WebGL</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero Interactive Terminal Card -->
+      <div class="hero-visual">
+        <div class="terminal-card">
+          <div class="terminal-header">
+            <div class="terminal-dots">
+              <div class="t-dot t-red"></div>
+              <div class="t-dot t-yellow"></div>
+              <div class="t-dot t-green"></div>
+            </div>
+            <div class="terminal-title">gremzaa-engine ~ session #419</div>
+            <span class="terminal-badge">ONLINE</span>
+          </div>
+
+          <div class="terminal-body">
+            <div class="terminal-line cmd">stack --info</div>
+            <div class="terminal-line">Core: <span class="highlight">TypeScript, React 18, Vite, Next.js</span></div>
+            <div class="terminal-line">TMA: <span class="highlight">Telegram WebApp SDK, Grammy, WebSockets</span></div>
+            <div class="terminal-line">AI & Backend: <span class="highlight">Cohere AI, Supabase PostgreSQL, Node.js</span></div>
+            <div class="terminal-line">3D & Creative: <span class="highlight">Three.js, WebGL, GSAP Timeline</span></div>
+            <div class="terminal-line cmd">sys.status --check-delivery</div>
+            <div class="terminal-line"><span style="color:var(--neon-green)">✓</span> Tests Passed: 48/48 (Unit + E2E Playwright)</div>
+            <div class="terminal-line"><span style="color:var(--neon-green)">✓</span> Build Status: Clean, zero-friction CI/CD</div>
+            <div class="terminal-line cmd">client.connect --channel telegram</div>
+            <div class="terminal-line highlight">Ready to deploy solutions for your business<span class="cursor-blink"></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SERVICES & EXPERTISE (BENTO GRID)
+       ========================================================================== -->
+  <section id="services">
+    <div class="container">
+      <span class="section-tag">Специализация и возможности</span>
+      <h2 class="section-title">Что я могу разработать для вас</h2>
+      <p class="section-subtitle">
+        Полный цикл инженерной разработки: от архитектуры данных и UX прототипирования до продакшен-деплоя и непрерывной поддержки.
+      </p>
+
+      <div class="services-grid">
+        <!-- Bento Featured: Telegram Mini Apps -->
+        <div class="bento-card bento-featured">
+          <div class="bento-icon">📱</div>
+          <h3 class="bento-title">Telegram Mini Apps (TMA) Под Ключ</h3>
+          <p class="bento-desc">
+            Разработка полноценных веб-приложений внутри мессенджера Telegram с конверсией в 3-5 раз выше обычных сайтов. Нативная интеграция Telegram WebApp SDK, адаптивная корзина, каталоги с КБЖУ и фильтрами, прием платежей (Telegram Pay / ЮKassa / СБП), haptic-вибрация и синхронизация с ботом.
+          </p>
+          <div class="bento-tags">
+            <span class="bento-tag">Telegram WebApp SDK</span>
+            <span class="bento-tag">React 18</span>
+            <span class="bento-tag">Zustand</span>
+            <span class="bento-tag">Grammy Bot</span>
+            <span class="bento-tag">Supabase Realtime</span>
+            <span class="bento-tag">Haptic Feedback</span>
+          </div>
+        </div>
+
+        <!-- Bento 2: AI Agents & Automation -->
+        <div class="bento-card">
+          <div class="bento-icon">🤖</div>
+          <h3 class="bento-title">AI-Агенты и Умные Боты</h3>
+          <p class="bento-desc">
+            Внедрение языковых моделей (LLM) для консультации клиентов, автоматического подбора рационов питания, генерации ответов техподдержки и классификации входящих заявок.
+          </p>
+          <div class="bento-tags">
+            <span class="bento-tag">Cohere AI</span>
+            <span class="bento-tag">OpenAI API</span>
+            <span class="bento-tag">RAG Архитектура</span>
+            <span class="bento-tag">VK Bot API</span>
+          </div>
+        </div>
+
+        <!-- Bento 3: Warehouse & Logistics CRM -->
+        <div class="bento-card">
+          <div class="bento-icon">📦</div>
+          <h3 class="bento-title">CRM, Склады и Логистика</h3>
+          <p class="bento-desc">
+            Автоматизация работы распределительных центров и ПВЗ: генерация штрихкодов Code128, экспорт накладных в PDF, учет складских ячеек и трекинг посылок в реальном времени.
+          </p>
+          <div class="bento-tags">
+            <span class="bento-tag">JsBarcode</span>
+            <span class="bento-tag">JsPDF</span>
+            <span class="bento-tag">СДЭК API</span>
+            <span class="bento-tag">Ролевая Модель</span>
+          </div>
+        </div>
+
+        <!-- Bento 4: 1C & Enterprise Integration -->
+        <div class="bento-card">
+          <div class="bento-icon">⚡</div>
+          <h3 class="bento-title">Интеграции с 1С и Bitrix24</h3>
+          <p class="bento-desc">
+            Разработка шлюзов синхронизации больших каталогов (100k+ SKU), парсинг XML/YML фидов, автоматическое обновление цен и остатков без зависания основного интернет-магазина.
+          </p>
+          <div class="bento-tags">
+            <span class="bento-tag">1C:Предприятие</span>
+            <span class="bento-tag">XML / JSON Streams</span>
+            <span class="bento-tag">Bitrix24 API</span>
+            <span class="bento-tag">High-Load ETL</span>
+          </div>
+        </div>
+
+        <!-- Bento 5: 3D & Creative Web -->
+        <div class="bento-card">
+          <div class="bento-icon">🔮</div>
+          <h3 class="bento-title">Интерактивный 3D Web & WebGL</h3>
+          <p class="bento-desc">
+            Создание иммерсивных 3D веб-сайтов, промо-страниц и интерактивных конфигураторов продукции на Three.js и GSAP со стабильными 60 кадров/сек на мобильных устройствах.
+          </p>
+          <div class="bento-tags">
+            <span class="bento-tag">Three.js</span>
+            <span class="bento-tag">GSAP Timeline</span>
+            <span class="bento-tag">GLSL Shaders</span>
+            <span class="bento-tag">Canvas Confetti</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       PORTFOLIO PROJECTS SHOWCASE
+       ========================================================================== -->
+  <section id="projects">
+    <div class="container">
+      <span class="section-tag">Практические результаты</span>
+      <h2 class="section-title">Избранные проекты и кейсы</h2>
+      <p class="section-subtitle">
+        Реальные проекты с продуманной архитектурой, чистым кодом и измеримыми результатами для бизнеса. Нажмите на проект для изучения деталей.
+      </p>
+
+      <!-- Filter Controls -->
+      <div class="projects-filter-bar">
+        <button class="filter-btn active" data-filter="all">Все проекты (6)</button>
+        <button class="filter-btn" data-filter="tma">Telegram Mini Apps</button>
+        <button class="filter-btn" data-filter="ai-crm">AI CRM & Логистика</button>
+        <button class="filter-btn" data-filter="3d-web">3D & Creative Web</button>
+        <button class="filter-btn" data-filter="enterprise">Enterprise & 1С</button>
+      </div>
+
+      <!-- Projects Grid -->
+      <div class="projects-grid">
+        
+        <!-- Project 1: BALANCE Food TMA -->
+        <div class="project-card" data-category="tma">
+          <div class="project-preview">
+            <span class="project-badge-type">Telegram Mini App</span>
+            <div class="project-links-overlay">
+              <a href="https://github.com/GreMZaa/balance-food" target="_blank" rel="noopener noreferrer" class="icon-btn" title="GitHub">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+              </a>
+            </div>
+            <div class="project-mockup-canvas">
+              <div class="mockup-ui">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <span style="font-size:0.75rem; color:var(--neon-cyan); font-family:var(--font-mono);">⚡ BALANCE FOOD TMA</span>
+                  <span style="font-size:0.7rem; background:#00e676; color:#000; padding:1px 6px; border-radius:4px; font-weight:700;">LIVE</span>
+                </div>
+                <div class="mockup-bar" style="width:60%;"></div>
+                <div class="mockup-grid-3">
+                  <div class="mockup-box" style="background:rgba(0,240,255,0.1)"></div>
+                  <div class="mockup-box"></div>
+                  <div class="mockup-box"></div>
+                </div>
+                <div style="background:rgba(255,255,255,0.06); padding:6px; border-radius:4px; font-size:0.7rem; display:flex; justify-content:space-between;">
+                  <span>Корзина: 3 позиции</span>
+                  <strong style="color:var(--neon-cyan)">1 750 ₽</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">BALANCE Food — Telegram Mini App с AI</h3>
+            <p class="project-desc">
+              Telegram WebApp для службы доставки здорового питания: каталог блюд с расчетом КБЖУ, интеграция карты Leaflet с полигонами зон доставки, AI-нутрициолог на Cohere AI и бэкенд на Supabase.
+            </p>
+            <div class="project-tech">
+              <span class="tech-tag">React 18</span>
+              <span class="tech-tag">TypeScript</span>
+              <span class="tech-tag">Telegram SDK</span>
+              <span class="tech-tag">Supabase</span>
+              <span class="tech-tag">Grammy Bot</span>
+              <span class="tech-tag">Cohere AI</span>
+            </div>
+            <div class="project-footer">
+              <span class="project-metric">⚡ 100% нативный TMA опыт</span>
+              <button class="btn btn-secondary" style="padding: 7px 16px; font-size: 0.85rem;" onclick="openProjectModal('balance-food')">Разбор кейса →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 2: CDEK Warehouse AI CRM -->
+        <div class="project-card" data-category="ai-crm">
+          <div class="project-preview">
+            <span class="project-badge-type">AI CRM & Logistics</span>
+            <div class="project-links-overlay">
+              <a href="https://github.com/GreMZaa/cdek-warehouse-ai-crm" target="_blank" rel="noopener noreferrer" class="icon-btn" title="GitHub">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+              </a>
+            </div>
+            <div class="project-mockup-canvas">
+              <div class="mockup-ui">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <span style="font-size:0.75rem; color:#ffb703; font-family:var(--font-mono);">📦 CDEK WAREHOUSE CRM</span>
+                  <span style="font-size:0.7rem; color:var(--text-muted);">v1.0</span>
+                </div>
+                <div style="background:#fff; height:32px; border-radius:3px; display:flex; align-items:center; justify-content:center;">
+                  <span style="color:#000; font-family:monospace; font-size:0.75rem; letter-spacing:3px;">|||| | ||| || |||</span>
+                </div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px;">
+                  <div class="mockup-box" style="padding:4px; font-size:0.65rem;">Ячейка A-14</div>
+                  <div class="mockup-box" style="padding:4px; font-size:0.65rem; color:#00e676;">Сортировка ✓</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">CDEK Warehouse AI CRM — Складская Платформа</h3>
+            <p class="project-desc">
+              Инженерная CRM-система для учета посылок, печати наклеек со штрихкодами Code128, формирования PDF накладных и фоновым VK-бот демоном для клиентских уведомлений.
+            </p>
+            <div class="project-tech">
+              <span class="tech-tag">React</span>
+              <span class="tech-tag">TypeScript</span>
+              <span class="tech-tag">Tailwind</span>
+              <span class="tech-tag">JsBarcode</span>
+              <span class="tech-tag">JsPDF</span>
+              <span class="tech-tag">VK Bot API</span>
+            </div>
+            <div class="project-footer">
+              <span class="project-metric">📦 Автопечать накладных & PDF</span>
+              <button class="btn btn-secondary" style="padding: 7px 16px; font-size: 0.85rem;" onclick="openProjectModal('cdek-crm')">Разбор кейса →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 3: Fairytale Crossroads 3D -->
+        <div class="project-card" data-category="3d-web">
+          <div class="project-preview">
+            <span class="project-badge-type">3D WebGL / Three.js</span>
+            <div class="project-links-overlay">
+              <a href="https://github.com/GreMZaa/fairytale-crossroads" target="_blank" rel="noopener noreferrer" class="icon-btn" title="GitHub">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+              </a>
+            </div>
+            <div class="project-mockup-canvas">
+              <div style="position:relative; width:80%; height:80%; display:flex; align-items:center; justify-content:center;">
+                <div style="width:100px; height:100px; border-radius:50%; border:2px dashed var(--neon-cyan); animation:spin 12s linear infinite;"></div>
+                <div style="position:absolute; width:60px; height:60px; border-radius:50%; background:radial-gradient(circle, #ff007f 0%, transparent 70%);"></div>
+                <span style="position:absolute; font-family:var(--font-mono); font-size:0.75rem; color:#fff;">3D WEBGL</span>
+              </div>
+            </div>
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Fairytale Crossroads — Интерактивный 3D Мир</h3>
+            <p class="project-desc">
+              Полноэкранный трехмерный интерактивный веб-опыт: процедурный рендеринг геометрии, динамический свет, плавные траектории камеры на GSAP и оптимизация под мобильные устройства.
+            </p>
+            <div class="project-tech">
+              <span class="tech-tag">Three.js</span>
+              <span class="tech-tag">GSAP 3D</span>
+              <span class="tech-tag">WebGL</span>
+              <span class="tech-tag">Vite</span>
+              <span class="tech-tag">Canvas Confetti</span>
+            </div>
+            <div class="project-footer">
+              <span class="project-metric">🔮 60 FPS на мобильных и ПК</span>
+              <button class="btn btn-secondary" style="padding: 7px 16px; font-size: 0.85rem;" onclick="openProjectModal('fairytale-crossroads')">Разбор кейса →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 4: 1C & 33Sport Integration -->
+        <div class="project-card" data-category="enterprise">
+          <div class="project-preview">
+            <span class="project-badge-type">Enterprise & 1C Gateway</span>
+            <div class="project-links-overlay">
+              <a href="https://github.com/GreMZaa/33sport-prototype" target="_blank" rel="noopener noreferrer" class="icon-btn" title="GitHub">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+              </a>
+            </div>
+            <div class="project-mockup-canvas">
+              <div class="mockup-ui">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <span style="font-size:0.75rem; color:var(--neon-green); font-family:var(--font-mono);">1C ENTERPRISE SYNC</span>
+                  <span style="font-size:0.7rem; color:var(--neon-cyan);">100k+ SKU</span>
+                </div>
+                <div class="mockup-bar" style="background:#00e676; width:85%;"></div>
+                <div style="font-family:var(--font-mono); font-size:0.7rem; color:var(--text-muted); line-height:1.4;">
+                  FEED: catalog_export.xml [OK]<br>
+                  DELTA: 1,420 items updated
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">33Sport & 1C — Синхронизация Каталога B2B</h3>
+            <p class="project-desc">
+              Интеграционный шлюз и каталог спортивных товаров с обработкой сотен тысяч позиций номенклатуры, парсингом характеристик, остатков по складам и кастомным быстрым поиском.
+            </p>
+            <div class="project-tech">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">1C:Предприятие</span>
+              <span class="tech-tag">XML / JSON Streams</span>
+              <span class="tech-tag">Design System</span>
+              <span class="tech-tag">Vite</span>
+            </div>
+            <div class="project-footer">
+              <span class="project-metric">⚡ Отказоустойчивый парсинг</span>
+              <button class="btn btn-secondary" style="padding: 7px 16px; font-size: 0.85rem;" onclick="openProjectModal('1c-b2b')">Разбор кейса →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 5: Poker Assistant Bot -->
+        <div class="project-card" data-category="tma">
+          <div class="project-preview">
+            <span class="project-badge-type">Telegram Bot & Serverless</span>
+            <div class="project-links-overlay">
+              <a href="https://github.com/GreMZaa/poker-assistant-bot" target="_blank" rel="noopener noreferrer" class="icon-btn" title="GitHub">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+              </a>
+            </div>
+            <div class="project-mockup-canvas">
+              <div class="mockup-ui">
+                <span style="font-size:0.75rem; color:#9d4edd; font-family:var(--font-mono);">♠️ POKER WIZARD BOT</span>
+                <div style="font-size:0.72rem; color:var(--text-muted); margin-top:4px;">
+                  Equity: 68.4% | Pot Odds: 2.5:1<br>
+                  Serverless Functions: Vercel + Supabase
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Poker Assistant Bot — Telegram Помощник</h3>
+            <p class="project-desc">
+              Телеграм-бот и мастер анализа игровых раскладов, шансов банка и вероятностей победы. Построен на Vercel Serverless с сохранением истории раздач в Supabase.
+            </p>
+            <div class="project-tech">
+              <span class="tech-tag">Telegram Bot API</span>
+              <span class="tech-tag">TypeScript</span>
+              <span class="tech-tag">Supabase</span>
+              <span class="tech-tag">Serverless</span>
+            </div>
+            <div class="project-footer">
+              <span class="project-metric">♠️ Математический движок</span>
+              <button class="btn btn-secondary" style="padding: 7px 16px; font-size: 0.85rem;" onclick="openProjectModal('poker-assistant')">Разбор кейса →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 6: Ai Da Umnichka Web -->
+        <div class="project-card" data-category="enterprise">
+          <div class="project-preview">
+            <span class="project-badge-type">Web & Lead-Generation</span>
+            <div class="project-links-overlay">
+              <a href="https://github.com/GreMZaa/ai-da-umnichka" target="_blank" rel="noopener noreferrer" class="icon-btn" title="GitHub">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+              </a>
+            </div>
+            <div class="project-mockup-canvas">
+              <div class="mockup-ui">
+                <span style="font-size:0.75rem; color:#ff007f; font-family:var(--font-mono);">🌟 АЙ ДА, УМНИЧКА!</span>
+                <div style="font-size:0.72rem; color:var(--text-muted); margin-top:4px;">
+                  100/100 Google PageSpeed<br>
+                  Интеграция заявок с Telegram
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Ай Да, Умничка! — Портал Детского Центра</h3>
+            <p class="project-desc">
+              Высококонверсионный веб-сайт с максимальной оптимизацией скорости загрузки, удобным расписанием, формой онлайн-записи и пересылкой заявок в мессенджеры.
+            </p>
+            <div class="project-tech">
+              <span class="tech-tag">HTML5 / CSS3</span>
+              <span class="tech-tag">JavaScript ES6</span>
+              <span class="tech-tag">Telegram Webhook</span>
+              <span class="tech-tag">SEO & Mobile First</span>
+            </div>
+            <div class="project-footer">
+              <span class="project-metric">⚡ 100/100 Google PageSpeed</span>
+              <button class="btn btn-secondary" style="padding: 7px 16px; font-size: 0.85rem;" onclick="openProjectModal('ai-da-umnichka')">Разбор кейса →</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       INTERACTIVE LABORATORY (LIVE DEMOS)
+       ========================================================================== -->
+  <section id="laboratory">
+    <div class="container">
+      <span class="section-tag">Живой интерактив</span>
+      <h2 class="section-title">Лаборатория работающих демо</h2>
+      <p class="section-subtitle">
+        Вы можете протестировать модули и логику прямо здесь: симулятор Telegram Mini App, складской генератор штрихкодов и 3D WebGL интерактив.
+      </p>
+
+      <div class="lab-container">
+        <!-- Lab Tabs Navigation -->
+        <div class="lab-tabs">
+          <button class="lab-tab active" data-panel="demo-tma">
+            <span>📱</span> <span>1. Telegram Mini App (TMA E-Commerce)</span>
+          </button>
+          <button class="lab-tab" data-panel="demo-crm">
+            <span>📦</span> <span>2. Складской Штрихкод & Логистика (CRM)</span>
+          </button>
+          <button class="lab-tab" data-panel="demo-3d">
+            <span>🔮</span> <span>3. Интерактивный 3D WebGL Холст</span>
+          </button>
+        </div>
+
+        <!-- Panel 1: TMA Simulator -->
+        <div id="demo-tma" class="lab-panel active">
+          <div class="tma-simulator-layout">
+            
+            <!-- Phone Mockup -->
+            <div class="phone-mockup">
+              <div class="phone-speaker"></div>
+              <div class="phone-screen">
+                <div class="tma-header">
+                  <div>
+                    <h4 style="font-size:0.95rem; font-weight:700;">BALANCE FOOD</h4>
+                    <span style="font-size:0.7rem; color:var(--neon-green);">● Telegram WebApp Active</span>
+                  </div>
+                  <span style="font-size:0.75rem; background:rgba(0,240,255,0.15); color:var(--neon-cyan); padding:3px 8px; border-radius:10px;">@balance_bot</span>
+                </div>
+
+                <!-- Categories -->
+                <div class="tma-categories">
+                  <button class="tma-cat-pill active" data-cat="lunches">Ланчи</button>
+                  <button class="tma-cat-pill" data-cat="bowls">Боулы</button>
+                  <button class="tma-cat-pill" data-cat="drinks">Детокс & Смузи</button>
+                </div>
+
+                <!-- Items Container -->
+                <div id="tma-items-container" class="tma-items-list">
+                  <!-- Rendered via demos.js -->
+                </div>
+
+                <!-- Cart Footer -->
+                <div class="tma-footer-cart">
+                  <div>
+                    <div style="font-size:0.75rem; color:var(--text-muted)">Итого в корзине:</div>
+                    <strong id="tma-cart-total" style="font-family:var(--font-mono); color:var(--neon-cyan); font-size:1.1rem;">0 ₽</strong>
+                    <span id="tma-cart-count" style="font-size:0.75rem; color:var(--text-dim); margin-left:6px;">0 шт.</span>
+                  </div>
+                  <button id="tma-order-btn" class="btn btn-primary" style="padding:8px 14px; font-size:0.8rem;">
+                    Заказать в Telegram
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- TMA Description & Features -->
+            <div>
+              <span class="section-tag" style="margin-bottom:12px;">Telegram WebApp Simulator</span>
+              <h3 style="font-size: 1.8rem; margin-bottom: 16px;">Настоящий опыт приложений внутри Telegram</h3>
+              <p style="color: var(--text-muted); line-height: 1.7; margin-bottom: 20px;">
+                Пользователю не нужно скачивать приложение из App Store или Google Play. Всё открывается мгновенно прямо в чате Telegram в один клик.
+              </p>
+              <ul style="list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px;">
+                <li style="display: flex; gap: 10px;">
+                  <span style="color: var(--neon-cyan)">⚡</span>
+                  <span><strong>Бесшовная авторизация</strong> — автоматическое получение Telegram ID и имени без SMS и паролей</span>
+                </li>
+                <li style="display: flex; gap: 10px;">
+                  <span style="color: var(--neon-cyan)">💳</span>
+                  <span><strong>Интеграция платежей</strong> — поддержка оплат через СБП, ЮKassa и Telegram Stars</span>
+                </li>
+                <li style="display: flex; gap: 10px;">
+                  <span style="color: var(--neon-cyan)">📳</span>
+                  <span><strong>Тактильный отклик (Haptic Feedback)</strong> — эффект настоящего нативного приложения iOS/Android</span>
+                </li>
+              </ul>
+              <a href="https://t.me/gremzaa" target="_blank" rel="noopener noreferrer" class="btn btn-neon">
+                Заказать разработку TMA под ваш бизнес →
+              </a>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Panel 2: CRM & Logistics Simulator -->
+        <div id="demo-crm" class="lab-panel">
+          <div style="max-width: 800px; margin: 0 auto;">
+            <div class="crm-sim-card">
+              <div style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+                <h4 style="font-size: 1.2rem;">Генератор и валидатор маркировки посылок СДЭК</h4>
+                <span id="crm-status-badge" style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--neon-green);">Готов к генерации</span>
+              </div>
+
+              <div class="crm-controls">
+                <input type="text" id="crm-track-input" class="crm-input" value="CDEK-7749102-MSK" placeholder="Введите трек-номер">
+                <button id="crm-btn-generate" class="btn btn-secondary">Случайный трек</button>
+                <button id="crm-btn-track" class="btn btn-primary">Сгенерировать штрихкод</button>
+              </div>
+
+              <div class="crm-result-box">
+                <div class="barcode-render">
+                  <div id="crm-barcode-lines" class="barcode-lines">
+                    <!-- Lines injected dynamically -->
+                  </div>
+                  <div id="crm-barcode-text" class="barcode-text">CDEK-7749102-MSK</div>
+                </div>
+
+                <div class="crm-timeline">
+                  <div class="crm-step done">
+                    <div class="crm-step-dot"></div>
+                    <span>1. Накладная создана</span>
+                  </div>
+                  <div class="crm-step done">
+                    <div class="crm-step-dot"></div>
+                    <span>2. Принято на складе</span>
+                  </div>
+                  <div class="crm-step active">
+                    <div class="crm-step-dot"></div>
+                    <span>3. В сортировке</span>
+                  </div>
+                  <div class="crm-step">
+                    <div class="crm-step-dot"></div>
+                    <span>4. Вручено получателю</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel 3: 3D WebGL Canvas Interactive -->
+        <div id="demo-3d" class="lab-panel">
+          <div class="canvas3d-container">
+            <canvas id="three-canvas-demo"></canvas>
+            <div class="canvas-controls-hint">🖱️ Зажмите мышь и вращайте 3D-модель (Интерактивный WebGL/Canvas)</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       PROJECT ESTIMATOR / CALCULATOR
+       ========================================================================== -->
+  <section id="calculator">
+    <div class="container">
+      <span class="section-tag">Прозрачные условия</span>
+      <h2 class="section-title">Калькулятор стоимости и сроков</h2>
+      <p class="section-subtitle">
+        Выберите тип проекта и требуемые опции, чтобы получить моментальную ориентировочную оценку и готовый бриф.
+      </p>
+
+      <div class="calc-card">
+        <div class="calc-grid">
+          <div>
+            <h4 class="calc-section-title">1. Выберите тип разрабатываемого продукта</h4>
+            <div class="options-group">
+              <button class="option-btn selected" data-calc-type="tma">
+                <div class="option-title">📱 Telegram Mini App (TMA)</div>
+                <div class="option-desc">E-commerce, сервис или игра внутри Telegram</div>
+              </button>
+              <button class="option-btn" data-calc-type="bot">
+                <div class="option-title">🤖 AI-Бот (Telegram / VK)</div>
+                <div class="option-desc">Автоматизация поддержки, LLM и воронки продаж</div>
+              </button>
+              <button class="option-btn" data-calc-type="fullstack">
+                <div class="option-title">📦 Full-Stack CRM / Сервис</div>
+                <div class="option-desc">Складской учет, базы данных, дашборды</div>
+              </button>
+              <button class="option-btn" data-calc-type="web3d">
+                <div class="option-title">🔮 3D WebGL / Промо-сайт</div>
+                <div class="option-desc">Интерактивный визуальный опыт на Three.js</div>
+              </button>
+            </div>
+
+            <h4 class="calc-section-title">2. Дополнительные модули и интеграции</h4>
+            <div class="options-group">
+              <button class="option-btn selected" data-calc-feature="payments">
+                <div class="option-title">💳 Прием платежей</div>
+                <div class="option-desc">Telegram Pay, ЮKassa, СБП, Robokassa</div>
+              </button>
+              <button class="option-btn" data-calc-feature="admin">
+                <div class="option-title">⚙️ Панель администратора</div>
+                <div class="option-desc">Управление заказами, товарами и пользователями</div>
+              </button>
+              <button class="option-btn" data-calc-feature="sync1c">
+                <div class="option-title">🔄 Интеграция с 1С / СДЭК</div>
+                <div class="option-desc">Синхронизация остатков, номенклатуры, накладных</div>
+              </button>
+              <button class="option-btn" data-calc-feature="aiassistant">
+                <div class="option-title">🧠 Умный AI-ассистент</div>
+                <div class="option-desc">Консультант на базе нейросети Cohere/OpenAI</div>
+              </button>
+            </div>
+          </div>
+
+          <!-- Total Summary -->
+          <div class="calc-summary-card">
+            <div>
+              <div style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase;">
+                // Предварительная оценка
+              </div>
+              <div id="calc-total-display" class="calc-total-val">от 60 000 ₽</div>
+              <div id="calc-time-display" class="calc-time-val">Срок реализации: ~9 рабочих дней</div>
+
+              <div style="margin-top: 20px; border-top: 1px solid var(--border-subtle); padding-top: 18px;">
+                <div style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-dim); margin-bottom: 6px;">Рекомендуемый стек:</div>
+                <div id="calc-stack-display" style="font-family: var(--font-mono); font-size: 0.85rem; color: #fff;">
+                  React 18 + TS + Telegram SDK + Supabase
+                </div>
+              </div>
+            </div>
+
+            <div style="margin-top: 30px;">
+              <a id="calc-telegram-btn" href="https://t.me/gremzaa" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="width: 100%;">
+                <span>Отправить бриф в Telegram</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+              <div style="font-size: 0.76rem; color: var(--text-dim); text-align: center; margin-top: 10px;">
+                Бесплатная консультация и аудит архитектуры
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       TECH STACK & TOOLS
+       ========================================================================== -->
+  <section id="stack">
+    <div class="container">
+      <span class="section-tag">Инженерный стек</span>
+      <h2 class="section-title">Технологии в боевом арсенале</h2>
+      <p class="section-subtitle">
+        Использую только современные и проверенные временем инструменты для создания быстрой и поддерживаемой архитектуры.
+      </p>
+
+      <div class="stack-grid">
+        <!-- Frontend -->
+        <div class="stack-column">
+          <div class="stack-col-title">🖥️ Frontend</div>
+          <ul class="stack-list">
+            <li class="stack-item"><strong>React 18 / 19</strong> <div class="stack-bar-wrap"><div class="stack-bar" style="width:95%"></div></div></li>
+            <li class="stack-item"><strong>TypeScript</strong> <div class="stack-bar-wrap"><div class="stack-bar" style="width:95%"></div></div></li>
+            <li class="stack-item"><strong>Tailwind CSS</strong> <div class="stack-bar-wrap"><div class="stack-bar" style="width:90%"></div></div></li>
+            <li class="stack-item"><strong>Zustand & TanStack</strong> <div class="stack-bar-wrap"><div class="stack-bar" style="width:90%"></div></div></li>
+            <li class="stack-item"><strong>Vite / Next.js</strong> <div class="stack-bar-wrap"><div class="stack-bar" style="width:88%"></div></div></li>
+          </ul>
+        </div>
+
+        <!-- Telegram & Bots -->
+        <div class="stack-column">
+          <div class="stack-col-title">📱 TMA & Боты</div>
+          <ul class="stack-list">
+            <li class="stack-item"><strong>Telegram WebApp SDK</strong> <div class="stack-bar-wrap"><div class="stack-bar" style="width:98%"></div></div></li>
+            <li class="stack-item"><strong>Grammy (Node.js)</strong> <div class="stack-bar-wrap"><div class="stack-bar" style="width:92%"></div></div></li>
+            <li class="stack-item"><strong>VK Bot API</strong> <div class="stack-bar-wrap"><div class="stack-bar" style="width:85%"></div></div></li>
+            <li class="stack-item"><strong>Aiogram (Python)</strong> <div class="stack-bar-wrap"><div class="stack-bar" style="width:85%"></div></div></li>
+            <li class="stack-item"><strong>Telegram Payments</strong> <div class="stack-bar-wrap"><div class="stack-bar" style="width:90%"></div></div></li>
+          </ul>
+        </div>
+
+        <!-- Backend & DB -->
+        <div class="stack-column">
+          <div class="stack-col-title">🗄️ Backend & Cloud</div>
+          <ul class="stack-list">
+            <li class="stack-item"><strong>Supabase (PostgreSQL)</strong> <div class="stack-bar-wrap"><div class="stack-bar" style="width:92%"></div></div></li>
+            <li class="stack-item"><strong>Node.js / Express</strong> <div class="stack-bar-wrap"><div class="stack-bar" style="width:90%"></div></div></li>
+            <li class="stack-item"><strong>Python 3 (ETL / API)</strong> <div class="stack-bar-wrap"><div class="stack-bar" style="width:88%"></div></div></li>
+            <li class="stack-item"><strong>Vercel Serverless</strong> <div class="stack-bar-wrap"><div class="stack-bar" style="width:92%"></div></div></li>
+            <li class="stack-item"><strong>WebSockets Realtime</strong> <div class="stack-bar-wrap"><div class="stack-bar" style="width:86%"></div></div></li>
+          </ul>
+        </div>
+
+        <!-- 3D & Enterprise -->
+        <div class="stack-column">
+          <div class="stack-col-title">🔮 3D & Интеграции</div>
+          <ul class="stack-list">
+            <li class="stack-item"><strong>Three.js & WebGL</strong> <div class="stack-bar-wrap"><div class="stack-bar" style="width:85%"></div></div></li>
+            <li class="stack-item"><strong>GSAP Animations</strong> <div class="stack-bar-wrap"><div class="stack-bar" style="width:90%"></div></div></li>
+            <li class="stack-item"><strong>1C:Предприятие (XML)</strong> <div class="stack-bar-wrap"><div class="stack-bar" style="width:88%"></div></div></li>
+            <li class="stack-item"><strong>СДЭК & CRM API</strong> <div class="stack-bar-wrap"><div class="stack-bar" style="width:90%"></div></div></li>
+            <li class="stack-item"><strong>Playwright E2E</strong> <div class="stack-bar-wrap"><div class="stack-bar" style="width:85%"></div></div></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       CONTACT SECTION
+       ========================================================================== -->
+  <section id="contact">
+    <div class="container">
+      <div class="contact-card">
+        <div>
+          <span class="section-tag" style="margin-bottom:12px;">Прямая связь</span>
+          <h2 style="font-size: 2.2rem; margin-bottom: 16px;">Готовы обсудить вашу задачу?</h2>
+          <p style="color: var(--text-muted); font-size: 1.05rem; line-height: 1.7; margin-bottom: 24px;">
+            Открыт для предложений: разработки Telegram Mini Apps, сложных CRM, AI-автоматизации и интеграций. Отвечаю в течение 15 минут в рабочее время.
+          </p>
+          <div style="font-family: var(--font-mono); font-size: 0.88rem; color: var(--neon-cyan);">
+            ● Статус: Свободен под новые проекты
+          </div>
+        </div>
+
+        <div class="contact-channels">
+          <!-- Telegram -->
+          <a href="https://t.me/gremzaa" target="_blank" rel="noopener noreferrer" class="channel-btn">
+            <div class="channel-left">
+              <span class="channel-icon">✈️</span>
+              <div>
+                <div style="font-weight:700;">Telegram</div>
+                <div style="font-size:0.8rem; color:var(--text-dim); font-family:var(--font-mono);">@gremzaa (самый быстрый ответ)</div>
+              </div>
+            </div>
+            <span>→</span>
+          </a>
+
+          <!-- GitHub Profile -->
+          <a href="https://github.com/GreMZaa" target="_blank" rel="noopener noreferrer" class="channel-btn">
+            <div class="channel-left">
+              <span class="channel-icon">🐙</span>
+              <div>
+                <div style="font-weight:700;">GitHub Профиль</div>
+                <div style="font-size:0.8rem; color:var(--text-dim); font-family:var(--font-mono);">github.com/GreMZaa</div>
+              </div>
+            </div>
+            <span>→</span>
+          </a>
+
+          <!-- Email Copy -->
+          <button class="channel-btn" onclick="copyToClipboard('sergey.nez00@gmail.com', 'Email sergey.nez00@gmail.com')">
+            <div class="channel-left">
+              <span class="channel-icon">✉️</span>
+              <div>
+                <div style="font-weight:700; text-align:left;">Email</div>
+                <div style="font-size:0.8rem; color:var(--text-dim); font-family:var(--font-mono);">sergey.nez00@gmail.com</div>
+              </div>
+            </div>
+            <span style="font-size:0.8rem; color:var(--neon-cyan); font-family:var(--font-mono);">[Скопировать]</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       FOOTER
+       ========================================================================== -->
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div>
+        © 2026 Сергей (GreMZaa). Разработано с фокусом на высокую производительность.
+      </div>
+      <div>
+        Размещено на <span style="color:var(--neon-cyan)">GitHub Pages</span> • Репозиторий: <a href="https://github.com/GreMZaa/portfolio" target="_blank" rel="noopener noreferrer" style="text-decoration:underline;">GreMZaa/portfolio</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       PROJECT DETAIL MODAL
+       ========================================================================== -->
+  <div id="project-modal" class="modal-overlay">
+    <div class="modal-content">
+      <button class="modal-close-btn" onclick="closeProjectModal()" aria-label="Закрыть">✕</button>
+      <div id="modal-body-content">
+        <!-- Injected via scripts/main.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script type="module" src="scripts/main.js"></script>
+</body>
+</html>
