@@ -1,23 +1,23 @@
 /**
  * Interactive Demos & Simulators for Portfolio
- * Author: Sergey (GreMZaa)
+ * Sergey Sharonov — Operator-Turned-Builder
  */
 
-// --- 1. Interactive Telegram Mini App Simulator ---
+// --- 1. Симулятор Telegram Mini App для доставки ---
 export function initTmaSimulator() {
   const categories = {
     lunches: [
-      { id: 1, name: 'Лосось на пару с киноа', price: 620, cal: '480 ккал' },
-      { id: 2, name: 'Индейка су-вид с брокколи', price: 540, cal: '420 ккал' },
-      { id: 3, name: 'Стейк тунца с овощами гриль', price: 710, cal: '510 ккал' }
+      { id: 1, name: 'Лосось на гриле с киноа', price: 620, desc: 'Без комиссии агрегатора' },
+      { id: 2, name: 'Филе индейки с овощами', price: 540, desc: 'Прямо на кухню' },
+      { id: 3, name: 'Стейк тунца с брокколи', price: 710, desc: 'База гостей у заведения' }
     ],
     bowls: [
-      { id: 4, name: 'Поке с тигровыми креветками', price: 590, cal: '440 ккал' },
-      { id: 5, name: 'Авокадо-боул с эдамаме', price: 480, cal: '390 ккал' }
+      { id: 4, name: 'Поке с тигровыми креветками', price: 590, desc: 'Быстрый чекаут' },
+      { id: 5, name: 'Авокадо-боул со злаками', price: 480, desc: 'Повторный заказ в 1 клик' }
     ],
     drinks: [
-      { id: 6, name: 'Матча с кокосовым молоком', price: 290, cal: '110 ккал' },
-      { id: 7, name: 'Детокс-смузи Спирулина & Яблоко', price: 320, cal: '140 ккал' }
+      { id: 6, name: 'Матча на кокосовом молоке', price: 290, desc: 'Чек без наценки сервисов' },
+      { id: 7, name: 'Детокс-смузи яблоко-шпинат', price: 320, desc: 'Чекаут за 30 секунд' }
     ]
   };
 
@@ -25,7 +25,7 @@ export function initTmaSimulator() {
   let cart = [];
 
   const listContainer = document.getElementById('tma-items-container');
-  const catButtons = document.querySelectorAll('.tma-cat-button');
+  const catButtons = document.querySelectorAll('.tma-cat-btn-light');
   const cartCountEl = document.getElementById('tma-cart-count');
   const cartTotalEl = document.getElementById('tma-cart-total');
   const orderBtn = document.getElementById('tma-order-btn');
@@ -37,15 +37,18 @@ export function initTmaSimulator() {
     items.forEach(item => {
       const inCart = cart.filter(c => c.id === item.id).length;
       const card = document.createElement('div');
-      card.className = 'tma-item-row';
+      card.className = 'tma-item-row-light';
       card.innerHTML = `
         <div>
-          <div style="font-weight:600; font-size:0.85rem; margin-bottom:2px;">${item.name}</div>
-          <div style="font-family:var(--font-mono); color:var(--text-secondary); font-size:0.78rem;">${item.price} ₽ <span style="color:var(--text-tertiary); margin-left:6px;">${item.cal}</span></div>
+          <div style="font-weight:700; font-size:0.86rem; margin-bottom:2px;">${item.name}</div>
+          <div style="font-size:0.75rem; color:var(--color-muted);">${item.desc}</div>
         </div>
-        <button class="btn btn-secondary" style="padding:4px 10px; font-size:0.75rem;" data-id="${item.id}">
-          ${inCart > 0 ? `+ (${inCart})` : '+ Добавить'}
-        </button>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span style="font-weight:700; font-size:0.85rem; color:var(--cobalt-blue);">${item.price} ₽</span>
+          <button class="btn btn-black" style="padding:4px 10px; font-size:0.75rem; border-radius:6px;" data-id="${item.id}">
+            ${inCart > 0 ? `+ (${inCart})` : '+'}
+          </button>
+        </div>
       `;
       listContainer.appendChild(card);
     });
@@ -81,11 +84,12 @@ export function initTmaSimulator() {
   if (orderBtn) {
     orderBtn.addEventListener('click', () => {
       if (cart.length === 0) {
-        window.showToast('Корзина пуста. Выберите позицию для оформления заказа.');
+        window.showToast('Добавьте позицию в корзину для проверки заказа');
         return;
       }
       const total = cart.reduce((acc, curr) => acc + curr.price, 0);
-      window.showToast(`Telegram WebApp: Заказ на ${total.toLocaleString('ru-RU')} ₽ отправлен в Telegram Bot`);
+      const savedFee = Math.round(total * 0.25);
+      window.showToast(`Заказ на ${total.toLocaleString('ru-RU')} ₽ оформлен! Сэкономлено на комиссии агрегатора: ~${savedFee} ₽`);
       cart = [];
       updateCartUI();
       renderItems();
@@ -95,7 +99,7 @@ export function initTmaSimulator() {
   renderItems();
 }
 
-// --- 2. Interactive Warehouse & Logistics CRM Simulator ---
+// --- 2. Симулятор складской маркировки и трекинга ---
 export function initCrmSimulator() {
   const inputEl = document.getElementById('crm-track-input');
   const btnGen = document.getElementById('crm-btn-generate');
@@ -103,13 +107,12 @@ export function initCrmSimulator() {
   const barcodeText = document.getElementById('crm-barcode-text');
   const barcodeLines = document.getElementById('crm-barcode-lines');
   const statusBadge = document.getElementById('crm-status-badge');
-  const steps = document.querySelectorAll('.timeline-checkpoint');
 
   const randomTracks = [
-    'CDEK-7749102-MSK',
+    'WH-7749102-MSK',
     'CDEK-8812903-SPB',
-    'CDEK-9941031-KZN',
-    'CDEK-5510928-EKB'
+    'STORE-9941031-KZN',
+    'ORD-5510928-SAM'
   ];
 
   function generateBarcode(code) {
@@ -119,33 +122,21 @@ export function initCrmSimulator() {
     for (let i = 0; i < 36; i++) {
       const line = document.createElement('div');
       const mod = (code.charCodeAt(i % len) + i * 5) % 4;
-      line.className = 'barcode-bar';
-      line.style.width = `${mod === 0 ? 1 : mod * 1.5}px`;
+      line.style.background = '#18181B';
+      line.style.height = '100%';
+      line.style.width = `${mod === 0 ? 1 : mod * 1.6}px`;
       barcodeLines.appendChild(line);
     }
     if (barcodeText) barcodeText.textContent = code;
-  }
-
-  function simulateTracking(code) {
-    generateBarcode(code);
-    steps.forEach((step, idx) => {
-      step.classList.remove('done', 'active');
-      if (idx < 2) step.classList.add('done');
-      else if (idx === 2) step.classList.add('active');
-    });
-
-    if (statusBadge) {
-      statusBadge.textContent = 'В сортировочном узле (ПВЗ #412)';
-      statusBadge.style.color = 'var(--text-primary)';
-    }
   }
 
   if (btnGen) {
     btnGen.addEventListener('click', () => {
       const rand = randomTracks[Math.floor(Math.random() * randomTracks.length)];
       if (inputEl) inputEl.value = rand;
-      simulateTracking(rand);
-      window.showToast(`Создана тестовая накладная: ${rand}`);
+      generateBarcode(rand);
+      if (statusBadge) statusBadge.textContent = 'Накладная сформирована';
+      window.showToast(`Создана накладная: ${rand}`);
     });
   }
 
@@ -153,18 +144,19 @@ export function initCrmSimulator() {
     btnTrack.addEventListener('click', () => {
       const val = inputEl ? inputEl.value.trim() : '';
       if (!val) {
-        window.showToast('Введите трек-номер накладной');
+        window.showToast('Введите номер отправления');
         return;
       }
-      simulateTracking(val);
-      window.showToast(`Синхронизировано со складом: ${val}`);
+      generateBarcode(val);
+      if (statusBadge) statusBadge.textContent = 'Синхронизировано со складом';
+      window.showToast(`Данные отправления обновлены: ${val}`);
     });
   }
 
-  generateBarcode('CDEK-7749102-MSK');
+  generateBarcode('WH-7749102-MSK');
 }
 
-// --- 3. Interactive 3D WebGL / Canvas Playground ---
+// --- 3. Интерактивная 3D визуализация ---
 export function init3DCanvasDemo() {
   const canvas = document.getElementById('three-canvas-demo');
   if (!canvas) return;
@@ -178,7 +170,6 @@ export function init3DCanvasDemo() {
   resize();
   window.addEventListener('resize', resize);
 
-  // Geometric Nodes (Icosahedron-like structure)
   const nodes = [
     [-1, -1, -1], [1, -1, -1], [1, 1, -1], [-1, 1, -1],
     [-1, -1, 1], [1, -1, 1], [1, 1, 1], [-1, 1, 1],
@@ -235,8 +226,8 @@ export function init3DCanvasDemo() {
     ctx.clearRect(0, 0, width, height);
 
     if (!isDragging) {
-      angleX += 0.004;
-      angleY += 0.007;
+      angleX += 0.005;
+      angleY += 0.008;
     }
 
     const scale = Math.min(width, height) * 0.22;
@@ -250,24 +241,22 @@ export function init3DCanvasDemo() {
       return [r[0] * z * scale + center[0], r[1] * z * scale + center[1], r[2]];
     });
 
-    // Edges: Clean wireframe hairlines
     for (let edge of edges) {
       const p1 = projected[edge[0]];
       const p2 = projected[edge[1]];
       ctx.beginPath();
       ctx.moveTo(p1[0], p1[1]);
       ctx.lineTo(p2[0], p2[1]);
-      const alpha = Math.max(0.12, Math.min(0.65, (p1[2] + p2[2] + 2) / 4));
-      ctx.strokeStyle = `rgba(237, 237, 240, ${alpha})`;
-      ctx.lineWidth = 1;
+      const alpha = Math.max(0.15, Math.min(0.7, (p1[2] + p2[2] + 2) / 4));
+      ctx.strokeStyle = `rgba(255, 255, 255, ${alpha})`;
+      ctx.lineWidth = 1.2;
       ctx.stroke();
     }
 
-    // Nodes: Crisp dots
     projected.forEach((p, idx) => {
       ctx.beginPath();
-      ctx.arc(p[0], p[1], idx >= 8 ? 3 : 2.5, 0, Math.PI * 2);
-      ctx.fillStyle = idx >= 8 ? '#ff5722' : '#ededf0';
+      ctx.arc(p[0], p[1], idx >= 8 ? 3.5 : 2.5, 0, Math.PI * 2);
+      ctx.fillStyle = idx >= 8 ? '#FF5722' : '#3B82F6';
       ctx.fill();
     });
 
@@ -276,7 +265,7 @@ export function init3DCanvasDemo() {
   draw();
 }
 
-// --- 4. Interactive Project Estimator / Calculator ---
+// --- 4. Интерактивный калькулятор внедрения ---
 export function initProjectCalculator() {
   const typeBtns = document.querySelectorAll('[data-calc-type]');
   const featureBtns = document.querySelectorAll('[data-calc-feature]');
@@ -289,17 +278,37 @@ export function initProjectCalculator() {
   let selectedFeatures = new Set(['payments']);
 
   const typeConfig = {
-    tma: { name: 'Telegram Mini App (TMA)', basePrice: 45000, baseDays: 7, stack: 'React 18 + TS + Telegram SDK + Supabase' },
-    bot: { name: 'AI Telegram / VK Bot', basePrice: 35000, baseDays: 5, stack: 'Node.js / Python + Grammy + LLM Integration' },
-    fullstack: { name: 'Full-Stack CRM / Logistics', basePrice: 75000, baseDays: 14, stack: 'Vite / Next.js + PostgreSQL + 1C / API Integrations' },
-    web3d: { name: '3D WebGL / Промо-платформа', basePrice: 50000, baseDays: 10, stack: 'Three.js + GSAP + Responsive WebGL' }
+    tma: { 
+      name: 'Telegram Mini App (TMA доставка/витрина)', 
+      basePrice: 50000, 
+      baseDays: 5, 
+      benefit: 'Экономия 20–35% комиссии агрегаторов, чекаут за 30 сек' 
+    },
+    bot: { 
+      name: 'Автоматизация лидов и чат-бот', 
+      basePrice: 35000, 
+      baseDays: 4, 
+      benefit: '0 потерянных ночных заявок, мгновенный квалификатор' 
+    },
+    fullstack: { 
+      name: 'E-commerce витрина / Складская CRM', 
+      basePrice: 85000, 
+      baseDays: 10, 
+      benefit: 'Быстрый сайт без тормозов, учет остатков, печать накладных' 
+    },
+    web3d: { 
+      name: 'Интерактивная промо-страница с 3D', 
+      basePrice: 60000, 
+      baseDays: 7, 
+      benefit: 'Высокая вовлеченность и конверсия в заявку' 
+    }
   };
 
   const featureConfig = {
-    payments: { name: 'Платежный шлюз (Telegram Pay / СБП / ЮKassa)', price: 15000, days: 2 },
-    admin: { name: 'Панель управления заказами и каталогом', price: 20000, days: 3 },
-    sync1c: { name: 'Интеграционный шлюз (1С / СДЭК / МойСклад)', price: 25000, days: 4 },
-    aiassistant: { name: 'LLM-ассистент консультаций клиентов', price: 18000, days: 3 }
+    payments: { name: 'Прием платежей (СБП / карты / Telegram Pay)', price: 15000, days: 1 },
+    admin: { name: 'Панель управления заказами для сотрудников', price: 20000, days: 2 },
+    sync1c: { name: 'Синхронизация с 1С / СДЭК / МойСклад', price: 25000, days: 3 },
+    aiassistant: { name: 'AI-консультант подбора товаров', price: 20000, days: 2 }
   };
 
   function updateEstimate() {
@@ -316,13 +325,13 @@ export function initProjectCalculator() {
     });
 
     if (totalValEl) totalValEl.textContent = `от ${totalPrice.toLocaleString('ru-RU')} ₽`;
-    if (timeValEl) timeValEl.textContent = `Ориентировочный срок: ~${totalDays} рабочих дней`;
-    if (stackValEl) stackValEl.textContent = typeInfo.stack;
+    if (timeValEl) timeValEl.textContent = `Срок запуска: ~${totalDays} рабочих дней`;
+    if (stackValEl) stackValEl.textContent = typeInfo.benefit;
 
     if (sendTelegramBtn) {
       const featNames = Array.from(selectedFeatures).map(f => featureConfig[f]?.name).filter(Boolean).join(', ');
       const text = encodeURIComponent(
-        `Здравствуйте! Хочу обсудить задачу:\n- Тип: ${typeInfo.name}\n- Опции: ${featNames || 'Базовая сборка'}\n- Оценка: от ${totalPrice.toLocaleString('ru-RU')} ₽ (~${totalDays} раб. дней)`
+        `Привет, Сергей! Хочу обсудить внедрение:\n• Направление: ${typeInfo.name}\n• Дополнительно: ${featNames || 'Базовый комплект'}\n• Оценка: от ${totalPrice.toLocaleString('ru-RU')} ₽ (~${totalDays} раб. дней)`
       );
       sendTelegramBtn.href = `https://t.me/gremzaa?text=${text}`;
     }
