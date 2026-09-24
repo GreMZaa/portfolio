@@ -1,6 +1,6 @@
 /* ==========================================================================
-   PORTFOLIO STYLES - 1:1 RECREATION OF REFERENCE DESIGN
-   Sergey Sharonov • Operator-Turned-Builder
+   PORTFOLIO STYLES - 1:1 CARBON COPY OF REFERENCE DESIGN
+   Sergey Sharonov • Portfolio & Business Builder
    ========================================================================== */
 
 :root {
@@ -12,15 +12,15 @@
   --text-muted: #52525B;
   --text-subtle: #71717A;
   
-  /* Reference Colors */
-  --royal-blue: #2563EB;
-  --royal-blue-hover: #1D4ED8;
+  /* Vibrant Graphic Accents */
+  --royal-blue: #1D4ED8;
+  --royal-blue-hover: #1E40AF;
   --pill-orange: #FF5722;
   --smiley-lime: #84CC16;
   --star-gold: #F59E0B;
   --star-green: #22C55E;
   
-  /* Pastel Bento Colors */
+  /* Exact Pastel Bento & Card Colors from Reference */
   --pastel-mint: #ECFDF5;
   --pastel-peach: #FFF1EC;
   --pastel-ice: #EFF6FF;
@@ -43,7 +43,7 @@
   --radius-full: 9999px;
   
   --shadow-card: 0 10px 28px -4px rgba(24, 24, 27, 0.05), 0 2px 8px -2px rgba(24, 24, 27, 0.03);
-  --shadow-card-hover: 0 16px 36px -6px rgba(24, 24, 27, 0.09), 0 4px 12px -2px rgba(24, 24, 27, 0.04);
+  --shadow-card-hover: 0 16px 36px -6px rgba(24, 24, 27, 0.1), 0 4px 12px -2px rgba(24, 24, 27, 0.04);
 }
 
 *, *::before, *::after {
@@ -80,7 +80,7 @@ button {
 }
 
 .container {
-  max-width: 1080px;
+  max-width: 1060px;
   margin: 0 auto;
   padding: 0 24px;
   position: relative;
@@ -88,10 +88,10 @@ button {
 }
 
 /* ==========================================================================
-   NAVIGATION BAR (MATCHING REFERENCE HEADER)
+   NAVIGATION BAR (EXACT MATCHING HEADER)
    ========================================================================== */
 .site-header {
-  padding: 32px 0 20px;
+  padding: 36px 0 20px;
   position: relative;
   z-index: 100;
 }
@@ -106,7 +106,7 @@ button {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-size: 1.18rem;
+  font-size: 1.25rem;
   font-weight: 800;
   letter-spacing: -0.015em;
   color: var(--text-main);
@@ -123,7 +123,7 @@ button {
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 28px;
+  gap: 32px;
   list-style: none;
 }
 
@@ -164,7 +164,7 @@ button {
 }
 
 /* ==========================================================================
-   HERO SECTION (MATCHING REFERENCE HERO 100%)
+   HERO SECTION (1:1 CARBON COPY)
    ========================================================================== */
 .hero-section {
   padding: 40px 0 70px;
@@ -173,7 +173,7 @@ button {
 
 .hero-layout {
   display: grid;
-  grid-template-columns: 1.05fr 0.95fr;
+  grid-template-columns: 1.08fr 0.92fr;
   align-items: center;
   gap: 40px;
 }
@@ -183,18 +183,18 @@ button {
   position: relative;
 }
 
-/* Blue outline 2026 Edition pill */
+/* 2025/2026 Edition Tilted Outline Badge */
 .edition-badge {
   display: inline-flex;
   align-items: center;
-  padding: 6px 14px;
+  padding: 6px 16px;
   border: 1.5px solid var(--royal-blue);
   border-radius: var(--radius-full);
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   font-weight: 700;
   color: var(--royal-blue);
-  transform: rotate(-6deg);
-  margin-bottom: 18px;
+  transform: rotate(-8deg);
+  margin-bottom: 20px;
   background: transparent;
   position: relative;
 }
@@ -230,7 +230,7 @@ button {
 
 .display-serif {
   font-family: var(--font-display);
-  font-size: clamp(4.5rem, 9.5vw, 7.8rem);
+  font-size: clamp(5rem, 10vw, 8.2rem);
   font-weight: 700;
   font-style: italic;
   color: var(--royal-blue);
@@ -294,7 +294,7 @@ button {
 .hero-btn-row {
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: 22px;
 }
 
 .btn-black-pill {
@@ -354,8 +354,8 @@ button {
   position: absolute;
   top: 15px;
   left: 10px;
-  width: 42px;
-  height: 42px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   background-color: var(--smiley-lime);
   display: flex;
@@ -454,6 +454,11 @@ button {
   letter-spacing: -0.01em;
 }
 
+.name-highlight {
+  background: linear-gradient(180deg, transparent 65%, #FEF08A 65%);
+  padding: 0 2px;
+}
+
 .profile-card-tag {
   background-color: #EFF6FF;
   color: var(--royal-blue);
@@ -494,7 +499,7 @@ button {
 }
 
 /* ==========================================================================
-   ABOUT ME SECTION
+   ABOUT ME SECTION (1:1 CARBON COPY)
    ========================================================================== */
 .about-section {
   padding: 80px 0 60px;
@@ -503,7 +508,7 @@ button {
 
 .about-row {
   display: grid;
-  grid-template-columns: 220px 1fr 200px;
+  grid-template-columns: 200px 1fr 200px;
   align-items: center;
   gap: 36px;
   position: relative;
@@ -571,14 +576,14 @@ button {
 
 .tape-text {
   font-family: var(--font-script);
-  font-size: 1.55rem;
+  font-size: 1.65rem;
   line-height: 1.25;
   font-weight: 700;
   color: #4C1D95;
 }
 
 /* ==========================================================================
-   WHAT I DO SECTION (4 CARDS)
+   WHAT I DO SECTION (4 CLEAN CARDS)
    ========================================================================== */
 .what-i-do-section {
   padding: 60px 0 70px;
@@ -682,7 +687,7 @@ button {
 }
 
 /* ==========================================================================
-   SELECTED WORK SECTION (4 HORIZONTAL CARDS)
+   SELECTED WORK SECTION (EXACT 4 MOCKUPS)
    ========================================================================== */
 .selected-work-section {
   padding: 60px 0 70px;
@@ -753,6 +758,7 @@ button {
   align-items: flex-end;
   justify-content: center;
   overflow: hidden;
+  position: relative;
 }
 
 .bg-mint-box {
@@ -771,21 +777,67 @@ button {
   background-color: #EDE5FC;
 }
 
-.inner-mockup-frame {
+/* Rich Mini Mockup Visuals Matching Reference Image */
+.mockup-desktop-mobile {
   width: 100%;
   height: 100%;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+}
+
+.mini-desktop-win {
+  width: 78%;
+  height: 95%;
   background: #FFFFFF;
   border-radius: 6px 6px 0 0;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
-  padding: 10px 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid #E4E4E7;
+  padding: 8px 10px;
   display: flex;
   flex-direction: column;
   gap: 6px;
-  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.win-header-dots {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 2px;
+}
+
+.win-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: #D4D4D8;
+}
+
+.mini-phone-win {
+  width: 38%;
+  height: 85%;
+  background: #FFFFFF;
+  border-radius: 8px 8px 0 0;
+  box-shadow: -4px 6px 14px rgba(0, 0, 0, 0.12);
+  border: 1px solid #D4D4D8;
+  position: absolute;
+  right: 4px;
+  bottom: 0;
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.phone-notch {
+  width: 14px;
+  height: 3px;
+  background-color: #18181B;
+  border-radius: 2px;
+  margin: 0 auto 3px;
 }
 
 .mock-bar {
-  height: 6px;
+  height: 5px;
   border-radius: 3px;
   background-color: #E4E4E7;
 }
@@ -803,33 +855,110 @@ button {
   width: 60%;
 }
 
-.mock-badge-tag {
-  display: inline-block;
-  padding: 2px 6px;
-  font-size: 0.65rem;
-  font-weight: 700;
+.mock-bar-coral {
+  width: 50%;
+  background-color: #EA580C;
+}
+
+.mock-bar-purple {
+  width: 55%;
+  background-color: #7C3AED;
+}
+
+/* E-commerce grid preview */
+.mini-store-win {
+  width: 100%;
+  height: 95%;
+  background: #FFFFFF;
+  border-radius: 6px 6px 0 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid #E4E4E7;
+  display: flex;
+  overflow: hidden;
+}
+
+.store-sidebar {
+  width: 25%;
+  background-color: #27272A;
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.store-content {
+  width: 75%;
+  padding: 8px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+}
+
+.store-prod-card {
+  background-color: #F4F4F5;
   border-radius: 3px;
-  align-self: flex-start;
+  height: 24px;
 }
 
-.tag-green {
-  background-color: #DCFCE7;
-  color: #15803D;
+/* Finance Dashboard Preview */
+.mini-fin-win {
+  width: 100%;
+  height: 95%;
+  background: #FFFFFF;
+  border-radius: 6px 6px 0 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid #E4E4E7;
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
-.tag-orange {
-  background-color: #FFEDD5;
-  color: #C2410C;
+.fin-cards-row {
+  display: flex;
+  gap: 6px;
 }
 
-.tag-blue {
-  background-color: #DBEAFE;
-  color: #1D4ED8;
+.fin-mini-stat {
+  flex: 1;
+  background: #EFF6FF;
+  border-radius: 4px;
+  height: 26px;
+  padding: 4px;
 }
 
-.tag-purple {
-  background-color: #EDE9FE;
-  color: #6D28D9;
+.fin-mini-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 24px;
+  padding-top: 4px;
+}
+
+.chart-bar {
+  flex: 1;
+  background: #2563EB;
+  border-radius: 1px 1px 0 0;
+}
+
+/* Travel Portal Preview */
+.mini-travel-win {
+  width: 100%;
+  height: 95%;
+  background: #FFFFFF;
+  border-radius: 6px 6px 0 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid #E4E4E7;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.travel-hero-banner {
+  height: 40px;
+  background: linear-gradient(135deg, #38BDF8, #818CF8);
+  border-radius: 4px 4px 0 0;
 }
 
 .work-card-info {
@@ -903,7 +1032,7 @@ button {
 }
 
 /* ==========================================================================
-   EXPERIENCE, EDUCATION, SKILLS (PASTEL BENTO)
+   EXPERIENCE, EDUCATION, SKILLS (PASTEL BENTO TRIO)
    ========================================================================== */
 .bento-section {
   padding: 60px 0 80px;
@@ -919,7 +1048,7 @@ button {
 
 .bento-blob-container {
   border-radius: var(--radius-xl);
-  padding: 32px 28px;
+  padding: 34px 28px;
   position: relative;
 }
 
