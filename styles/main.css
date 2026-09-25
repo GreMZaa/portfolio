@@ -762,245 +762,169 @@ button {
 }
 
 /* ==========================================================================
-   INTERACTIVE HERO SECTION (SRI TECH STYLE)
+   HERO SECTION (1:1 SRI TECH REFERENCE RECREATION)
    ========================================================================== */
-.hero-sri-wrapper {
+.hero-sri-pure {
   position: relative;
-  padding: 30px 0 65px;
+  min-height: calc(100vh - 80px);
+  display: flex;
+  align-items: center;
+  padding: 24px 0 36px 0;
   overflow: visible;
 }
 
-/* Ambient Radial Glow Behind Hero */
-.hero-sri-glow {
-  position: absolute;
-  top: 48%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 850px;
-  height: 520px;
-  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.95) 0%, rgba(224, 235, 255, 0.45) 45%, rgba(250, 247, 242, 0) 75%);
-  pointer-events: none;
-  z-index: 1;
-}
-
-.hero-sri-grid {
+.hero-sri-pure-grid {
   display: grid;
-  grid-template-columns: 1.08fr 1fr;
+  grid-template-columns: 1fr 1.05fr;
   align-items: center;
-  gap: 48px;
+  gap: 36px;
   position: relative;
   z-index: 2;
-  min-height: 560px;
+  width: 100%;
 }
 
-/* Left Column: Author, Badges, Name, Tagline, Cursor Hint, Positioning */
-.hero-sri-left {
+/* Left Column: Pure Sri Tech Typography Hierarchy */
+.sri-pure-left {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 16px;
+  margin-bottom: 0;
   position: relative;
-  z-index: 3;
+  z-index: 5;
 }
 
-.hero-sri-author-badge {
-  display: inline-flex;
+/* Eyebrow: SERGEY SHARONOV / FULL-STACK DEVELOPER */
+.sri-pure-eyebrow {
+  display: flex;
   align-items: center;
   gap: 8px;
-  flex-wrap: wrap;
-}
-
-/* 2025 Edition Oval */
-.edition-sticker-sri {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 3px 10px;
-  border: 1.5px solid #1855F4;
-  border-radius: 999px;
-  background: #FAF8F5;
-  font-size: 11px;
-  font-weight: 800;
-  color: #1855F4;
-  transform: rotate(-3deg);
-}
-
-.author-pill {
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.02em;
-  padding: 4px 10px;
-  border-radius: 999px;
-  background: #1855F4;
-  color: #fff;
-}
-
-.author-status-pill {
+  font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
   font-size: 11px;
   font-weight: 700;
-  color: #059669;
-  background: #ECFDF5;
-  padding: 4px 10px;
-  border-radius: 999px;
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
+  letter-spacing: 0.18em;
+  color: #8E8E93;
+  text-transform: uppercase;
 }
 
-.status-pulse-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #10B981;
-  display: inline-block;
-  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.3);
-  animation: pulseGreenDot 2s infinite;
+.eyebrow-slash {
+  color: #C7C7CC;
 }
 
-@keyframes pulseGreenDot {
-  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
-  70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
-  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
-}
-
-.hero-sri-name {
+/* Giant Editorial Name: Сергей (Dark) / Шаронов (Dusty Rose/Coral) */
+.sri-pure-name {
   font-family: 'Playfair Display', Georgia, serif;
-  font-size: clamp(3rem, 5.2vw, 4.5rem);
-  font-weight: 900;
-  color: #18181B;
-  line-height: 1.02;
-  letter-spacing: -0.03em;
+  font-size: clamp(3.8rem, 6.2vw, 5.6rem);
+  font-weight: 700;
+  line-height: 0.96;
+  letter-spacing: -0.025em;
   margin: 0;
 }
 
-.hero-sri-name span {
-  color: #1855F4;
+.sri-pure-name .name-first {
+  display: block;
+  color: #1C1917;
 }
 
-.role-orange-pill-sri {
-  display: inline-block;
-  background-color: #FF5722;
-  color: #FFFFFF;
-  font-family: 'Plus Jakarta Sans', sans-serif;
+.sri-pure-name .name-last {
+  display: block;
+  color: #E28782; /* Delicate pastel dusty rose matching Sri Tech reference */
+  font-weight: 600;
+}
+
+/* Subtitle: FULL-STACK & AUTOMATION DEVELOPER */
+.sri-pure-subtitle {
+  font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
   font-size: 12px;
   font-weight: 800;
-  padding: 5px 14px;
-  border-radius: 999px;
-  white-space: nowrap;
-  box-shadow: 0 4px 12px rgba(255, 87, 34, 0.25);
-  letter-spacing: -0.01em;
-  transform: rotate(-1.5deg);
-  align-self: flex-start;
+  letter-spacing: 0.16em;
+  color: #71717A;
+  text-transform: uppercase;
+  margin-top: 2px;
 }
 
-.hero-sri-cursor-hint {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: #FFFFFF;
-  border: 1.5px dashed rgba(24, 85, 244, 0.4);
-  border-radius: 12px;
-  padding: 7px 13px;
-  font-size: 0.80rem;
-  font-weight: 700;
-  color: #1855F4;
-  box-shadow: 0 4px 12px rgba(24, 85, 244, 0.05);
-  animation: hintFloat 3s ease-in-out infinite;
-  align-self: flex-start;
-}
-
-@keyframes hintFloat {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-3px); }
-}
-
-.cursor-icon-svg {
-  width: 15px;
-  height: 15px;
-  animation: cursorNudge 1.5s ease-in-out infinite alternate;
-}
-
-@keyframes cursorNudge {
-  0% { transform: translate(0, 0); }
-  100% { transform: translate(3px, 3px); }
-}
-
-.hero-sri-desc {
-  font-size: 0.90rem;
-  color: #52525B;
+/* Pure Tagline */
+.sri-pure-tagline {
+  font-size: 0.94rem;
   line-height: 1.55;
-}
-
-.hero-sri-desc strong {
-  color: #18181B;
-  font-weight: 700;
-}
-
-.hero-sri-actions {
-  display: flex;
-  align-items: center;
-  gap: 16px;
+  color: #52525B;
+  max-width: 440px;
   margin-top: 4px;
 }
 
-/* Center Column: Dominant Interactive Character in Sri Tech Style */
-.hero-sri-center {
-  position: relative;
+/* Sleek Minimal Actions */
+.sri-pure-actions {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: flex-end;
-  width: 100%;
+  gap: 18px;
+  margin-top: 10px;
 }
 
-/* Floating Speech Bubble (Placed gracefully to the left of Sergey like Sri Tech) */
-.sri-speech-bubble {
-  position: absolute;
-  top: 12%;
-  left: -50px;
-  background: rgba(255, 255, 255, 0.94);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1.5px solid rgba(24, 24, 27, 0.12);
-  border-radius: 14px;
-  padding: 8px 14px;
-  box-shadow: 0 12px 32px -4px rgba(0, 0, 0, 0.08), 0 4px 12px -2px rgba(0, 0, 0, 0.04);
-  z-index: 12;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  display: flex;
+.sri-btn-action {
+  display: inline-flex;
   align-items: center;
   gap: 8px;
-  white-space: nowrap;
-  pointer-events: none;
+  background: #18181B;
+  color: #FFFFFF;
+  font-size: 0.86rem;
+  font-weight: 700;
+  padding: 10px 22px;
+  border-radius: 999px;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(24, 24, 27, 0.14);
+  transition: all 0.25s ease;
 }
 
-.sri-bubble-text {
-  font-size: 0.84rem;
+.sri-btn-action:hover {
+  background: #27272A;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(24, 24, 27, 0.2);
+}
+
+.sri-link-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.86rem;
   font-weight: 700;
+  color: #71717A;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.sri-link-action:hover {
   color: #18181B;
 }
 
-.sri-bubble-tag {
-  font-size: 0.70rem;
-  font-weight: 800;
-  padding: 2px 7px;
-  border-radius: 6px;
-  background: #EFF6FF;
-  color: #1855F4;
+.link-arrow {
+  display: inline-block;
+  transition: transform 0.2s ease;
 }
 
-/* Character Canvas Stage — transparent, no border, generous space */
-.sri-canvas-stage {
+.sri-link-action:hover .link-arrow {
+  transform: translateY(2px);
+}
+
+/* Right Column: Dominant Interactive Character */
+.sri-pure-right {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+/* Canvas Stage */
+.sri-pure-canvas-stage {
   position: relative;
   width: 100%;
-  max-width: 640px;
+  max-width: 720px;
   aspect-ratio: 16 / 10;
   background: transparent;
   cursor: crosshair;
   overflow: hidden;
-  clip-path: inset(0 0 14% 0);
-  margin-bottom: 0;
-  mask-image: linear-gradient(to bottom, black 84%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, black 84%, transparent 100%);
+  clip-path: inset(0 0 4% 0);
+  mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
 }
 
 #hero-character-canvas {
@@ -1010,7 +934,57 @@ button {
   background: transparent;
 }
 
-/* 3 Horizontal Interaction Zones Overlay */
+/* Floating Pills (1:1 Sri Tech Reference: delicate, frosted, smooth) */
+.sri-floating-pill {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 999px;
+  padding: 9px 20px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #27272A;
+  box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.08);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 20;
+  white-space: nowrap;
+}
+
+.sri-floating-pill.is-active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Left Pill (when cursor is on the left, character looks left) */
+.sri-floating-pill.pill-left {
+  top: 24%;
+  left: -20px;
+}
+
+/* Right Pill (when cursor is on the right, character looks right) */
+.sri-floating-pill.pill-right {
+  top: 24%;
+  right: 20px;
+}
+
+/* Center Pill (when cursor is on character) */
+.sri-floating-pill.pill-center {
+  top: 6%;
+  left: 50%;
+  transform: translate(-50%, 6px);
+}
+
+.sri-floating-pill.pill-center.is-active {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+/* 3 Horizontal Interaction Zones */
 .sri-zones-overlay {
   position: absolute;
   top: 0;
@@ -1024,22 +998,18 @@ button {
 .sri-zone {
   height: 100%;
   cursor: pointer;
+}
+
+.sri-zone-left { width: 33%; }
+.sri-zone-center { width: 34%; }
+.sri-zone-right { width: 33%; }
+
+/* Trust Strip Section (Bridge from Hero to Details) */
+.trust-focus-section {
+  padding: 30px 0 20px;
   position: relative;
 }
 
-.sri-zone-left {
-  width: 33%;
-}
-
-.sri-zone-center {
-  width: 34%;
-}
-
-.sri-zone-right {
-  width: 33%;
-}
-
-/* Horizontal Trust & Metric Strip Below Hero */
 .hero-trust-strip {
   display: flex;
   align-items: center;
@@ -1048,7 +1018,6 @@ button {
   border: 1px solid #E4E4E7;
   border-radius: 20px;
   padding: 18px 28px;
-  margin-top: 48px;
   box-shadow: 0 4px 20px -2px rgba(24, 24, 27, 0.04);
   gap: 16px;
 }
@@ -1099,36 +1068,34 @@ button {
   flex-shrink: 0;
 }
 
-/* Responsive Sri Tech Hero */
+/* Responsive */
 @media (max-width: 1040px) {
-  .hero-sri-grid {
-    grid-template-columns: 1fr;
-    gap: 24px;
+  .hero-sri-pure {
     min-height: auto;
+    padding: 30px 0 0;
   }
-  .hero-sri-center {
+  .hero-sri-pure-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .sri-pure-right {
     order: -1;
   }
-  .hero-sri-left {
+  .sri-pure-left {
     text-align: center;
     align-items: center;
+    margin-bottom: 30px;
   }
-  .hero-btn-row {
+  .sri-pure-actions {
     justify-content: center;
   }
-  .hero-positioning-block {
-    text-align: left;
-  }
-  .sri-canvas-stage {
+  .sri-pure-canvas-stage {
     max-width: 480px;
     margin: 0 auto;
   }
-  .sri-speech-bubble {
-    position: relative;
-    top: 0;
-    left: 0;
-    margin-bottom: 12px;
-    align-self: center;
+  .sri-floating-pill.pill-left,
+  .sri-floating-pill.pill-right {
+    top: 14%;
   }
   .hero-trust-strip {
     flex-direction: column;
@@ -1142,28 +1109,12 @@ button {
 }
 
 @media (max-width: 640px) {
-  .hero-sri-wrapper {
-    padding: 20px 0 35px;
+  .sri-pure-name {
+    font-size: 2.75rem;
   }
-  .hero-sri-name {
-    font-size: 2.2rem;
-  }
-  .sri-speech-bubble {
-    width: calc(100% - 16px);
-    max-width: calc(100% - 16px);
-    box-sizing: border-box;
-    justify-content: center;
-    gap: 6px;
-    flex-wrap: wrap;
-    text-align: center;
-    white-space: normal;
-  }
-  .sri-bubble-text {
-    font-size: 0.74rem;
-    line-height: 1.3;
-  }
-  .hero-sri-cursor-hint {
-    display: none;
+  .sri-floating-pill {
+    font-size: 11px;
+    padding: 6px 12px;
   }
 }
 

@@ -181,10 +181,25 @@ function initInteractiveHero() {
   if (!canvas) return;
 
   const ctx = canvas.getContext('2d');
+  const pillLeft = document.getElementById('sri-pill-left');
+  const pillRight = document.getElementById('sri-pill-right');
+  const pillCenter = document.getElementById('sri-pill-center');
   const bubbleTag = document.getElementById('bubble-tag');
   const bubbleText = document.getElementById('bubble-text');
   const contextReactionText = document.getElementById('context-reaction-text');
   const heroWrapper = document.getElementById('hero-interactive-section');
+
+  function showPill(active) {
+    if (pillLeft) pillLeft.classList.toggle('is-active', pillLeft === active);
+    if (pillRight) pillRight.classList.toggle('is-active', pillRight === active);
+    if (pillCenter) pillCenter.classList.toggle('is-active', pillCenter === active);
+  }
+
+  function hideAllPills() {
+    if (pillLeft) pillLeft.classList.remove('is-active');
+    if (pillRight) pillRight.classList.remove('is-active');
+    if (pillCenter) pillCenter.classList.remove('is-active');
+  }
 
   const TOTAL_FRAMES = 144;
   const frames = [];
@@ -256,6 +271,8 @@ function initInteractiveHero() {
     isGreetingSequence = false;
     targetFrame = POSES.LOOK_LEFT;
 
+    showPill(pillLeft);
+
     if (bubbleTag) {
       bubbleTag.textContent = "Склады & 1С";
       bubbleTag.style.background = "#EFF6FF";
@@ -275,6 +292,8 @@ function initInteractiveHero() {
     clearTimeout(resetTimer);
     isGreetingSequence = false;
     targetFrame = POSES.LOOK_RIGHT;
+
+    showPill(pillRight);
 
     if (bubbleTag) {
       bubbleTag.textContent = "Mini Apps";
@@ -297,6 +316,8 @@ function initInteractiveHero() {
     greetingStep = 1;
     targetFrame = POSES.CENTER_LOOK;
 
+    showPill(pillCenter);
+
     if (bubbleTag) {
       bubbleTag.textContent = "Привет!";
       bubbleTag.style.background = "#ECFDF5";
@@ -315,6 +336,8 @@ function initInteractiveHero() {
     isGreetingSequence = false;
     targetFrame = POSES.IDLE;
 
+    hideAllPills();
+
     const isMobile = window.innerWidth <= 640;
     if (bubbleTag) {
       bubbleTag.textContent = isMobile ? "Привет!" : "В работе";
@@ -325,9 +348,6 @@ function initInteractiveHero() {
       bubbleText.textContent = isMobile 
         ? "Нажмите на экран или листайте вниз ↓" 
         : "Двигайте курсор влево, вправо или на меня";
-    }
-    if (contextReactionText) {
-      contextReactionText.textContent = "Наведите курсор на Сергея, чтобы познакомиться, или на края экрана для выбора темы.";
     }
   }
 
