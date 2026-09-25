@@ -902,9 +902,9 @@ button {
   background: transparent;
   cursor: crosshair;
   overflow: hidden;
-  /* Clip the very bottom edge (table surface) */
-  clip-path: inset(0 0 8% 0);
-  margin-bottom: -52px; /* Pull up to compensate for clip */
+  /* Clip desk/table surface at the bottom */
+  clip-path: inset(0 0 14% 0);
+  margin-bottom: -72px; /* compensate clip height */
 }
 
 #hero-character-canvas {
@@ -943,12 +943,9 @@ button {
   width: 33%;
 }
 
-/* Bottom exploration cue */
+/* Bottom exploration cue — hidden, character rising from bottom is enough */
 .sri-bottom-cue-wrap {
-  margin-top: 14px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  display: none;
 }
 
 .sri-bottom-cue {
