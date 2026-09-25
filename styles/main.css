@@ -903,8 +903,8 @@ button {
   cursor: crosshair;
   overflow: hidden;
   /* Clip desk/table surface at the bottom */
-  clip-path: inset(0 0 14% 0);
-  margin-bottom: -72px; /* compensate clip height */
+  clip-path: inset(0 0 20% 0);
+  margin-bottom: -90px; /* compensate clip height */
 }
 
 #hero-character-canvas {
