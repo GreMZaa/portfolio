@@ -897,11 +897,14 @@ button {
 .sri-canvas-stage {
   position: relative;
   width: 100%;
-  max-width: 580px;
-  aspect-ratio: 16 / 9;
+  max-width: 620px;
+  aspect-ratio: 16 / 10;
   background: transparent;
   cursor: crosshair;
-  overflow: visible;
+  overflow: hidden;
+  /* Clip the very bottom edge (table surface) */
+  clip-path: inset(0 0 8% 0);
+  margin-bottom: -52px; /* Pull up to compensate for clip */
 }
 
 #hero-character-canvas {
