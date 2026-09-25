@@ -5,55 +5,58 @@
 
 const projectDetails = {
   'balance-food': {
-    title: 'Telegram Mini App для локального заведения доставки еды',
-    tag: 'TMA • Замена агрегаторов доставки',
-    desc: 'Замена Яндекс.Еды и других сервисов доставки с их комиссией 20–35% на собственную витрину внутри Telegram. Гость заказывает без скачивания приложений прямо в чате за 30 секунд. Заказы мгновенно уходят на кухню, а база клиентов сохраняется у заведения для повторных продаж.',
-    stack: ['Telegram Mini App', 'Быстрый чекаут без регистрации', 'Зоны доставки на карте', 'AI-подбор рациона', 'Автоуведомления кухни и гостя'],
-    highlights: [
-      'Экономия до 35% маржи с каждого чека — 0% сторонних комиссий',
-      'База клиентов остается у бизнеса: прямой контакт для бесплатных повторных рассылок',
-      'Оформление заказа за 30 секунд с автосохранением адреса гостя',
-      'AI-консультант меню помогает выбрать подходящий рацион и увеличивает средний чек'
-    ]
+    title: 'Telegram Mini App: Доставка для заведения без комиссий агрегаторов 20–35%',
+    tag: 'Telegram Mini App • Окупаемость за 2–3 недели',
+    pain: 'Кафе отдавало треть выручки сервисам доставки (Яндекс.Еда и др.), а разработка собственного мобильного приложения под iOS/Android стоила от 400 000 ₽ и требовала месяцев ожидания и публикации в App Store.',
+    solution: 'Легкий интерфейс прямо внутри Telegram без скачивания из App Store: каталог меню, модификаторы блюд, корзина и отправка заказа администратору за 3 тапа. Гость сохраняет адрес один раз, повторные заказы оформляются за 15 секунд.',
+    timeline: '4 дня от ТЗ до первых реальных заказов',
+    roi: 'Окупается за 2–3 недели за счет перевода постоянников на прямой заказ с 0% комиссии. Вся база гостей сохраняется у кафе для бесплатных рассылок.',
+    stack: ['Telegram Mini App', 'Чек на кухню за 30 сек', '0% сторонних комиссий', 'База клиентов у бизнеса', 'Модификаторы блюд']
   },
   'cdek-crm': {
-    title: 'Складская система маркировки и трекинга отправлений',
-    tag: 'Склад & Логистика • Исключение ошибок комплектации',
-    desc: 'Система адресного учета товаров, мгновенной генерации штрихкодов Code128 и печати термонаклеек и накладных в PDF. Исключает человеческий фактор при сборке и отгрузке, контролирует складские остатки.',
-    stack: ['Генерация штрихкодов Code128', 'Экспорт накладных в PDF', 'Адресный учет ячеек', 'Интеграция со СДЭК API'],
-    highlights: [
-      'Сокращение времени сборки заказа в 3 раза за счет быстрой печати наклеек',
-      'Ноль пересортов: сверка штрихкода перед отправкой исключает возвраты и штрафы',
-      'Автоматическое информирование покупателей о трек-номере',
-      'Полная прозрачность остатков по ячейкам склада в реальном времени'
-    ]
+    title: 'Редизайн чекаута интернет-магазина глазами операциониста',
+    tag: 'Редизайн E-Commerce • Сокращение времени в 6 раз',
+    pain: 'Перегруженная корзина, 8 обязательных полей для заполнения, потеря до 25% мобильных покупателей на этапе оплаты из-за долгого и неудобного интерфейса.',
+    solution: 'Проектирование пути клиента на основе 5 лет опыта в складской логистике и продажах: чекаут в 1 экран, автозаполнение адреса по геолокации, устранение визуального шума и оплата через СБП в 1 клик.',
+    timeline: '5 дней',
+    roi: 'Сокращение времени оформления заказа с 3 минут до 30 секунд. Рост конверсии мобильного трафика в оплату на 25%.',
+    stack: ['Чекаут в 1 экран', 'Автоопределение адреса', 'СБП / Оплата в 1 клик', 'Mobile-First UX', 'Без лишних полей']
+  },
+  'wms-logistics': {
+    title: 'WMS и маркировка склада: отгрузки без пересортов и штрафов',
+    tag: 'Логистика & WMS • Сборка в 3 раза быстрее',
+    pain: 'Путаница в ячейках склада, регулярные пересорты при комплектации, ручное оформление накладных СДЭК и штрафы маркетплейсов за задержки отгрузок.',
+    solution: 'Адресный учет по штрихкодам Code128, моментальная печать термоэтикеток на складе и автогенерация реестров СДЭК в один клик.',
+    timeline: '3 дня',
+    roi: '0 пересортов за все время работы. Время сборки одной позиции сократилось с 6 до 2 минут. Исключены штрафы за задержки.',
+    stack: ['Штрихкодирование Code128', 'Адресный учет ячеек', 'Интеграция со СДЭК API', 'Печать этикеток в 1 клик', 'Контроль остатков']
   },
   '1c-b2b': {
-    title: 'B2B Каталог и сквозная синхронизация с 1С:Предприятие',
-    tag: '1C Интеграция • Каталог 100 000+ товаров',
-    desc: 'Интеграционный шлюз номенклатуры спортивных товаров: автоматический парсинг сотен тысяч позиций, характеристик и складских остатков по филиалам без тормозов и зависаний витрины.',
-    stack: ['1C:Предприятие', 'Потоковый парсинг XML без утечек памяти', 'Синхронизация цен и остатков', 'Фасетный поиск'],
-    highlights: [
-      'Отказоустойчивая обработка больших фидов (100k+ SKU) без подвисания сайта',
-      'Фоновая синхронизация остатков: исключены заказы отсутствующих товаров',
-      'Моментальный поиск по фильтрам для оптовых клиентов',
-      'Экономия десятков часов ручного труда операторов контента'
-    ]
-  },
-  'ai-da-umnichka': {
-    title: 'Веб-сервис детского центра: запись и сбор лидов',
-    tag: 'E-Commerce & Лидген • 100/100 Google PageSpeed',
-    desc: 'Легкий и быстрый сайт детского развивающего центра. Полная оптимизация скорости загрузки (100 баллов PageSpeed), мгновенный отклик на смартфонах и прямая маршрутизация заявок в Telegram.',
-    stack: ['100/100 PageSpeed Performance', 'Интуитивная онлайн-запись', 'Маршрутизация заявок в Telegram', 'Mobile-First'],
-    highlights: [
-      '100 из 100 баллов скорости Google Lighthouse: мгновенная загрузка даже на слабом 3G',
-      'Удобная форма записи на пробные занятия с высокой конверсией в заявку',
-      'Прямая отправка уведомлений администраторам в Telegram без задержек'
-    ]
+    title: 'Сквозная синхронизация 1С: 100 000 товаров без тормозов сайта',
+    tag: '1С:Предприятие • 100k+ SKU без подвисаний',
+    pain: 'Оптовый сайт зависал при выгрузках номенклатуры из 1С, менеджеры вручную перепроверяли остатки и цены по телефону, бизнес продавал отсутствующие товары в минус.',
+    solution: 'Потоковый шлюз данных: фоновый обмен остатками и ценами за секунды без падения серверов, подвисания витрины и утечек памяти.',
+    timeline: '4 дня',
+    roi: 'Экономия 40+ часов ручного труда менеджеров в месяц. Ноль ошибок в ценах и ноль заказов на отсутствующий товар.',
+    stack: ['1С:Предприятие 8.3', 'Потоковый парсинг фидов', 'Фоновая синхронизация', 'Мгновенный фасетный поиск', 'Отказоустойчивость']
   }
 };
 
-// Открытие модального окна проекта
+// Интерактивный переключатель До / После для чекаута
+window.switchCheckoutView = function(view) {
+  const container = document.getElementById('checkout-compare');
+  if (!container) return;
+  const buttons = container.querySelectorAll('.compare-tab-btn');
+  buttons.forEach(b => {
+    b.classList.toggle('active', b.getAttribute('data-view') === view);
+  });
+  const panels = container.querySelectorAll('.compare-view-card');
+  panels.forEach(p => {
+    p.classList.toggle('active', p.classList.contains(`view-${view}`));
+  });
+};
+
+// Открытие модального окна проекта по структуре «Деньги и окупаемость»
 window.openProjectModal = function(projectId) {
   const p = projectDetails[projectId];
   if (!p) return;
@@ -64,29 +67,44 @@ window.openProjectModal = function(projectId) {
 
   modalBody.innerHTML = `
     <div style="margin-bottom: 20px;">
-      <span style="display:inline-block; background:#EFF6FF; color:#2563EB; font-weight:700; font-size:0.75rem; padding:4px 10px; border-radius:999px; margin-bottom:8px;">
+      <span style="display:inline-block; background:#EFF6FF; color:#1D4ED8; font-weight:700; font-size:0.75rem; padding:5px 12px; border-radius:999px; margin-bottom:10px;">
         ${p.tag}
       </span>
-      <h2 style="font-size: 1.5rem; font-weight:800; margin: 6px 0 12px; line-height:1.25; color:#18181B;">${p.title}</h2>
-      <p style="color: #52525B; font-size: 0.95rem; line-height: 1.65; margin-bottom: 20px;">${p.desc}</p>
+      <h2 style="font-size: 1.45rem; font-weight:800; margin: 4px 0 16px; line-height:1.25; color:#18181B;">${p.title}</h2>
     </div>
 
-    <div style="margin-bottom: 22px;">
-      <div style="font-size: 0.85rem; font-weight:800; color: #18181B; margin-bottom: 10px; text-transform: uppercase; letter-spacing:0.04em;">
-        Что это дает бизнесу (Результаты внедрения):
+    <!-- Боль клиента -->
+    <div style="background:#FEF2F2; border-left:4px solid #EF4444; border-radius:0 12px 12px 0; padding:12px 16px; margin-bottom:14px;">
+      <div style="font-size:0.8rem; font-weight:800; color:#DC2626; text-transform:uppercase; margin-bottom:4px; letter-spacing:0.04em;">
+        🔴 Какая была боль клиента:
       </div>
-      <ul style="list-style: none; display: flex; flex-direction: column; gap: 8px;">
-        ${p.highlights.map(h => `
-          <li style="display: flex; gap: 10px; font-size: 0.92rem; color: #18181B;">
-            <span style="color: #2563EB; font-weight:800;">✓</span> <span>${h}</span>
-          </li>
-        `).join('')}
-      </ul>
+      <p style="color:#18181B; font-size:0.92rem; line-height:1.55; margin:0;">${p.pain}</p>
     </div>
 
-    <div style="margin-bottom: 26px;">
-      <div style="font-size: 0.85rem; font-weight:800; color: #18181B; margin-bottom: 10px; text-transform: uppercase; letter-spacing:0.04em;">
-        Примененные решения:
+    <!-- Что внедрено -->
+    <div style="background:#F0FDF4; border-left:4px solid #16A34A; border-radius:0 12px 12px 0; padding:12px 16px; margin-bottom:16px;">
+      <div style="font-size:0.8rem; font-weight:800; color:#15803D; text-transform:uppercase; margin-bottom:4px; letter-spacing:0.04em;">
+        🟢 Что внедрено (Решение):
+      </div>
+      <p style="color:#18181B; font-size:0.92rem; line-height:1.55; margin:0;">${p.solution}</p>
+    </div>
+
+    <!-- Метрики: Срок и Окупаемость -->
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:20px;">
+      <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:12px; padding:12px 14px;">
+        <div style="font-size:0.75rem; font-weight:700; color:#64748B; text-transform:uppercase; margin-bottom:4px;">⏱ Срок внедрения:</div>
+        <strong style="color:#18181B; font-size:1.02rem;">${p.timeline}</strong>
+      </div>
+      <div style="background:#F0FDF4; border:1px solid #BBF7D0; border-radius:12px; padding:12px 14px;">
+        <div style="font-size:0.75rem; font-weight:700; color:#15803D; text-transform:uppercase; margin-bottom:4px;">💰 Экономика (ROI):</div>
+        <strong style="color:#15803D; font-size:1.02rem;">${p.roi}</strong>
+      </div>
+    </div>
+
+    <!-- Примененные решения -->
+    <div style="margin-bottom: 24px;">
+      <div style="font-size: 0.8rem; font-weight:800; color: #71717A; margin-bottom: 8px; text-transform: uppercase; letter-spacing:0.04em;">
+        Технические решения:
       </div>
       <div style="display: flex; flex-wrap: wrap; gap: 6px;">
         ${p.stack.map(s => `<span style="background:#F4F4F5; color:#18181B; font-weight:600; font-size:0.8rem; padding:4px 10px; border-radius:999px;">${s}</span>`).join('')}
@@ -94,8 +112,9 @@ window.openProjectModal = function(projectId) {
     </div>
 
     <div style="display: flex; gap: 12px; flex-wrap: wrap; padding-top: 18px; border-top: 1px solid #E4E4E7;">
-      <a href="https://t.me/ssharonovv" target="_blank" rel="noopener noreferrer" class="btn-blue-pill" style="font-size:0.88rem; padding:10px 20px;">
-        Обсудить внедрение в Telegram ↗
+      <a href="https://t.me/ssharonovv" target="_blank" rel="noopener noreferrer" class="btn-black-pill" style="font-size:0.92rem; padding:12px 24px;">
+        <span>Обсудить похожее решение в Telegram</span>
+        <span>↗</span>
       </a>
     </div>
   `;
