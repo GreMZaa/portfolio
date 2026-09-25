@@ -224,9 +224,9 @@ function initInteractiveHero() {
   };
 
   // Smooth render loop (requestAnimationFrame + lerp)
-  // LERP factor 0.04 provides a calm, graceful head turn (approx 0.8s) instead of nervous twitching
-  const LERP_SPEED = 0.042;
-  const GREETING_LERP_SPEED = 0.05;
+  // LERP factor 0.022 provides a calm, graceful, cinematic head turn without sudden jerks
+  const LERP_SPEED = 0.022;
+  const GREETING_LERP_SPEED = 0.03;
 
   function render() {
     if (isGreetingSequence) {
@@ -343,7 +343,7 @@ function initInteractiveHero() {
   if (heroWrapper) {
     heroWrapper.addEventListener('mousemove', (e) => {
       const now = performance.now();
-      if (now - lastZoneChangeTime < 240) return; // Prevent frantic rapid switching
+      if (now - lastZoneChangeTime < 360) return; // Prevent frantic rapid switching
 
       const rect = heroWrapper.getBoundingClientRect();
       const relX = (e.clientX - rect.left) / rect.width;
@@ -372,7 +372,7 @@ function initInteractiveHero() {
     heroWrapper.addEventListener('mouseleave', () => {
       currentActiveZone = 'idle';
       clearTimeout(resetTimer);
-      resetTimer = setTimeout(returnToIdle, 2500);
+      resetTimer = setTimeout(returnToIdle, 3500);
     });
   }
 
