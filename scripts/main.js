@@ -187,31 +187,8 @@ function initInteractiveHero() {
   const heroWrapper = document.getElementById('hero-interactive-section');
 
   const TOTAL_FRAMES = 144;
-  const frames = [];
-  let loadedCount = 0;
-  let renderedInitial = false;
-
-  // Preload all 144 WebP frames
-  for (let i = 0; i < TOTAL_FRAMES; i++) {
-    const img = new Image();
-    const num = String(i).padStart(3, '0');
-    img.src = `assets/hero_frames/frame_${num}.webp`;
-    img.onload = () => {
-      loadedCount++;
-      if (i === 0 && !renderedInitial) {
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-        renderedInitial = true;
-      }
-    };
-    frames.push(img);
-  }
-
-  let currentFrame = 0;
-  let targetFrame = 0;
-  let isGreetingSequence = false;
-  let greetingStep = 0;
-  let resetTimer = null;
-  let currentActiveZone = 'idle';
+  const frames = new Array(TOTAL_FRAMES);
+  let lastDrawnFrame = null;
 
   // Key animation landmarks
   const POSES = {
@@ -222,6 +199,52 @@ function initInteractiveHero() {
     GREET_WAVE: 115,
     POINT_DOWN: 140
   };
+
+  // Safe frame drawer: never clears unless next frame is fully decoded
+  function drawFrame(img) {
+    if (!img || !img.complete || img.naturalWidth === 0) return false;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+    lastDrawnFrame = img;
+    return true;
+  }
+
+  // 1. Immediately preload and draw primary landmark frames first
+  const primaryIndices = [POSES.IDLE, 0, POSES.CENTER_LOOK, POSES.LOOK_LEFT, POSES.LOOK_RIGHT, POSES.GREET_WAVE, POSES.POINT_DOWN];
+  primaryIndices.forEach((idx) => {
+    const img = new Image();
+    const num = String(idx).padStart(3, '0');
+    img.src = `assets/hero_frames/frame_${num}.webp`;
+    img.onload = () => {
+      frames[idx] = img;
+      if (!lastDrawnFrame && (idx === POSES.IDLE || idx === 0)) {
+        drawFrame(img);
+      }
+    };
+    frames[idx] = img;
+  });
+
+  // 2. Preload remaining frames in background
+  for (let i = 0; i < TOTAL_FRAMES; i++) {
+    if (frames[i]) continue;
+    const img = new Image();
+    const num = String(i).padStart(3, '0');
+    img.src = `assets/hero_frames/frame_${num}.webp`;
+    img.onload = () => {
+      frames[i] = img;
+      if (!lastDrawnFrame && i === 0) {
+        drawFrame(img);
+      }
+    };
+    frames[i] = img;
+  }
+
+  let currentFrame = POSES.IDLE;
+  let targetFrame = POSES.IDLE;
+  let isGreetingSequence = false;
+  let greetingStep = 0;
+  let resetTimer = null;
+  let currentActiveZone = 'idle';
 
   // Smooth render loop (requestAnimationFrame + lerp)
   // LERP factor 0.022 provides a calm, graceful, cinematic head turn without sudden jerks
@@ -245,9 +268,12 @@ function initInteractiveHero() {
     }
 
     const fIdx = Math.min(TOTAL_FRAMES - 1, Math.max(0, Math.round(currentFrame)));
-    if (frames[fIdx] && frames[fIdx].complete) {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.drawImage(frames[fIdx], 0, 0, canvas.width, canvas.height);
+    const candidateImg = frames[fIdx];
+
+    if (candidateImg && candidateImg.complete && candidateImg.naturalWidth > 0) {
+      drawFrame(candidateImg);
+    } else if (lastDrawnFrame) {
+      // Keep displaying last valid frame without wiping canvas!
     }
 
     requestAnimationFrame(render);
