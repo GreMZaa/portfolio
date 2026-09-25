@@ -24,3 +24,7 @@ assets/mockup_inner_*
 assets/mockup_perfect_*
 assets/sergey_crop*
 assets/sergey_grabcut*
+assets/*.html
+assets/*.svg
+assets/fonts_test/
+scripts/*.py

@@ -195,134 +195,174 @@ button {
   position: relative;
 }
 
-/* 2025/2026 Edition Tilted Doodle Badge */
-.edition-badge-container {
-  display: inline-block;
-  margin-bottom: 8px;
-  transform: rotate(-3deg);
-  transition: transform 0.25s ease;
-}
-
-.edition-badge-container:hover {
-  transform: rotate(0deg) scale(1.05);
-}
-
-.edition-doodle-img {
-  width: 135px;
-  height: auto;
-  display: block;
-}
-
-/* 1:1 Carbon Copy Title Artwork */
-.hero-title-artwork-box {
-  width: 100%;
-  max-width: 440px;
-  margin-bottom: 24px;
+/* ==========================================================================
+   HERO TITLE (1:1 RAZOR-SHARP VECTOR SVG + DISPLAY TYPOGRAPHY)
+   ========================================================================== */
+.hero-vector-title-wrap {
   position: relative;
-}
-
-.hero-title-artwork-img {
   width: 100%;
-  height: auto;
-  display: block;
-}
-
-/* Giant Port / folio display title */
-.giant-title-box {
-  position: relative;
+  max-width: 400px;
+  height: 350px;
+  user-select: none;
   margin-bottom: 24px;
 }
 
-.title-line-1 {
-  display: flex;
-  align-items: flex-end;
-  gap: 14px;
-  line-height: 0.88;
-  position: relative;
-}
-
-.title-line-2 {
-  display: flex;
+/* 2025 Edition Oval */
+.edition-sticker {
+  position: absolute;
+  top: 6px;
+  left: 14px;
+  transform: rotate(-10deg);
+  display: inline-flex;
+  flex-direction: column;
   align-items: center;
-  gap: 16px;
-  line-height: 0.88;
-  position: relative;
-  margin-top: -0.05em;
+  justify-content: center;
+  padding: 4px 13px;
+  border: 1.8px solid #1855F4;
+  border-radius: 999px;
+  background: transparent;
+  z-index: 5;
 }
 
-.display-serif {
-  font-family: var(--font-display);
-  font-size: clamp(4.8rem, 9.8vw, 8.2rem);
-  font-weight: 700;
-  font-style: normal; /* STRICTLY UPRIGHT (ROMAN), NOT ITALIC */
-  color: var(--royal-blue);
+.edition-year {
+  font-size: 12px;
+  font-weight: 800;
+  color: #1855F4;
+  line-height: 1.1;
+}
+
+.edition-text {
+  font-size: 12px;
+  font-weight: 800;
+  color: #1855F4;
+  line-height: 1.1;
+}
+
+/* Curly Arrow from 2025 Edition */
+.edition-curly-arrow {
+  position: absolute;
+  top: 16px;
+  left: 92px;
+  width: 54px;
+  height: 38px;
+  z-index: 4;
+  pointer-events: none;
+}
+
+/* Title Row 1: Port */
+.title-row-1 {
+  position: absolute;
+  top: 50px;
+  left: 8px;
+  z-index: 3;
+}
+
+.word-port {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 124px;
+  font-weight: 900;
+  color: #1855F4;
+  line-height: 0.80;
   letter-spacing: -0.04em;
   display: inline-block;
-  line-height: 0.88;
+  transform: rotate(-5deg);
+  transform-origin: left bottom;
+  position: relative;
 }
 
-/* Star dot replacing standard dot on 'i' in folio */
-.star-dot-i {
+/* Blue 4-Point Sparkle Star top-right of Port */
+.star-port-sparkle {
+  position: absolute;
+  top: -6px;
+  right: -24px;
+  width: 17px;
+  height: 17px;
+}
+
+/* Orange Pill Sticker (Under 't', above 'folio' ending) */
+.role-orange-pill {
+  position: absolute;
+  top: 124px;
+  right: 14px;
+  background-color: #FF5722;
+  color: #FFFFFF;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 5px 14px;
+  border-radius: 999px;
+  white-space: nowrap;
+  z-index: 6;
+  box-shadow: 0 4px 12px rgba(255, 87, 34, 0.28);
+  letter-spacing: -0.01em;
+  transform: rotate(-1.5deg);
+}
+
+/* Title Row 2: folio */
+.title-row-2 {
+  position: absolute;
+  top: 154px;
+  left: 12px;
+  z-index: 2;
+}
+
+.word-folio {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 124px;
+  font-weight: 900;
+  color: #1855F4;
+  line-height: 0.82;
+  letter-spacing: -0.04em;
+  display: inline-block;
+  transform: rotate(-2.5deg);
+  transform-origin: left center;
+}
+
+/* Dotless i with Star replacement */
+.star-i-box {
   position: relative;
   display: inline-block;
 }
 
 .star-i-svg {
   position: absolute;
-  top: -0.12em;
+  top: -0.22em;
   left: 50%;
   transform: translateX(-50%);
-  width: 0.38em;
-  height: 0.38em;
-  pointer-events: none;
+  width: 0.34em;
+  height: 0.34em;
 }
 
-/* Small blue 4-point sparkle star above the orange pill */
-.doodle-star-blue-hero {
+/* Green Plus Doodle */
+.doodle-plus-green {
   position: absolute;
-  top: -6px;
-  right: 20px;
-  pointer-events: none;
-}
-
-.role-tag-pill {
-  display: inline-block;
-  background-color: var(--pill-orange);
-  color: #FFFFFF;
-  font-family: var(--font-sans);
-  font-size: clamp(0.75rem, 1.2vw, 0.95rem);
-  font-weight: 700;
-  font-style: normal;
-  padding: 6px 18px;
-  border-radius: var(--radius-full);
-  white-space: nowrap;
-  box-shadow: 0 4px 14px rgba(255, 87, 34, 0.3);
-  margin-bottom: 0.12em;
-}
-
-/* Doodles around hero title */
-.doodle-green-plus {
-  position: absolute;
-  left: -32px;
-  top: 15%;
+  top: 195px;
+  left: -16px;
   color: #84CC16;
+  font-size: 28px;
   font-weight: 900;
-  font-size: 1.8rem;
   line-height: 1;
-  pointer-events: none;
+  z-index: 3;
 }
 
-.doodle-curved-arrow {
+/* Hand-drawn Curved Arrow */
+.doodle-curved-arrow-wrap {
   position: absolute;
-  left: -32px;
-  bottom: -28px;
-  pointer-events: none;
+  top: 270px;
+  left: -4px;
+  width: 36px;
+  height: 40px;
+  z-index: 3;
 }
 
-.doodle-star-gold {
+/* Golden 8-Ray Sunburst Star */
+.doodle-starburst-gold {
   position: absolute;
-  right: -25px;
-  bottom: -15px;
+  top: 260px;
+  right: 10px;
+  width: 60px;
+  height: 60px;
+  z-index: 3;
   pointer-events: none;
 }
 
@@ -1517,5 +1557,13 @@ button {
     left: 0;
     right: 0;
     margin-top: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-vector-title-wrap {
+    transform: scale(0.82);
+    transform-origin: left top;
+    margin-bottom: -40px;
   }
 }
