@@ -183,28 +183,22 @@ button {
   position: relative;
 }
 
-/* 2025/2026 Edition Tilted Outline Badge */
-.edition-badge {
-  display: inline-flex;
-  align-items: center;
-  padding: 6px 16px;
-  border: 1.5px solid var(--royal-blue);
-  border-radius: var(--radius-full);
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: var(--royal-blue);
-  transform: rotate(-8deg);
-  margin-bottom: 20px;
-  background: transparent;
-  position: relative;
+/* 2025/2026 Edition Tilted Doodle Badge */
+.edition-badge-container {
+  display: inline-block;
+  margin-bottom: 8px;
+  transform: rotate(-3deg);
+  transition: transform 0.25s ease;
 }
 
-.edition-arrow-doodle {
-  position: absolute;
-  top: -14px;
-  right: -24px;
-  color: var(--royal-blue);
-  pointer-events: none;
+.edition-badge-container:hover {
+  transform: rotate(0deg) scale(1.05);
+}
+
+.edition-doodle-img {
+  width: 135px;
+  height: auto;
+  display: block;
 }
 
 /* Giant Port / folio display title */
@@ -215,27 +209,54 @@ button {
 
 .title-line-1 {
   display: flex;
-  align-items: center;
-  gap: 16px;
-  line-height: 0.9;
+  align-items: flex-end;
+  gap: 14px;
+  line-height: 0.88;
+  position: relative;
 }
 
 .title-line-2 {
   display: flex;
   align-items: center;
   gap: 16px;
-  line-height: 0.9;
+  line-height: 0.88;
   position: relative;
+  margin-top: -0.05em;
 }
 
 .display-serif {
   font-family: var(--font-display);
-  font-size: clamp(5rem, 10vw, 8.2rem);
+  font-size: clamp(4.8rem, 9.8vw, 8.2rem);
   font-weight: 700;
-  font-style: italic;
+  font-style: normal; /* STRICTLY UPRIGHT (ROMAN), NOT ITALIC */
   color: var(--royal-blue);
   letter-spacing: -0.04em;
   display: inline-block;
+  line-height: 0.88;
+}
+
+/* Star dot replacing standard dot on 'i' in folio */
+.star-dot-i {
+  position: relative;
+  display: inline-block;
+}
+
+.star-i-svg {
+  position: absolute;
+  top: -0.12em;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0.38em;
+  height: 0.38em;
+  pointer-events: none;
+}
+
+/* Small blue 4-point sparkle star above the orange pill */
+.doodle-star-blue-hero {
+  position: absolute;
+  top: -6px;
+  right: 20px;
+  pointer-events: none;
 }
 
 .role-tag-pill {
@@ -243,41 +264,39 @@ button {
   background-color: var(--pill-orange);
   color: #FFFFFF;
   font-family: var(--font-sans);
-  font-size: clamp(0.75rem, 1.2vw, 0.92rem);
+  font-size: clamp(0.75rem, 1.2vw, 0.95rem);
   font-weight: 700;
   font-style: normal;
-  padding: 7px 18px;
+  padding: 6px 18px;
   border-radius: var(--radius-full);
   white-space: nowrap;
-  box-shadow: 0 4px 12px rgba(255, 87, 34, 0.25);
-  transform: translateY(-8px);
+  box-shadow: 0 4px 14px rgba(255, 87, 34, 0.3);
+  margin-bottom: 0.12em;
 }
 
 /* Doodles around hero title */
 .doodle-green-plus {
   position: absolute;
-  left: -28px;
-  top: 55%;
-  color: var(--star-green);
+  left: -32px;
+  top: 15%;
+  color: #84CC16;
   font-weight: 900;
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   line-height: 1;
   pointer-events: none;
 }
 
 .doodle-curved-arrow {
   position: absolute;
-  left: 10px;
-  bottom: -32px;
-  color: var(--text-main);
+  left: -32px;
+  bottom: -28px;
   pointer-events: none;
 }
 
 .doodle-star-gold {
   position: absolute;
-  right: -20px;
-  bottom: 0px;
-  color: var(--star-gold);
+  right: -25px;
+  bottom: -15px;
   pointer-events: none;
 }
 
@@ -518,36 +537,32 @@ button {
   position: relative;
 }
 
+.about-title-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.about-wavy-doodle {
+  margin-bottom: 6px;
+  color: #FF5722;
+}
+
+.about-title-scribbles {
+  margin-top: 4px;
+  margin-left: 2px;
+}
+
 .section-serif-title {
   font-family: var(--font-display);
   font-size: 2.8rem;
   font-weight: 700;
+  font-style: normal;
   color: var(--royal-blue);
-  line-height: 1.1;
+  line-height: 1.08;
   letter-spacing: -0.02em;
   position: relative;
   display: inline-block;
-}
-
-.title-doodle-underlines {
-  position: relative;
-  margin-top: 6px;
-  width: 90px;
-}
-
-.doodle-wavy-red {
-  display: block;
-  width: 100%;
-  height: 6px;
-}
-
-.doodle-line-blue {
-  display: block;
-  width: 100%;
-  height: 3px;
-  background-color: var(--royal-blue);
-  border-radius: 2px;
-  margin-top: 3px;
 }
 
 .about-text-body {
@@ -559,28 +574,33 @@ button {
 
 .doodle-about-star {
   position: absolute;
-  right: 210px;
-  top: -10px;
+  right: 220px;
+  top: 50%;
+  transform: translateY(-50%);
   color: var(--star-green);
+  pointer-events: none;
 }
 
-/* Purple Tilted Tape Sticker */
-.tilted-tape-sticker {
-  background-color: var(--tape-purple);
-  padding: 16px 20px;
-  border-radius: var(--radius-sm);
-  transform: rotate(6deg);
-  box-shadow: 0 6px 16px rgba(109, 40, 217, 0.12);
-  text-align: center;
+/* Authentic Lavender Brush Sticker */
+.lavender-brush-sticker {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: rotate(10deg);
+  transition: transform 0.3s ease;
 }
 
-.tape-text {
-  font-family: var(--font-script);
-  font-size: 1.65rem;
-  line-height: 1.25;
-  font-weight: 700;
-  color: #4C1D95;
+.lavender-brush-sticker:hover {
+  transform: rotate(6deg) scale(1.05);
 }
+
+.brush-sticker-img {
+  width: 100%;
+  max-width: 185px;
+  height: auto;
+  display: block;
+}
+
 
 /* ==========================================================================
    WHAT I DO SECTION (4 CLEAN CARDS)
@@ -705,17 +725,30 @@ button {
 
 .work-title-wrap {
   position: relative;
+  display: inline-block;
 }
 
-.brush-stroke-green {
+.sw-title-highlight {
+  position: relative;
+  display: inline-block;
+  z-index: 1;
+}
+
+.sw-title-highlight::after {
+  content: '';
   position: absolute;
   bottom: 2px;
-  left: 0;
-  width: 100%;
-  height: 8px;
+  left: -4px;
+  right: -4px;
+  height: 14px;
   background-color: #BEF264;
   z-index: -1;
   border-radius: 4px;
+  transform: rotate(-0.5deg);
+}
+
+.coffee-cup-svg {
+  flex-shrink: 0;
 }
 
 .work-header-subtitle {
@@ -1021,14 +1054,23 @@ button {
 /* See All Projects Button with Sparks */
 .see-all-center {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
+  margin-top: 36px;
   position: relative;
 }
 
+.see-all-btn-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
 .sparks-doodle {
-  color: #EC4899;
-  margin-top: 6px;
+  position: absolute;
+  top: -10px;
+  right: -24px;
+  pointer-events: none;
 }
 
 /* ==========================================================================
@@ -1208,7 +1250,8 @@ button {
 .banner-lead-script {
   font-family: var(--font-display);
   font-size: 1.85rem;
-  font-style: italic;
+  font-style: normal;
+  font-weight: 700;
   color: var(--royal-blue);
   margin-bottom: 6px;
   line-height: 1.2;
@@ -1218,6 +1261,7 @@ button {
   font-family: var(--font-display);
   font-size: clamp(1.8rem, 3.2vw, 2.6rem);
   font-weight: 700;
+  font-style: normal;
   color: var(--royal-blue);
   line-height: 1.2;
 }
@@ -1230,6 +1274,23 @@ button {
 
 .banner-action-side {
   flex-shrink: 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.doodle-cta-star {
+  position: absolute;
+  top: -24px;
+  left: -44px;
+  pointer-events: none;
+}
+
+.doodle-cta-arrow {
+  position: absolute;
+  bottom: -22px;
+  left: -34px;
+  pointer-events: none;
 }
 
 .btn-blue-pill {
