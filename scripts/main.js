@@ -137,6 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const navLinks = document.querySelector('.nav-links');
   if (mobileBtn && navLinks) {
     mobileBtn.addEventListener('click', () => {
+      mobileBtn.classList.toggle('is-active');
       const isShown = navLinks.style.display === 'flex';
       navLinks.style.display = isShown ? '' : 'flex';
       if (!isShown) {
