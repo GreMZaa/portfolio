@@ -762,229 +762,331 @@ button {
 }
 
 /* ==========================================================================
-   HERO SECTION (1:1 SRI TECH REFERENCE RECREATION)
+   INTERACTIVE HERO SECTION (SRI TECH STYLE)
    ========================================================================== */
-.hero-sri-pure {
+.hero-sri-wrapper {
   position: relative;
-  min-height: calc(100vh - 80px);
-  display: flex;
-  align-items: center;
-  padding: 24px 0 36px 0;
+  padding: 24px 0 30px;
   overflow: visible;
 }
 
-.hero-sri-pure-grid {
+/* Ambient Radial Glow Behind Hero */
+.hero-sri-glow {
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 850px;
+  height: 520px;
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.95) 0%, rgba(224, 235, 255, 0.45) 45%, rgba(250, 247, 242, 0) 75%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.hero-sri-grid {
   display: grid;
-  grid-template-columns: 1fr 1.05fr;
+  grid-template-columns: 1fr 1.15fr;
   align-items: center;
   gap: 36px;
   position: relative;
   z-index: 2;
-  width: 100%;
+  min-height: calc(100vh - 120px);
 }
 
-/* Left Column: Pure Sri Tech Typography Hierarchy */
-.sri-pure-left {
+/* Left Column: Author, Badges, Name, Tagline, Cursor Hint, Positioning */
+.hero-sri-left {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  margin-bottom: 0;
   position: relative;
-  z-index: 5;
+  z-index: 3;
 }
 
-/* Eyebrow: SERGEY SHARONOV / FULL-STACK DEVELOPER */
-.sri-pure-eyebrow {
-  display: flex;
+.hero-sri-author-badge {
+  display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  flex-wrap: wrap;
+}
+
+/* 2025 Edition Oval */
+.edition-sticker-sri {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 11px;
+  border: 1.5px solid #1855F4;
+  border-radius: 999px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  color: #1855F4;
+  background: #FFFFFF;
+}
+
+/* Builder Pill */
+.author-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 11px;
+  border-radius: 999px;
+  background: #1855F4;
+  color: #FFFFFF;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+/* Status Pill */
+.author-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 11px;
+  border-radius: 999px;
+  background: #ECFDF5;
+  color: #059669;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.18em;
-  color: #8E8E93;
-  text-transform: uppercase;
+  border: 1px solid rgba(16, 185, 129, 0.2);
 }
 
-.eyebrow-slash {
-  color: #C7C7CC;
+.status-pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10B981;
+  display: inline-block;
+  animation: pulseGreen 2s infinite ease-in-out;
 }
 
-/* Giant Editorial Name: Сергей (Dark) / Шаронов (Dusty Rose/Coral) */
-.sri-pure-name {
+@keyframes pulseGreen {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+.hero-sri-name {
   font-family: 'Playfair Display', Georgia, serif;
-  font-size: clamp(3.8rem, 6.2vw, 5.6rem);
-  font-weight: 700;
-  line-height: 0.96;
-  letter-spacing: -0.025em;
+  font-size: clamp(3.2rem, 5.4vw, 4.8rem);
+  font-weight: 900;
+  color: #18181B;
+  line-height: 1.02;
+  letter-spacing: -0.03em;
   margin: 0;
 }
 
-.sri-pure-name .name-first {
-  display: block;
-  color: #1C1917;
+.hero-sri-name span {
+  color: #1855F4;
 }
 
-.sri-pure-name .name-last {
-  display: block;
-  color: #E28782; /* Delicate pastel dusty rose matching Sri Tech reference */
-  font-weight: 600;
-}
-
-/* Subtitle: FULL-STACK & AUTOMATION DEVELOPER */
-.sri-pure-subtitle {
-  font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+.role-orange-pill-sri {
+  display: inline-block;
+  background-color: #FF5722;
+  color: #FFFFFF;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 12px;
   font-weight: 800;
-  letter-spacing: 0.16em;
-  color: #71717A;
-  text-transform: uppercase;
-  margin-top: 2px;
+  padding: 5px 14px;
+  border-radius: 999px;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(255, 87, 34, 0.25);
+  letter-spacing: -0.01em;
+  transform: rotate(-1.5deg);
+  align-self: flex-start;
 }
 
-/* Pure Tagline */
-.sri-pure-tagline {
-  font-size: 0.94rem;
-  line-height: 1.55;
-  color: #52525B;
-  max-width: 440px;
+/* Positioning Block */
+.hero-positioning-block {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 500px;
+}
+
+.hero-positioning-lead {
+  font-size: 1.02rem;
+  line-height: 1.45;
+  color: #18181B;
+  margin: 0;
+}
+
+.hero-positioning-lead strong {
+  color: #18181B;
+  font-weight: 800;
+}
+
+.hero-positioning-sub {
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: #71717A;
+  margin: 0;
+}
+
+/* Buttons Row */
+.hero-btn-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
   margin-top: 4px;
 }
 
-/* Sleek Minimal Actions */
-.sri-pure-actions {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  margin-top: 10px;
-}
-
-.sri-btn-action {
+.btn-black-pill {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   background: #18181B;
   color: #FFFFFF;
-  font-size: 0.86rem;
+  font-size: 0.88rem;
   font-weight: 700;
-  padding: 10px 22px;
+  padding: 11px 22px;
   border-radius: 999px;
   text-decoration: none;
-  box-shadow: 0 4px 14px rgba(24, 24, 27, 0.14);
+  box-shadow: 0 4px 14px rgba(24, 24, 27, 0.15);
   transition: all 0.25s ease;
 }
 
-.sri-btn-action:hover {
+.btn-black-pill:hover {
   background: #27272A;
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(24, 24, 27, 0.2);
 }
 
-.sri-link-action {
+.btn-clean-link {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-size: 0.86rem;
+  font-size: 0.88rem;
   font-weight: 700;
-  color: #71717A;
+  color: #18181B;
   text-decoration: none;
-  transition: color 0.2s ease;
+  padding: 4px 0;
 }
 
-.sri-link-action:hover {
+.link-wavy-doodle {
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+}
+
+/* Lead Magnet Micro-Trigger */
+.hero-lead-magnet-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #FFFFFF;
+  border: 1px solid #E4E4E7;
+  border-radius: 999px;
+  padding: 10px 18px;
+  box-shadow: 0 4px 16px -2px rgba(24, 24, 27, 0.05);
+  max-width: 490px;
+  margin-top: 4px;
+}
+
+.hero-lead-magnet-pill .lm-pulse-icon {
+  flex-shrink: 0;
+  animation: pulseAlert 2s infinite ease-in-out;
+}
+
+@keyframes pulseAlert {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+.hero-lead-magnet-pill .lm-text {
+  font-size: 0.78rem;
+  color: #52525B;
+  line-height: 1.35;
+}
+
+.hero-lead-magnet-pill .lm-text strong {
+  color: #18181B;
+  font-weight: 700;
+}
+
+/* Center/Right Column: Dominant Interactive Character in Sri Tech Style */
+.hero-sri-center {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end; /* Laptop sits cleanly at bottom */
+  width: 100%;
+  height: 100%;
+  min-height: calc(100vh - 140px);
+  max-height: 740px;
+}
+
+/* Floating Speech Bubble (Placed gracefully beside Sergey like Sri Tech) */
+.sri-speech-bubble {
+  position: absolute;
+  top: 16%;
+  left: -40px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(24, 24, 27, 0.1);
+  border-radius: 999px;
+  padding: 9px 18px;
+  box-shadow: 0 10px 28px -4px rgba(0, 0, 0, 0.08);
+  z-index: 12;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.sri-bubble-tag {
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: #EFF6FF;
+  color: #1855F4;
+}
+
+.sri-bubble-text {
+  font-size: 0.82rem;
+  font-weight: 700;
   color: #18181B;
 }
 
-.link-arrow {
-  display: inline-block;
-  transition: transform 0.2s ease;
-}
-
-.sri-link-action:hover .link-arrow {
-  transform: translateY(2px);
-}
-
-/* Right Column: Dominant Interactive Character */
-.sri-pure-right {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-}
-
-/* Canvas Stage */
-.sri-pure-canvas-stage {
+/* Character Canvas Stage — large, prominent, sitting cleanly */
+.sri-canvas-stage {
   position: relative;
   width: 100%;
-  max-width: 720px;
+  max-width: 860px;
+  height: 100%;
+  min-height: 480px;
+  max-height: 700px;
   aspect-ratio: 16 / 10;
   background: transparent;
   cursor: crosshair;
   overflow: hidden;
-  clip-path: inset(0 0 4% 0);
+  clip-path: inset(0 0 3% 0);
   mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
   -webkit-mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
 }
 
 #hero-character-canvas {
   width: 100%;
   height: 100%;
+  object-fit: contain;
+  object-position: bottom center;
   display: block;
   background: transparent;
 }
 
-/* Floating Pills (1:1 Sri Tech Reference: delicate, frosted, smooth) */
-.sri-floating-pill {
-  position: absolute;
-  background: rgba(255, 255, 255, 0.94);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  border-radius: 999px;
-  padding: 9px 20px;
-  font-size: 13.5px;
-  font-weight: 600;
-  color: #27272A;
-  box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.08);
-  pointer-events: none;
-  opacity: 0;
-  transform: translateY(6px);
-  transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  z-index: 20;
-  white-space: nowrap;
-}
-
-.sri-floating-pill.is-active {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Left Pill (when cursor is on the left, character looks left) */
-.sri-floating-pill.pill-left {
-  top: 24%;
-  left: -20px;
-}
-
-/* Right Pill (when cursor is on the right, character looks right) */
-.sri-floating-pill.pill-right {
-  top: 24%;
-  right: 20px;
-}
-
-/* Center Pill (when cursor is on character) */
-.sri-floating-pill.pill-center {
-  top: 6%;
-  left: 50%;
-  transform: translate(-50%, 6px);
-}
-
-.sri-floating-pill.pill-center.is-active {
-  opacity: 1;
-  transform: translate(-50%, 0);
-}
-
-/* 3 Horizontal Interaction Zones */
+/* 3 Horizontal Interaction Zones Overlay */
 .sri-zones-overlay {
   position: absolute;
   top: 0;
@@ -998,11 +1100,20 @@ button {
 .sri-zone {
   height: 100%;
   cursor: pointer;
+  position: relative;
 }
 
-.sri-zone-left { width: 33%; }
-.sri-zone-center { width: 34%; }
-.sri-zone-right { width: 33%; }
+.sri-zone-left {
+  width: 33%;
+}
+
+.sri-zone-center {
+  width: 34%;
+}
+
+.sri-zone-right {
+  width: 33%;
+}
 
 /* Trust Strip Section (Bridge from Hero to Details) */
 .trust-focus-section {

@@ -181,25 +181,10 @@ function initInteractiveHero() {
   if (!canvas) return;
 
   const ctx = canvas.getContext('2d');
-  const pillLeft = document.getElementById('sri-pill-left');
-  const pillRight = document.getElementById('sri-pill-right');
-  const pillCenter = document.getElementById('sri-pill-center');
   const bubbleTag = document.getElementById('bubble-tag');
   const bubbleText = document.getElementById('bubble-text');
   const contextReactionText = document.getElementById('context-reaction-text');
   const heroWrapper = document.getElementById('hero-interactive-section');
-
-  function showPill(active) {
-    if (pillLeft) pillLeft.classList.toggle('is-active', pillLeft === active);
-    if (pillRight) pillRight.classList.toggle('is-active', pillRight === active);
-    if (pillCenter) pillCenter.classList.toggle('is-active', pillCenter === active);
-  }
-
-  function hideAllPills() {
-    if (pillLeft) pillLeft.classList.remove('is-active');
-    if (pillRight) pillRight.classList.remove('is-active');
-    if (pillCenter) pillCenter.classList.remove('is-active');
-  }
 
   const TOTAL_FRAMES = 144;
   const frames = [];
@@ -239,9 +224,13 @@ function initInteractiveHero() {
   };
 
   // Smooth render loop (requestAnimationFrame + lerp)
+  // LERP factor 0.04 provides a calm, graceful head turn (approx 0.8s) instead of nervous twitching
+  const LERP_SPEED = 0.042;
+  const GREETING_LERP_SPEED = 0.05;
+
   function render() {
     if (isGreetingSequence) {
-      currentFrame += (targetFrame - currentFrame) * 0.15;
+      currentFrame += (targetFrame - currentFrame) * GREETING_LERP_SPEED;
       if (Math.abs(targetFrame - currentFrame) < 1.5) {
         if (greetingStep === 1) {
           greetingStep = 2;
@@ -252,7 +241,7 @@ function initInteractiveHero() {
         }
       }
     } else {
-      currentFrame += (targetFrame - currentFrame) * 0.12;
+      currentFrame += (targetFrame - currentFrame) * LERP_SPEED;
     }
 
     const fIdx = Math.min(TOTAL_FRAMES - 1, Math.max(0, Math.round(currentFrame)));
@@ -271,8 +260,6 @@ function initInteractiveHero() {
     isGreetingSequence = false;
     targetFrame = POSES.LOOK_LEFT;
 
-    showPill(pillLeft);
-
     if (bubbleTag) {
       bubbleTag.textContent = "Склады & 1С";
       bubbleTag.style.background = "#EFF6FF";
@@ -285,15 +272,13 @@ function initInteractiveHero() {
       contextReactionText.textContent = "Интересует автоматизация склада, печать термоэтикеток Code128 или синхронизация 100k SKU без зависаний?";
     }
 
-    resetTimer = setTimeout(returnToIdle, 3500);
+    resetTimer = setTimeout(returnToIdle, 4000);
   }
 
   function setRightReaction() {
     clearTimeout(resetTimer);
     isGreetingSequence = false;
     targetFrame = POSES.LOOK_RIGHT;
-
-    showPill(pillRight);
 
     if (bubbleTag) {
       bubbleTag.textContent = "Mini Apps";
@@ -307,7 +292,7 @@ function initInteractiveHero() {
       contextReactionText.textContent = "Собственная доставка в Telegram без комиссий агрегаторов 20–35% или чекаут сайта за 30 секунд.";
     }
 
-    resetTimer = setTimeout(returnToIdle, 3500);
+    resetTimer = setTimeout(returnToIdle, 4000);
   }
 
   function setCenterReaction() {
@@ -315,8 +300,6 @@ function initInteractiveHero() {
     isGreetingSequence = true;
     greetingStep = 1;
     targetFrame = POSES.CENTER_LOOK;
-
-    showPill(pillCenter);
 
     if (bubbleTag) {
       bubbleTag.textContent = "Привет!";
@@ -329,14 +312,14 @@ function initInteractiveHero() {
     if (contextReactionText) {
       contextReactionText.textContent = "Рад знакомству! Скролльте вниз: там 4 кейса с цифрами окупаемости и демо-видео.";
     }
+
+    resetTimer = setTimeout(returnToIdle, 4000);
   }
 
   function returnToIdle() {
     currentActiveZone = 'idle';
     isGreetingSequence = false;
     targetFrame = POSES.IDLE;
-
-    hideAllPills();
 
     const isMobile = window.innerWidth <= 640;
     if (bubbleTag) {
@@ -355,25 +338,32 @@ function initInteractiveHero() {
     returnToIdle();
   }
 
-  // Global mouse tracking across the Hero section
+  // Global mouse tracking across the Hero section with damping
+  let lastZoneChangeTime = 0;
   if (heroWrapper) {
     heroWrapper.addEventListener('mousemove', (e) => {
+      const now = performance.now();
+      if (now - lastZoneChangeTime < 240) return; // Prevent frantic rapid switching
+
       const rect = heroWrapper.getBoundingClientRect();
       const relX = (e.clientX - rect.left) / rect.width;
 
-      if (relX < 0.35) {
+      if (relX < 0.38) {
         if (currentActiveZone !== 'left') {
           currentActiveZone = 'left';
+          lastZoneChangeTime = now;
           setLeftReaction();
         }
-      } else if (relX > 0.65) {
+      } else if (relX > 0.62) {
         if (currentActiveZone !== 'right') {
           currentActiveZone = 'right';
+          lastZoneChangeTime = now;
           setRightReaction();
         }
       } else {
         if (currentActiveZone !== 'center') {
           currentActiveZone = 'center';
+          lastZoneChangeTime = now;
           setCenterReaction();
         }
       }
@@ -382,7 +372,7 @@ function initInteractiveHero() {
     heroWrapper.addEventListener('mouseleave', () => {
       currentActiveZone = 'idle';
       clearTimeout(resetTimer);
-      resetTimer = setTimeout(returnToIdle, 1500);
+      resetTimer = setTimeout(returnToIdle, 2500);
     });
   }
 
