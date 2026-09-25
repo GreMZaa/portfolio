@@ -53,77 +53,41 @@
 
   <main>
     <!-- ==========================================================================
-         HERO SECTION (1:1 CARBON COPY)
+         HERO SECTION (INTERACTIVE CHARACTER HERO IN SRI TECH STYLE)
          ========================================================================== -->
-    <section class="hero-section">
-      <div class="container hero-layout">
+    <section class="hero-section hero-sri-wrapper" id="hero-interactive-section">
+      <div class="hero-sri-glow"></div>
+      
+      <div class="container hero-sri-grid">
         
-        <!-- Left Column -->
-        <div class="hero-content">
-          <!-- 1:1 Razor-Sharp Vector Display Title (2025 Edition, Port folio, Star on i, Doodles) -->
-          <div class="hero-vector-title-wrap">
-            
-            <!-- 2025 Edition Oval -->
-            <div class="edition-sticker">
-              <span class="edition-year">2025</span>
-              <span class="edition-text">Edition</span>
-            </div>
-
-            <!-- Curly Arrow from Edition -->
-            <div class="edition-curly-arrow">
-              <svg width="54" height="38" viewBox="0 0 54 38" fill="none" stroke="#1855F4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M4 14 C 18 16, 26 4, 18 1 C 10 -2, 4 8, 16 18 C 26 26, 38 24, 46 28 M 40 32 L 46 28 L 42 22" />
-              </svg>
-            </div>
-
-            <!-- Row 1: Port -->
-            <div class="title-row-1">
-              <div class="word-port">
-                <span>Port</span>
-                <!-- Sparkle Star -->
-                <svg class="star-port-sparkle" viewBox="0 0 24 24" fill="#1855F4">
-                  <path d="M12 0 C12 6.5 17.5 12 24 12 C17.5 12 12 17.5 12 24 C12 17.5 6.5 12 0 12 C6.5 12 12 6.5 12 0 Z"/>
-                </svg>
-              </div>
-            </div>
-
-            <!-- Orange Pill -->
-            <span class="role-orange-pill">Партнер для бизнеса</span>
-
-            <!-- Green Plus -->
-            <span class="doodle-plus-green">+</span>
-
-            <!-- Row 2: folio -->
-            <div class="title-row-2">
-              <div class="word-folio">
-                fol<span class="star-i-box">ı<svg class="star-i-svg" viewBox="0 0 24 24" fill="#1855F4"><path d="M12 0 C12 6.5 17.5 12 24 12 C17.5 12 12 17.5 12 24 C12 17.5 6.5 12 0 12 C6.5 12 12 6.5 12 0 Z"/></svg></span>o
-              </div>
-            </div>
-
-            <!-- Hand-drawn Curved Arrow -->
-            <div class="doodle-curved-arrow-wrap">
-              <svg width="36" height="40" viewBox="0 0 36 40" fill="none" stroke="#18181B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 4 C 2 16, 4 28, 24 28 M 16 32 L 24 28 L 20 20" />
-              </svg>
-            </div>
-
-            <!-- Golden Sunburst -->
-            <div class="doodle-starburst-gold">
-              <svg width="60" height="60" viewBox="0 0 44 44" fill="none" stroke="#F59E0B" stroke-width="2.6" stroke-linecap="round">
-                <path d="M22 2 L22 42 M2 22 L42 22 M8 8 L36 36 M8 36 L36 8" />
-              </svg>
-            </div>
-
-            <h1 class="sr-only">Сергей Шаронов — Port folio — Партнер для бизнеса</h1>
+        <!-- Left Column: Author, Badges, Name, Tagline, Cursor Hint, Positioning -->
+        <div class="hero-sri-left">
+          <div class="hero-sri-author-badge">
+            <span class="edition-sticker-sri">2025 Edition</span>
+            <span class="author-pill">Builder</span>
+            <span class="author-status-pill"><span class="status-pulse-dot"></span> На связи</span>
           </div>
 
-          <!-- Strong Positioning Block directly under Hero Title -->
+          <h1 class="hero-sri-name">
+            Сергей<br><span>Шаронов</span>
+          </h1>
+
+          <span class="role-orange-pill-sri">Партнер для бизнеса</span>
+
+          <div class="hero-sri-cursor-hint">
+            <svg class="cursor-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+              <path d="M4 4l7 17 2-6 6-2L4 4z"/>
+            </svg>
+            <span>Двигайте курсор по экрану</span>
+          </div>
+
+          <!-- Strong Positioning Block -->
           <div class="hero-positioning-block">
             <p class="hero-positioning-lead">
               Собираю рабочий софт, Mini Apps и веб-системы для бизнеса <strong>за дни вместо месяцев в IT-студиях.</strong>
             </p>
             <p class="hero-positioning-sub">
-              5 лет в изнанке e-commerce и операционки. Инвестор с 2016 года: считаю окупаемость систем (ROI), а не строки кода.
+              5 лет в e-commerce и операционке. Инвестор с 2016 года: считаю окупаемость систем (ROI), а не строки кода.
             </p>
           </div>
 
@@ -139,76 +103,84 @@
           </div>
         </div>
 
-        <!-- Right Column (Clean Cutout Portrait + Periwinkle Blob + Doodles + White Card) -->
-        <div class="hero-visual">
-          <div class="portrait-composition-wrap">
-            
-            <!-- Lime Green Smiley Face on Shoulder -->
-            <div class="doodle-portrait-smiley">
-              <svg width="46" height="46" viewBox="0 0 44 44" fill="none">
-                <circle cx="22" cy="22" r="21" fill="#84CC16"/>
-                <circle cx="15" cy="18" r="2.4" fill="#18181B"/>
-                <circle cx="29" cy="18" r="2.4" fill="#18181B"/>
-                <path d="M14 27 C 18 34, 26 34, 30 27" stroke="#18181B" stroke-width="2.6" stroke-linecap="round"/>
-              </svg>
-            </div>
-
-            <!-- 3 Black Slashes on Top -->
-            <div class="doodle-portrait-lines">
-              <svg width="36" height="26" viewBox="0 0 34 24" fill="none" stroke="#18181B" stroke-width="2.4" stroke-linecap="round">
-                <path d="M6 22 L14 4 M16 22 L24 4 M26 22 L34 4"/>
-              </svg>
-            </div>
-
-            <!-- Thin Blue Wire Loop Doodle -->
-            <div class="doodle-portrait-loop">
-              <svg width="50" height="120" viewBox="0 0 46 110" fill="none" stroke="#1855F4" stroke-width="1.8" stroke-linecap="round">
-                <path d="M10 5 C 45 30, 48 80, 15 105"/>
-              </svg>
-            </div>
-
-            <!-- Green 4-Point Star Doodle on Top Right -->
-            <div class="doodle-portrait-star">
-              <svg width="34" height="34" viewBox="0 0 24 24" fill="#84CC16">
-                <path d="M12 0 C12 6.5 17.5 12 24 12 C17.5 12 12 17.5 12 24 C12 17.5 6.5 12 0 12 C6.5 12 12 6.5 12 0 Z"/>
-              </svg>
-            </div>
-
-            <!-- Organic Background Blob with Original Portrait Photo Masked Inside -->
-            <div class="portrait-blob-frame">
-              <img src="assets/sergey_portrait.jpg" alt="Сергей Шаронов — Партнер для бизнеса" class="founder-photo-original">
-            </div>
-
-            <!-- Floating White Profile ID Card with Highlight Under Name -->
-            <div class="floating-profile-card">
-              <div class="profile-card-top">
-                <span class="profile-card-name"><mark class="name-highlight">Сергей Шаронов</mark></span>
-                <span class="profile-card-tag">Builder</span>
-              </div>
-              <ul class="profile-card-list">
-                <li class="profile-card-item">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                  <span>Москва, РФ / Удаленно (РФ, ОАЭ, Бали)</span>
-                </li>
-                <li class="profile-card-item">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
-                  <a href="mailto:sergey.nez00@gmail.com">sergey.nez00@gmail.com</a>
-                </li>
-                <li class="profile-card-item">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
-                  <a href="https://t.me/ssharonovv" target="_blank" rel="noopener noreferrer">@ssharonovv (Telegram)</a>
-                </li>
-              </ul>
-            </div>
-
-            <!-- Red Spiral Spring Doodle Bottom Right -->
-            <div class="doodle-portrait-spiral">
-              <svg width="36" height="48" viewBox="0 0 34 42" fill="none" stroke="#EF4444" stroke-width="2" stroke-linecap="round">
-                <path d="M5 8 C 25 2, 32 16, 12 20 C -2 24, 28 32, 10 38"/>
-              </svg>
-            </div>
-
+        <!-- Center Column: Dominant Interactive Character Sitting at Laptop -->
+        <div class="hero-sri-center">
+          
+          <!-- Doodle Smiley on Top-Left of Stage -->
+          <div class="sri-doodle-smiley" title="Смайлик настроения">
+            <svg width="24" height="24" viewBox="0 0 44 44" fill="none">
+              <circle cx="22" cy="22" r="21" fill="#84CC16"/>
+              <circle cx="15" cy="18" r="2.4" fill="#18181B"/>
+              <circle cx="29" cy="18" r="2.4" fill="#18181B"/>
+              <path d="M14 27 C 18 34, 26 34, 30 27" stroke="#18181B" stroke-width="2.6" stroke-linecap="round"/>
+            </svg>
           </div>
+
+          <!-- Golden Sunburst Doodle on Top-Right of Stage -->
+          <div class="sri-doodle-sunburst">
+            <svg width="44" height="44" viewBox="0 0 44 44" fill="none" stroke="#F59E0B" stroke-width="2.6" stroke-linecap="round">
+              <path d="M22 2 L22 42 M2 22 L42 22 M8 8 L36 36 M8 36 L36 8" />
+            </svg>
+          </div>
+
+          <!-- Dynamic Speech Bubble -->
+          <div class="sri-speech-bubble" id="sri-speech-bubble">
+            <span class="sri-bubble-tag" id="bubble-tag">Привет!</span>
+            <span class="sri-bubble-text" id="bubble-text">Двигайте курсор влево, вправо или на меня</span>
+          </div>
+
+          <!-- Canvas Stage with 16:9 Interactive Screen -->
+          <div class="sri-canvas-stage" id="canvas-stage" title="Нажмите для приветствия">
+            <canvas id="hero-character-canvas" width="960" height="540"></canvas>
+            
+            <!-- 3 Interaction Zones Overlay -->
+            <div class="sri-zones-overlay">
+              <div class="sri-zone sri-zone-left" id="zone-left" title="Смотрит налево"></div>
+              <div class="sri-zone sri-zone-center" id="zone-center" title="Смотрит на вас и приветствует"></div>
+              <div class="sri-zone sri-zone-right" id="zone-right" title="Смотрит направо"></div>
+            </div>
+          </div>
+
+          <!-- Portfolio Exploration Cue -->
+          <div class="sri-bottom-cue-wrap">
+            <a href="#work" class="sri-bottom-cue">
+              <span>Смотреть окупаемые кейсы</span>
+              <span>⤓</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Right Column: Real-time contextual response & Fast facts -->
+        <div class="hero-sri-right">
+          
+          <div class="reaction-context-box">
+            <div class="context-box-title">
+              <span>⚡ Фокус внимания</span>
+            </div>
+            <div class="context-box-content" id="context-reaction-text">
+              Наведите курсор на Сергея, чтобы познакомиться, или на края экрана для выбора темы.
+            </div>
+          </div>
+
+          <ul class="right-quick-stats">
+            <li class="quick-stat-item">
+              <span class="stat-icon">⏱</span>
+              <span>Запуск за 3–5 дней</span>
+            </li>
+            <li class="quick-stat-item">
+              <span class="stat-icon">📈</span>
+              <span>Фокус на окупаемости (ROI)</span>
+            </li>
+            <li class="quick-stat-item">
+              <span class="stat-icon">💬</span>
+              <span>Прямой диалог: @ssharonovv</span>
+            </li>
+            <li class="quick-stat-item">
+              <span class="stat-icon">📦</span>
+              <span>5 лет в логистике & e-com</span>
+            </li>
+          </ul>
+
         </div>
 
       </div>

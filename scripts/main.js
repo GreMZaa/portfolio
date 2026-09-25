@@ -166,4 +166,230 @@ document.addEventListener('DOMContentLoaded', () => {
       window.closeProjectModal();
     }
   });
+
+  // Initialize Interactive Hero (Sri Tech Style)
+  initInteractiveHero();
 });
+
+/**
+ * Interactive Hero Frame Controller (Sri Tech Style)
+ * Animates Sergey Sharonov reacting to cursor zones
+ */
+function initInteractiveHero() {
+  const canvas = document.getElementById('hero-character-canvas');
+  if (!canvas) return;
+
+  const ctx = canvas.getContext('2d');
+  const bubbleTag = document.getElementById('bubble-tag');
+  const bubbleText = document.getElementById('bubble-text');
+  const contextReactionText = document.getElementById('context-reaction-text');
+  const heroWrapper = document.getElementById('hero-interactive-section');
+
+  const TOTAL_FRAMES = 144;
+  const frames = [];
+  let loadedCount = 0;
+  let renderedInitial = false;
+
+  // Preload all 144 WebP frames
+  for (let i = 0; i < TOTAL_FRAMES; i++) {
+    const img = new Image();
+    const num = String(i).padStart(3, '0');
+    img.src = `assets/hero_frames/frame_${num}.webp`;
+    img.onload = () => {
+      loadedCount++;
+      if (i === 0 && !renderedInitial) {
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        renderedInitial = true;
+      }
+    };
+    frames.push(img);
+  }
+
+  let currentFrame = 0;
+  let targetFrame = 0;
+  let isGreetingSequence = false;
+  let greetingStep = 0;
+  let resetTimer = null;
+  let currentActiveZone = 'idle';
+
+  // Key animation landmarks
+  const POSES = {
+    IDLE: 10,
+    LOOK_LEFT: 44,
+    LOOK_RIGHT: 70,
+    CENTER_LOOK: 96,
+    GREET_WAVE: 115,
+    POINT_DOWN: 140
+  };
+
+  // Smooth render loop (requestAnimationFrame + lerp)
+  function render() {
+    if (isGreetingSequence) {
+      currentFrame += (targetFrame - currentFrame) * 0.15;
+      if (Math.abs(targetFrame - currentFrame) < 1.5) {
+        if (greetingStep === 1) {
+          greetingStep = 2;
+          targetFrame = POSES.GREET_WAVE;
+        } else if (greetingStep === 2) {
+          greetingStep = 3;
+          targetFrame = POSES.POINT_DOWN;
+        }
+      }
+    } else {
+      currentFrame += (targetFrame - currentFrame) * 0.12;
+    }
+
+    const fIdx = Math.min(TOTAL_FRAMES - 1, Math.max(0, Math.round(currentFrame)));
+    if (frames[fIdx] && frames[fIdx].complete) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(frames[fIdx], 0, 0, canvas.width, canvas.height);
+    }
+
+    requestAnimationFrame(render);
+  }
+
+  requestAnimationFrame(render);
+
+  function setLeftReaction() {
+    clearTimeout(resetTimer);
+    isGreetingSequence = false;
+    targetFrame = POSES.LOOK_LEFT;
+
+    if (bubbleTag) {
+      bubbleTag.textContent = "Склады & 1С";
+      bubbleTag.style.background = "#EFF6FF";
+      bubbleTag.style.color = "#1855F4";
+    }
+    if (bubbleText) {
+      bubbleText.textContent = "Смотрите складскую логистику или 1С?";
+    }
+    if (contextReactionText) {
+      contextReactionText.textContent = "Интересует автоматизация склада, печать термоэтикеток Code128 или синхронизация 100k SKU без зависаний?";
+    }
+
+    resetTimer = setTimeout(returnToIdle, 3500);
+  }
+
+  function setRightReaction() {
+    clearTimeout(resetTimer);
+    isGreetingSequence = false;
+    targetFrame = POSES.LOOK_RIGHT;
+
+    if (bubbleTag) {
+      bubbleTag.textContent = "Mini Apps";
+      bubbleTag.style.background = "#FEF2F2";
+      bubbleTag.style.color = "#EF4444";
+    }
+    if (bubbleText) {
+      bubbleText.textContent = "Нужен Telegram Mini App или чекаут?";
+    }
+    if (contextReactionText) {
+      contextReactionText.textContent = "Собственная доставка в Telegram без комиссий агрегаторов 20–35% или чекаут сайта за 30 секунд.";
+    }
+
+    resetTimer = setTimeout(returnToIdle, 3500);
+  }
+
+  function setCenterReaction() {
+    clearTimeout(resetTimer);
+    isGreetingSequence = true;
+    greetingStep = 1;
+    targetFrame = POSES.CENTER_LOOK;
+
+    if (bubbleTag) {
+      bubbleTag.textContent = "Привет!";
+      bubbleTag.style.background = "#ECFDF5";
+      bubbleTag.style.color = "#059669";
+    }
+    if (bubbleText) {
+      bubbleText.textContent = "Я Сергей Шаронов. Кейсы с окупаемостью прямо внизу ↓";
+    }
+    if (contextReactionText) {
+      contextReactionText.textContent = "Рад знакомству! Скролльте вниз: там 4 кейса с цифрами окупаемости и демо-видео.";
+    }
+  }
+
+  function returnToIdle() {
+    currentActiveZone = 'idle';
+    isGreetingSequence = false;
+    targetFrame = POSES.IDLE;
+
+    const isMobile = window.innerWidth <= 640;
+    if (bubbleTag) {
+      bubbleTag.textContent = isMobile ? "Привет!" : "В работе";
+      bubbleTag.style.background = "#F4F4F5";
+      bubbleTag.style.color = "#71717A";
+    }
+    if (bubbleText) {
+      bubbleText.textContent = isMobile 
+        ? "Нажмите на экран или листайте вниз ↓" 
+        : "Двигайте курсор влево, вправо или на меня";
+    }
+    if (contextReactionText) {
+      contextReactionText.textContent = "Наведите курсор на Сергея, чтобы познакомиться, или на края экрана для выбора темы.";
+    }
+  }
+
+  if (window.innerWidth <= 640) {
+    returnToIdle();
+  }
+
+  // Global mouse tracking across the Hero section
+  if (heroWrapper) {
+    heroWrapper.addEventListener('mousemove', (e) => {
+      const rect = heroWrapper.getBoundingClientRect();
+      const relX = (e.clientX - rect.left) / rect.width;
+
+      if (relX < 0.35) {
+        if (currentActiveZone !== 'left') {
+          currentActiveZone = 'left';
+          setLeftReaction();
+        }
+      } else if (relX > 0.65) {
+        if (currentActiveZone !== 'right') {
+          currentActiveZone = 'right';
+          setRightReaction();
+        }
+      } else {
+        if (currentActiveZone !== 'center') {
+          currentActiveZone = 'center';
+          setCenterReaction();
+        }
+      }
+    });
+
+    heroWrapper.addEventListener('mouseleave', () => {
+      currentActiveZone = 'idle';
+      clearTimeout(resetTimer);
+      resetTimer = setTimeout(returnToIdle, 1500);
+    });
+  }
+
+  // Direct zone overlay hover support
+  const zoneLeft = document.getElementById('zone-left');
+  const zoneCenter = document.getElementById('zone-center');
+  const zoneRight = document.getElementById('zone-right');
+
+  zoneLeft?.addEventListener('mouseenter', setLeftReaction);
+  zoneCenter?.addEventListener('mouseenter', setCenterReaction);
+  zoneRight?.addEventListener('mouseenter', setRightReaction);
+
+  // Mobile / Touch support
+  const stage = document.getElementById('canvas-stage');
+  stage?.addEventListener('click', () => {
+    setCenterReaction();
+  });
+
+  // Mobile viewport entry trigger
+  if ('IntersectionObserver' in window && window.innerWidth <= 768) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setTimeout(setCenterReaction, 500);
+          observer.disconnect();
+        }
+      });
+    }, { threshold: 0.5 });
+    observer.observe(canvas);
+  }
+}
