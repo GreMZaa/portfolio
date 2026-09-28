@@ -1725,10 +1725,10 @@ button {
 .preview-ice { background-color: var(--pastel-ice); }
 .preview-lavender { background-color: var(--pastel-lavender); }
 
-/* Smartphone Mockup with Real Looping Video */
+/* Smartphone Mockup with High-Contrast Telegram Mini App UI */
 .phone-mockup-wrapper {
-  width: 155px;
-  height: 224px;
+  width: 160px;
+  height: 236px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1748,8 +1748,8 @@ button {
 }
 
 .phone-island-notch {
-  width: 40px;
-  height: 9px;
+  width: 38px;
+  height: 8px;
   background-color: #000000;
   border-radius: 999px;
   position: absolute;
@@ -1763,10 +1763,196 @@ button {
 }
 
 .phone-lens {
-  width: 4px;
-  height: 4px;
+  width: 3px;
+  height: 3px;
   border-radius: 50%;
   background-color: #1E293B;
+}
+
+.phone-screen-tma {
+  width: 100%;
+  height: 100%;
+  background: #FFFFFF;
+  border-radius: 22px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 16px 7px 7px;
+  font-family: var(--font-sans);
+  position: relative;
+  user-select: none;
+}
+
+.tma-app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2px 2px 5px;
+  border-bottom: 1px solid #F1F5F9;
+}
+
+.tma-close-btn {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #64748B;
+  line-height: 1;
+}
+
+.tma-header-title {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.tma-store-name {
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: #0F172A;
+  letter-spacing: -0.01em;
+}
+
+.tma-verify-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 10px;
+  height: 10px;
+  background: #2563EB;
+  color: #FFFFFF;
+  border-radius: 50%;
+  font-size: 0.45rem;
+  font-weight: 900;
+}
+
+.tma-more-dots {
+  font-size: 0.6rem;
+  letter-spacing: 1px;
+  color: #64748B;
+  line-height: 1;
+}
+
+.tma-dish-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding-top: 5px;
+}
+
+.tma-dish-img-wrap {
+  width: 100%;
+  height: 84px;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  background: #0F172A;
+}
+
+.tma-dish-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.tma-dish-badge {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  background: rgba(15, 23, 42, 0.82);
+  backdrop-filter: blur(4px);
+  color: #FBBF24;
+  font-size: 0.52rem;
+  font-weight: 800;
+  padding: 2px 5px;
+  border-radius: 4px;
+}
+
+.tma-dish-details {
+  padding-top: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.tma-dish-title-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.tma-dish-name {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #0F172A;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tma-dish-weight {
+  font-size: 0.52rem;
+  color: #94A3B8;
+  font-weight: 600;
+}
+
+.tma-dish-sub {
+  font-size: 0.52rem;
+  color: #64748B;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 2px;
+}
+
+.tma-dish-buy-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 2px;
+}
+
+.tma-dish-price {
+  font-size: 0.84rem;
+  font-weight: 900;
+  color: #0F172A;
+}
+
+.tma-dish-qty-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: #F1F5F9;
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: #0F172A;
+}
+
+.tma-dish-qty-btn span {
+  color: #2563EB;
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.tma-main-button {
+  background: #16A34A;
+  color: #FFFFFF;
+  border-radius: 9px;
+  padding: 6px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.62rem;
+  font-weight: 800;
+  box-shadow: 0 4px 10px rgba(22, 163, 74, 0.35);
+  margin-top: auto;
+}
+
+.tma-btn-arrow {
+  font-weight: 800;
+  opacity: 0.95;
 }
 
 .phone-screen-video {
@@ -2427,12 +2613,19 @@ button {
   line-height: 1.45;
 }
 
-.education-grad-cap {
+.education-grad-cap,
+.capital-growth-icon {
   position: absolute;
   bottom: 24px;
   right: 28px;
-  color: var(--text-main);
+  color: var(--royal-blue);
   opacity: 0.85;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.bento-lavender:hover .capital-growth-icon {
+  transform: translateY(-2px) scale(1.05);
+  opacity: 1;
 }
 
 /* Skills white pill tags */
@@ -2494,18 +2687,20 @@ button {
 .sunshine-wavy-banner {
   background-color: #FDE68A;
   border-radius: 40px;
-  padding: 44px 50px;
+  padding: 44px 48px;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 30px;
+  gap: 32px;
   position: relative;
   overflow: hidden;
   box-shadow: 0 14px 34px -8px rgba(217, 119, 6, 0.16);
 }
 
 .banner-text-side {
-  max-width: 620px;
+  flex: 1 1 480px;
+  max-width: 640px;
 }
 
 .banner-lead-script {
@@ -2538,6 +2733,8 @@ button {
   position: relative;
   display: flex;
   align-items: center;
+  margin-left: 30px;
+  margin-right: 6px;
 }
 
 .doodle-cta-star {
@@ -2566,6 +2763,7 @@ button {
   border-radius: var(--radius-full);
   box-shadow: 0 6px 18px rgba(37, 99, 235, 0.35);
   transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+  white-space: nowrap;
 }
 
 .btn-blue-pill:hover {
@@ -2698,6 +2896,12 @@ button {
     flex-direction: column;
     align-items: flex-start;
     padding: 34px 28px;
+    gap: 26px;
+  }
+
+  .banner-action-side {
+    margin-left: 8px;
+    margin-top: 6px;
   }
 }
 
