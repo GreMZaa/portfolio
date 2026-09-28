@@ -780,7 +780,7 @@ button {
   top: 48%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 900px;
+  width: min(900px, 100vw);
   height: 560px;
   background: radial-gradient(circle at center, rgba(255, 255, 255, 0.95) 0%, rgba(224, 235, 255, 0.45) 45%, rgba(250, 247, 242, 0) 75%);
   pointer-events: none;
@@ -905,6 +905,7 @@ button {
   box-shadow: 0 4px 12px rgba(255, 87, 34, 0.25);
   letter-spacing: -0.01em;
   transform: rotate(-1.5deg);
+  transform-origin: left center;
   align-self: flex-start;
 }
 
@@ -1085,14 +1086,14 @@ button {
 .sri-canvas-stage {
   position: relative;
   width: 100%;
-  max-width: 820px;
+  max-width: 680px;
   aspect-ratio: 16 / 9;
   background: transparent;
   cursor: pointer;
   overflow: visible;
   display: block;
   margin: 0 auto;
-  transform: scale(1.16);
+  transform: scale(1.08);
   transform-origin: bottom center;
 }
 
@@ -1104,9 +1105,10 @@ button {
 }
 
 /* Trust Strip Section (Bridge from Hero to Details) */
-.trust-focus-section {
-  padding: 30px 0 20px;
+.hero-trust-container {
+  margin-top: 32px;
   position: relative;
+  z-index: 5;
 }
 
 .hero-trust-strip {
@@ -1119,6 +1121,7 @@ button {
   padding: 18px 28px;
   box-shadow: 0 4px 20px -2px rgba(24, 24, 27, 0.04);
   gap: 16px;
+  width: 100%;
 }
 
 .trust-metric-item {
@@ -1302,7 +1305,7 @@ button {
    ABOUT ME SECTION (1:1 CARBON COPY)
    ========================================================================== */
 .about-section {
-  padding: 80px 0 60px;
+  padding: 70px 0;
   position: relative;
 }
 
@@ -1387,7 +1390,7 @@ button {
    WHAT I DO SECTION (4 CLEAN CARDS)
    ========================================================================== */
 .what-i-do-section {
-  padding: 60px 0 70px;
+  padding: 70px 0;
   position: relative;
 }
 
@@ -1464,6 +1467,7 @@ button {
   margin-bottom: 10px;
   color: var(--text-main);
   letter-spacing: -0.01em;
+  min-height: 2.5em;
 }
 
 .service-clean-desc {
@@ -1491,7 +1495,7 @@ button {
    COMPARISON SECTION (СТУДИИ VS ШАРОНОВ)
    ========================================================================== */
 .comparison-section {
-  padding: 50px 0 60px;
+  padding: 70px 0;
   position: relative;
 }
 
@@ -1522,7 +1526,7 @@ button {
 
 .comparison-grid {
   display: grid;
-  grid-template-columns: 1fr 1.08fr;
+  grid-template-columns: 1fr 1fr;
   gap: 26px;
   align-items: stretch;
 }
@@ -1633,7 +1637,7 @@ button {
    SELECTED WORK SECTION (RESTRUCTURED: PAIN -> SOLUTION -> TIME -> ROI)
    ========================================================================== */
 .selected-work-section {
-  padding: 60px 0 70px;
+  padding: 70px 0;
   position: relative;
 }
 
@@ -2109,6 +2113,7 @@ button {
   line-height: 1.35;
   margin-bottom: 16px;
   letter-spacing: -0.015em;
+  min-height: 3.1em;
 }
 
 .case-steps-container {
@@ -2330,7 +2335,7 @@ button {
    EXPERIENCE, EDUCATION, SKILLS (PASTEL BENTO TRIO)
    ========================================================================== */
 .bento-section {
-  padding: 60px 0 80px;
+  padding: 70px 0;
   position: relative;
 }
 
@@ -2339,12 +2344,15 @@ button {
   grid-template-columns: repeat(3, 1fr);
   gap: 22px;
   position: relative;
+  align-items: stretch;
 }
 
 .bento-blob-container {
   border-radius: var(--radius-xl);
   padding: 34px 28px;
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 .bento-mint {
@@ -2479,7 +2487,7 @@ button {
    SUNSHINE YELLOW BOTTOM BANNER (CTA)
    ========================================================================== */
 .cta-banner-wrapper {
-  padding: 20px 0 50px;
+  padding: 40px 0 70px;
   position: relative;
 }
 
