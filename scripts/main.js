@@ -173,34 +173,45 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /**
- * Interactive Hero Frame Controller (Sri Tech Style)
- * Animates Sergey Sharonov reacting to cursor zones
+ * Interactive Hero Frame Controller (Sri Tech Style - High Definition 24fps)
+ * Native 1280x720 video frames with authentic human motion
  */
 function initInteractiveHero() {
   const canvas = document.getElementById('hero-character-canvas');
   if (!canvas) return;
 
   const ctx = canvas.getContext('2d');
+  ctx.imageSmoothingEnabled = true;
+  ctx.imageSmoothingQuality = 'high';
+
   const bubbleTag = document.getElementById('bubble-tag');
   const bubbleText = document.getElementById('bubble-text');
-  const contextReactionText = document.getElementById('context-reaction-text');
   const heroWrapper = document.getElementById('hero-interactive-section');
 
   const TOTAL_FRAMES = 144;
   const frames = new Array(TOTAL_FRAMES);
   let lastDrawnFrame = null;
 
-  // Key animation landmarks
+  // Key animation landmarks based on САЙТ.mp4:
+  // 0..35: Typing at laptop (Idle cycle)
+  // 40..55: Turning head to screen-right (his left) -> LOOK_RIGHT = 46
+  // 56..85: Turning head to screen-left (his right) -> LOOK_LEFT = 72
+  // 90..143: Natural greeting gesture:
+  //   92..104: Looks up at camera with a warm smile
+  //   105..122: Raises right hand and waves hello!
+  //   125..142: Points down with index finger ("кейсы прямо внизу!")
   const POSES = {
-    IDLE: 10,
-    LOOK_LEFT: 44,
-    LOOK_RIGHT: 70,
-    CENTER_LOOK: 96,
-    GREET_WAVE: 115,
-    POINT_DOWN: 140
+    IDLE_BASE: 14,
+    IDLE_MIN: 2,
+    IDLE_MAX: 26,
+    LOOK_LEFT: 72,
+    LOOK_RIGHT: 46,
+    GREET_START: 92,
+    GREET_WAVE_PEAK: 118,
+    GREET_POINT: 138,
+    GREET_END: 142
   };
 
-  // Safe frame drawer: never clears unless next frame is fully decoded
   function drawFrame(img) {
     if (!img || !img.complete || img.naturalWidth === 0) return false;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -209,22 +220,22 @@ function initInteractiveHero() {
     return true;
   }
 
-  // 1. Immediately preload and draw primary landmark frames first
-  const primaryIndices = [POSES.IDLE, 0, POSES.CENTER_LOOK, POSES.LOOK_LEFT, POSES.LOOK_RIGHT, POSES.GREET_WAVE, POSES.POINT_DOWN];
-  primaryIndices.forEach((idx) => {
+  // Preload priority frames first
+  const priorityIndices = [POSES.IDLE_BASE, 0, POSES.LOOK_LEFT, POSES.LOOK_RIGHT, POSES.GREET_START, POSES.GREET_WAVE_PEAK, POSES.GREET_POINT];
+  priorityIndices.forEach((idx) => {
     const img = new Image();
     const num = String(idx).padStart(3, '0');
     img.src = `assets/hero_frames/frame_${num}.webp`;
     img.onload = () => {
       frames[idx] = img;
-      if (!lastDrawnFrame && (idx === POSES.IDLE || idx === 0)) {
+      if (!lastDrawnFrame && (idx === POSES.IDLE_BASE || idx === 0)) {
         drawFrame(img);
       }
     };
     frames[idx] = img;
   });
 
-  // 2. Preload remaining frames in background
+  // Preload all remaining frames in background
   for (let i = 0; i < TOTAL_FRAMES; i++) {
     if (frames[i]) continue;
     const img = new Image();
@@ -239,52 +250,82 @@ function initInteractiveHero() {
     frames[i] = img;
   }
 
-  let currentFrame = POSES.IDLE;
-  let targetFrame = POSES.IDLE;
-  let isGreetingSequence = false;
-  let greetingStep = 0;
-  let resetTimer = null;
+  // Animation state machine
+  // Modes: 'idle' | 'transition' | 'greeting' | 'holding'
+  let mode = 'idle';
+  let currentFrame = POSES.IDLE_BASE;
+  let targetFrame = POSES.IDLE_BASE;
+  let idleDirection = 1;
+  let idleTickCounter = 0;
+  let holdTimer = null;
+  let resetToIdleTimer = null;
   let currentActiveZone = 'idle';
 
-  // Smooth render loop (requestAnimationFrame + lerp)
-  // LERP factor 0.022 provides a calm, graceful, cinematic head turn without sudden jerks
-  const LERP_SPEED = 0.022;
-  const GREETING_LERP_SPEED = 0.03;
+  // 24 FPS video clock (41.67ms per frame)
+  const FRAME_INTERVAL = 1000 / 24;
+  let lastFrameTime = performance.now();
 
-  function render() {
-    if (isGreetingSequence) {
-      currentFrame += (targetFrame - currentFrame) * GREETING_LERP_SPEED;
-      if (Math.abs(targetFrame - currentFrame) < 1.5) {
-        if (greetingStep === 1) {
-          greetingStep = 2;
-          targetFrame = POSES.GREET_WAVE;
-        } else if (greetingStep === 2) {
-          greetingStep = 3;
-          targetFrame = POSES.POINT_DOWN;
+  function updateAnimation(now) {
+    const elapsed = now - lastFrameTime;
+
+    if (elapsed >= FRAME_INTERVAL) {
+      lastFrameTime = now - (elapsed % FRAME_INTERVAL);
+
+      if (mode === 'greeting') {
+        // Play the video greeting sequentially at natural 24 FPS: 92 -> 142
+        if (currentFrame < POSES.GREET_END) {
+          currentFrame += 1;
+        } else {
+          // Finished wave & point: hold pointing pose pleasantly
+          mode = 'holding';
+          clearTimeout(holdTimer);
+          holdTimer = setTimeout(() => {
+            returnToIdle();
+          }, 2400);
+        }
+      } else if (mode === 'transition') {
+        // Smooth head turn at natural speed
+        const dist = Math.abs(targetFrame - currentFrame);
+        const step = Math.sign(targetFrame - currentFrame);
+        const speed = dist > 20 ? 2 : 1;
+
+        if (dist <= 1) {
+          currentFrame = targetFrame;
+          mode = 'holding';
+        } else {
+          currentFrame += step * speed;
+        }
+      } else if (mode === 'idle') {
+        // Gentle subtle typing loop (2..26..2) every 2 ticks
+        idleTickCounter++;
+        if (idleTickCounter % 2 === 0) {
+          currentFrame += idleDirection;
+          if (currentFrame >= POSES.IDLE_MAX) {
+            idleDirection = -1;
+          } else if (currentFrame <= POSES.IDLE_MIN) {
+            idleDirection = 1;
+          }
         }
       }
-    } else {
-      currentFrame += (targetFrame - currentFrame) * LERP_SPEED;
+
+      // Draw current frame safely
+      const fIdx = Math.min(TOTAL_FRAMES - 1, Math.max(0, Math.round(currentFrame)));
+      const img = frames[fIdx];
+      if (img && img.complete && img.naturalWidth > 0) {
+        drawFrame(img);
+      }
     }
 
-    const fIdx = Math.min(TOTAL_FRAMES - 1, Math.max(0, Math.round(currentFrame)));
-    const candidateImg = frames[fIdx];
-
-    if (candidateImg && candidateImg.complete && candidateImg.naturalWidth > 0) {
-      drawFrame(candidateImg);
-    } else if (lastDrawnFrame) {
-      // Keep displaying last valid frame without wiping canvas!
-    }
-
-    requestAnimationFrame(render);
+    requestAnimationFrame(updateAnimation);
   }
 
-  requestAnimationFrame(render);
+  requestAnimationFrame(updateAnimation);
 
   function setLeftReaction() {
-    clearTimeout(resetTimer);
-    isGreetingSequence = false;
+    clearTimeout(resetToIdleTimer);
+    clearTimeout(holdTimer);
     targetFrame = POSES.LOOK_LEFT;
+    mode = 'transition';
 
     if (bubbleTag) {
       bubbleTag.textContent = "Склады & 1С";
@@ -294,17 +335,15 @@ function initInteractiveHero() {
     if (bubbleText) {
       bubbleText.textContent = "Смотрите складскую логистику или 1С?";
     }
-    if (contextReactionText) {
-      contextReactionText.textContent = "Интересует автоматизация склада, печать термоэтикеток Code128 или синхронизация 100k SKU без зависаний?";
-    }
 
-    resetTimer = setTimeout(returnToIdle, 4000);
+    resetToIdleTimer = setTimeout(returnToIdle, 4200);
   }
 
   function setRightReaction() {
-    clearTimeout(resetTimer);
-    isGreetingSequence = false;
+    clearTimeout(resetToIdleTimer);
+    clearTimeout(holdTimer);
     targetFrame = POSES.LOOK_RIGHT;
+    mode = 'transition';
 
     if (bubbleTag) {
       bubbleTag.textContent = "Mini Apps";
@@ -314,18 +353,17 @@ function initInteractiveHero() {
     if (bubbleText) {
       bubbleText.textContent = "Нужен Telegram Mini App или чекаут?";
     }
-    if (contextReactionText) {
-      contextReactionText.textContent = "Собственная доставка в Telegram без комиссий агрегаторов 20–35% или чекаут сайта за 30 секунд.";
-    }
 
-    resetTimer = setTimeout(returnToIdle, 4000);
+    resetToIdleTimer = setTimeout(returnToIdle, 4200);
   }
 
   function setCenterReaction() {
-    clearTimeout(resetTimer);
-    isGreetingSequence = true;
-    greetingStep = 1;
-    targetFrame = POSES.CENTER_LOOK;
+    clearTimeout(resetToIdleTimer);
+    clearTimeout(holdTimer);
+
+    // Play greeting sequence from frame 92 at natural 24 FPS
+    currentFrame = POSES.GREET_START;
+    mode = 'greeting';
 
     if (bubbleTag) {
       bubbleTag.textContent = "Привет!";
@@ -335,17 +373,14 @@ function initInteractiveHero() {
     if (bubbleText) {
       bubbleText.textContent = "Я Сергей Шаронов. Кейсы с окупаемостью прямо внизу ↓";
     }
-    if (contextReactionText) {
-      contextReactionText.textContent = "Рад знакомству! Скролльте вниз: там 4 кейса с цифрами окупаемости и демо-видео.";
-    }
 
-    resetTimer = setTimeout(returnToIdle, 4000);
+    resetToIdleTimer = setTimeout(returnToIdle, 6000);
   }
 
   function returnToIdle() {
     currentActiveZone = 'idle';
-    isGreetingSequence = false;
-    targetFrame = POSES.IDLE;
+    targetFrame = POSES.IDLE_BASE;
+    mode = 'transition';
 
     const isMobile = window.innerWidth <= 640;
     if (bubbleTag) {
@@ -364,12 +399,12 @@ function initInteractiveHero() {
     returnToIdle();
   }
 
-  // Global mouse tracking across the Hero section with damping
+  // Global mouse tracking across Hero section
   let lastZoneChangeTime = 0;
   if (heroWrapper) {
     heroWrapper.addEventListener('mousemove', (e) => {
       const now = performance.now();
-      if (now - lastZoneChangeTime < 360) return; // Prevent frantic rapid switching
+      if (now - lastZoneChangeTime < 280) return;
 
       const rect = heroWrapper.getBoundingClientRect();
       const relX = (e.clientX - rect.left) / rect.width;
@@ -380,7 +415,7 @@ function initInteractiveHero() {
           lastZoneChangeTime = now;
           setLeftReaction();
         }
-      } else if (relX > 0.62) {
+      } else if (relX > 0.65) {
         if (currentActiveZone !== 'right') {
           currentActiveZone = 'right';
           lastZoneChangeTime = now;
@@ -397,8 +432,8 @@ function initInteractiveHero() {
 
     heroWrapper.addEventListener('mouseleave', () => {
       currentActiveZone = 'idle';
-      clearTimeout(resetTimer);
-      resetTimer = setTimeout(returnToIdle, 3500);
+      clearTimeout(resetToIdleTimer);
+      resetToIdleTimer = setTimeout(returnToIdle, 3000);
     });
   }
 
@@ -411,18 +446,18 @@ function initInteractiveHero() {
   zoneCenter?.addEventListener('mouseenter', setCenterReaction);
   zoneRight?.addEventListener('mouseenter', setRightReaction);
 
-  // Mobile / Touch support
+  // Click / touch to trigger greeting wave
   const stage = document.getElementById('canvas-stage');
   stage?.addEventListener('click', () => {
     setCenterReaction();
   });
 
-  // Mobile viewport entry trigger
+  // Mobile viewport auto-trigger greeting wave
   if ('IntersectionObserver' in window && window.innerWidth <= 768) {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          setTimeout(setCenterReaction, 500);
+          setTimeout(setCenterReaction, 400);
           observer.disconnect();
         }
       });
