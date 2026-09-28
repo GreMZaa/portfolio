@@ -174,7 +174,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /**
  * Interactive Hero Frame Controller (Sri Tech Style - High Definition 24fps)
- * Native 1280x720 video frames with authentic human motion
+ * Sequence: 00:04 to end of video (Frames 96..143)
+ * Sergey exclusively looks at the visitor, waves hello, and points down to the case studies.
  */
 function initInteractiveHero() {
   const canvas = document.getElementById('hero-character-canvas');
@@ -187,30 +188,17 @@ function initInteractiveHero() {
   const bubbleTag = document.getElementById('bubble-tag');
   const bubbleText = document.getElementById('bubble-text');
   const heroWrapper = document.getElementById('hero-interactive-section');
+  const stage = document.getElementById('canvas-stage');
+
+  // Video timing constants from 00:04 to end of greeting & pointing (24 FPS)
+  const START_FRAME = 96;     // Looking up directly at the camera with a warm smile
+  const WAVE_PEAK = 118;      // Raising right hand and waving hello
+  const POINT_START = 124;    // Index finger pointing down begins
+  const END_FRAME = 138;      // Clear index finger pointing down at cases below
 
   const TOTAL_FRAMES = 144;
   const frames = new Array(TOTAL_FRAMES);
   let lastDrawnFrame = null;
-
-  // Key animation landmarks based on САЙТ.mp4:
-  // 0..35: Typing at laptop (Idle cycle)
-  // 40..55: Turning head to screen-right (his left) -> LOOK_RIGHT = 46
-  // 56..85: Turning head to screen-left (his right) -> LOOK_LEFT = 72
-  // 90..143: Natural greeting gesture:
-  //   92..104: Looks up at camera with a warm smile
-  //   105..122: Raises right hand and waves hello!
-  //   125..142: Points down with index finger ("кейсы прямо внизу!")
-  const POSES = {
-    IDLE_BASE: 14,
-    IDLE_MIN: 2,
-    IDLE_MAX: 26,
-    LOOK_LEFT: 72,
-    LOOK_RIGHT: 46,
-    GREET_START: 92,
-    GREET_WAVE_PEAK: 118,
-    GREET_POINT: 138,
-    GREET_END: 142
-  };
 
   function drawFrame(img) {
     if (!img || !img.complete || img.naturalWidth === 0) return false;
@@ -220,30 +208,14 @@ function initInteractiveHero() {
     return true;
   }
 
-  // Preload priority frames first
-  const priorityIndices = [POSES.IDLE_BASE, 0, POSES.LOOK_LEFT, POSES.LOOK_RIGHT, POSES.GREET_START, POSES.GREET_WAVE_PEAK, POSES.GREET_POINT];
-  priorityIndices.forEach((idx) => {
-    const img = new Image();
-    const num = String(idx).padStart(3, '0');
-    img.src = `assets/hero_frames/frame_${num}.webp`;
-    img.onload = () => {
-      frames[idx] = img;
-      if (!lastDrawnFrame && (idx === POSES.IDLE_BASE || idx === 0)) {
-        drawFrame(img);
-      }
-    };
-    frames[idx] = img;
-  });
-
-  // Preload all remaining frames in background
-  for (let i = 0; i < TOTAL_FRAMES; i++) {
-    if (frames[i]) continue;
+  // Preload frames 96..143
+  for (let i = START_FRAME; i <= END_FRAME; i++) {
     const img = new Image();
     const num = String(i).padStart(3, '0');
     img.src = `assets/hero_frames/frame_${num}.webp`;
     img.onload = () => {
       frames[i] = img;
-      if (!lastDrawnFrame && i === 0) {
+      if (!lastDrawnFrame && i === START_FRAME) {
         drawFrame(img);
       }
     };
@@ -251,19 +223,30 @@ function initInteractiveHero() {
   }
 
   // Animation state machine
-  // Modes: 'idle' | 'transition' | 'greeting' | 'holding'
-  let mode = 'idle';
-  let currentFrame = POSES.IDLE_BASE;
-  let targetFrame = POSES.IDLE_BASE;
-  let idleDirection = 1;
-  let idleTickCounter = 0;
+  // Modes: 'forward' (96 -> 143) | 'hold_point' | 'reverse' (143 -> 96) | 'hold_start'
+  let mode = 'forward';
+  let currentFrame = START_FRAME;
   let holdTimer = null;
-  let resetToIdleTimer = null;
-  let currentActiveZone = 'idle';
 
   // 24 FPS video clock (41.67ms per frame)
   const FRAME_INTERVAL = 1000 / 24;
   let lastFrameTime = performance.now();
+
+  function updateBubbleCopy(frameNum) {
+    if (!bubbleTag || !bubbleText) return;
+
+    if (frameNum < POINT_START) {
+      bubbleTag.textContent = "Привет!";
+      bubbleTag.style.background = "#ECFDF5";
+      bubbleTag.style.color = "#059669";
+      bubbleText.textContent = "Я Сергей Шаронов. Рад знакомству!";
+    } else {
+      bubbleTag.textContent = "Кейсы ↓";
+      bubbleTag.style.background = "#EFF6FF";
+      bubbleTag.style.color = "#1855F4";
+      bubbleText.textContent = "Кейсы с окупаемостью прямо внизу ↓";
+    }
+  }
 
   function updateAnimation(now) {
     const elapsed = now - lastFrameTime;
@@ -271,45 +254,36 @@ function initInteractiveHero() {
     if (elapsed >= FRAME_INTERVAL) {
       lastFrameTime = now - (elapsed % FRAME_INTERVAL);
 
-      if (mode === 'greeting') {
-        // Play the video greeting sequentially at natural 24 FPS: 92 -> 142
-        if (currentFrame < POSES.GREET_END) {
+      if (mode === 'forward') {
+        if (currentFrame < END_FRAME) {
           currentFrame += 1;
         } else {
           // Finished wave & point: hold pointing pose pleasantly
-          mode = 'holding';
+          currentFrame = END_FRAME;
+          mode = 'hold_point';
           clearTimeout(holdTimer);
           holdTimer = setTimeout(() => {
-            returnToIdle();
-          }, 2400);
+            mode = 'reverse';
+          }, 3000); // Hold pointing down for 3.0 seconds
         }
-      } else if (mode === 'transition') {
-        // Smooth head turn at natural speed
-        const dist = Math.abs(targetFrame - currentFrame);
-        const step = Math.sign(targetFrame - currentFrame);
-        const speed = dist > 20 ? 2 : 1;
-
-        if (dist <= 1) {
-          currentFrame = targetFrame;
-          mode = 'holding';
+        updateBubbleCopy(Math.round(currentFrame));
+      } else if (mode === 'reverse') {
+        // Smoothly reverse back to neutral smile
+        if (currentFrame > START_FRAME) {
+          currentFrame -= 1;
         } else {
-          currentFrame += step * speed;
+          currentFrame = START_FRAME;
+          mode = 'hold_start';
+          clearTimeout(holdTimer);
+          holdTimer = setTimeout(() => {
+            mode = 'forward';
+          }, 1200); // Brief pleasant pause before repeating
         }
-      } else if (mode === 'idle') {
-        // Gentle subtle typing loop (2..26..2) every 2 ticks
-        idleTickCounter++;
-        if (idleTickCounter % 2 === 0) {
-          currentFrame += idleDirection;
-          if (currentFrame >= POSES.IDLE_MAX) {
-            idleDirection = -1;
-          } else if (currentFrame <= POSES.IDLE_MIN) {
-            idleDirection = 1;
-          }
-        }
+        updateBubbleCopy(Math.round(currentFrame));
       }
 
       // Draw current frame safely
-      const fIdx = Math.min(TOTAL_FRAMES - 1, Math.max(0, Math.round(currentFrame)));
+      const fIdx = Math.min(END_FRAME, Math.max(START_FRAME, Math.round(currentFrame)));
       const img = frames[fIdx];
       if (img && img.complete && img.naturalWidth > 0) {
         drawFrame(img);
@@ -321,147 +295,46 @@ function initInteractiveHero() {
 
   requestAnimationFrame(updateAnimation);
 
-  function setLeftReaction() {
-    clearTimeout(resetToIdleTimer);
+  // Trigger re-play greeting + point sequence on user interaction
+  function triggerGreeting() {
     clearTimeout(holdTimer);
-    targetFrame = POSES.LOOK_LEFT;
-    mode = 'transition';
-
-    if (bubbleTag) {
-      bubbleTag.textContent = "Склады & 1С";
-      bubbleTag.style.background = "#EFF6FF";
-      bubbleTag.style.color = "#1855F4";
+    if (mode === 'hold_point' || mode === 'reverse') {
+      currentFrame = START_FRAME;
     }
-    if (bubbleText) {
-      bubbleText.textContent = "Смотрите складскую логистику или 1С?";
-    }
-
-    resetToIdleTimer = setTimeout(returnToIdle, 4200);
+    mode = 'forward';
   }
 
-  function setRightReaction() {
-    clearTimeout(resetToIdleTimer);
-    clearTimeout(holdTimer);
-    targetFrame = POSES.LOOK_RIGHT;
-    mode = 'transition';
-
-    if (bubbleTag) {
-      bubbleTag.textContent = "Mini Apps";
-      bubbleTag.style.background = "#FEF2F2";
-      bubbleTag.style.color = "#EF4444";
-    }
-    if (bubbleText) {
-      bubbleText.textContent = "Нужен Telegram Mini App или чекаут?";
-    }
-
-    resetToIdleTimer = setTimeout(returnToIdle, 4200);
-  }
-
-  function setCenterReaction() {
-    clearTimeout(resetToIdleTimer);
-    clearTimeout(holdTimer);
-
-    // Play greeting sequence from frame 92 at natural 24 FPS
-    currentFrame = POSES.GREET_START;
-    mode = 'greeting';
-
-    if (bubbleTag) {
-      bubbleTag.textContent = "Привет!";
-      bubbleTag.style.background = "#ECFDF5";
-      bubbleTag.style.color = "#059669";
-    }
-    if (bubbleText) {
-      bubbleText.textContent = "Я Сергей Шаронов. Кейсы с окупаемостью прямо внизу ↓";
-    }
-
-    resetToIdleTimer = setTimeout(returnToIdle, 6000);
-  }
-
-  function returnToIdle() {
-    currentActiveZone = 'idle';
-    targetFrame = POSES.IDLE_BASE;
-    mode = 'transition';
-
-    const isMobile = window.innerWidth <= 640;
-    if (bubbleTag) {
-      bubbleTag.textContent = isMobile ? "Привет!" : "В работе";
-      bubbleTag.style.background = "#F4F4F5";
-      bubbleTag.style.color = "#71717A";
-    }
-    if (bubbleText) {
-      bubbleText.textContent = isMobile 
-        ? "Нажмите на экран или листайте вниз ↓" 
-        : "Двигайте курсор влево, вправо или на меня";
-    }
-  }
-
-  if (window.innerWidth <= 640) {
-    returnToIdle();
-  }
-
-  // Global mouse tracking across Hero section
-  let lastZoneChangeTime = 0;
+  // Hover or click on canvas / hero section re-triggers the wave & point
+  let lastMoveTrigger = 0;
   if (heroWrapper) {
-    heroWrapper.addEventListener('mousemove', (e) => {
+    heroWrapper.addEventListener('mousemove', () => {
       const now = performance.now();
-      if (now - lastZoneChangeTime < 280) return;
-
-      const rect = heroWrapper.getBoundingClientRect();
-      const relX = (e.clientX - rect.left) / rect.width;
-
-      if (relX < 0.38) {
-        if (currentActiveZone !== 'left') {
-          currentActiveZone = 'left';
-          lastZoneChangeTime = now;
-          setLeftReaction();
-        }
-      } else if (relX > 0.65) {
-        if (currentActiveZone !== 'right') {
-          currentActiveZone = 'right';
-          lastZoneChangeTime = now;
-          setRightReaction();
-        }
-      } else {
-        if (currentActiveZone !== 'center') {
-          currentActiveZone = 'center';
-          lastZoneChangeTime = now;
-          setCenterReaction();
-        }
+      if (now - lastMoveTrigger > 4000 && (mode === 'hold_point' || mode === 'hold_start')) {
+        lastMoveTrigger = now;
+        triggerGreeting();
       }
     });
 
-    heroWrapper.addEventListener('mouseleave', () => {
-      currentActiveZone = 'idle';
-      clearTimeout(resetToIdleTimer);
-      resetToIdleTimer = setTimeout(returnToIdle, 3000);
+    heroWrapper.addEventListener('mouseenter', () => {
+      if (mode === 'hold_point' || mode === 'hold_start') {
+        triggerGreeting();
+      }
     });
   }
 
-  // Direct zone overlay hover support
-  const zoneLeft = document.getElementById('zone-left');
-  const zoneCenter = document.getElementById('zone-center');
-  const zoneRight = document.getElementById('zone-right');
+  if (stage) {
+    stage.addEventListener('click', triggerGreeting);
+  }
 
-  zoneLeft?.addEventListener('mouseenter', setLeftReaction);
-  zoneCenter?.addEventListener('mouseenter', setCenterReaction);
-  zoneRight?.addEventListener('mouseenter', setRightReaction);
-
-  // Click / touch to trigger greeting wave
-  const stage = document.getElementById('canvas-stage');
-  stage?.addEventListener('click', () => {
-    setCenterReaction();
-  });
-
-  // Mobile viewport auto-trigger greeting wave
+  // Mobile viewport auto-trigger
   if ('IntersectionObserver' in window && window.innerWidth <= 768) {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          setTimeout(setCenterReaction, 400);
-          observer.disconnect();
+          triggerGreeting();
         }
       });
-    }, { threshold: 0.5 });
+    }, { threshold: 0.4 });
     observer.observe(canvas);
   }
 }

@@ -1088,7 +1088,7 @@ button {
   max-width: 820px;
   aspect-ratio: 16 / 9;
   background: transparent;
-  cursor: crosshair;
+  cursor: pointer;
   overflow: visible;
   display: block;
   margin: 0 auto;
@@ -1101,35 +1101,6 @@ button {
   height: 100%;
   display: block;
   background: transparent;
-}
-
-/* 3 Horizontal Interaction Zones Overlay */
-.sri-zones-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  z-index: 5;
-}
-
-.sri-zone {
-  height: 100%;
-  cursor: pointer;
-  position: relative;
-}
-
-.sri-zone-left {
-  width: 33%;
-}
-
-.sri-zone-center {
-  width: 34%;
-}
-
-.sri-zone-right {
-  width: 33%;
 }
 
 /* Trust Strip Section (Bridge from Hero to Details) */
