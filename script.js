@@ -1006,16 +1006,8 @@
   }
 
   /* ---------- Agentation (визуальные правки для ИИ-агента) ----------
-     Включается автоматически на localhost / 127.0.0.1 или по ?agentation=1 */
-  if (
-    location.hostname === 'localhost' ||
-    location.hostname === '127.0.0.1' ||
-    location.search.indexOf('agentation=1') !== -1 ||
-    sessionStorage.getItem('agentation') === '1'
-  ) {
-    if (location.search.indexOf('agentation=1') !== -1) {
-      try { sessionStorage.setItem('agentation', '1'); } catch (e) {}
-    }
+     Включается ТОЛЬКО локально на localhost / 127.0.0.1 */
+  if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
     Promise.all([
       import('https://esm.sh/react@18.3.1'),
       import('https://esm.sh/react-dom@18.3.1/client'),
