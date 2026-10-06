@@ -1011,11 +1011,12 @@
   (function () {
     var EXPECTED_HASH = '6ddb928b8b2f462aa5c711d46a9da295993e978581699fcaba2c4e787aa17138';
     var SALT = 'sharonov_ag_salt_v1:';
-    var RL_KEY = 'ag_rl_v1';
+    var RL_KEY = 'ag_rl_v2';
     var UNLOCK_KEY = 'ag_unlocked_v1';
     var MAX_ATTEMPTS = 3;
     var LOCKOUT_MS = 15 * 60 * 1000; // 15 минут
     var mounted = false;
+    try { localStorage.removeItem('ag_rl_v1'); } catch (e) {}
 
     function showToast(text) {
       var old = document.getElementById('ag-status-toast');
@@ -1049,7 +1050,7 @@
       }
 
       var s = document.createElement('script');
-      s.src = 'agentation.bundle.js?v=20261006c';
+      s.src = 'agentation.bundle.js?v=20261006d';
       s.onload = finishMount;
       s.onerror = function () {
         // Фолбэк на esm.sh, если локальный бандл недоступен
@@ -1094,16 +1095,52 @@
       try { localStorage.setItem(RL_KEY, JSON.stringify(state)); } catch (e) {}
     }
 
-    function sha256Hex(str) {
-      if (window.crypto && crypto.subtle && crypto.subtle.digest) {
-        var buf = new TextEncoder().encode(str);
-        return crypto.subtle.digest('SHA-256', buf).then(function (hash) {
-          return Array.from(new Uint8Array(hash)).map(function (b) {
-            return b.toString(16).padStart(2, '0');
-          }).join('');
-        });
+    // Чистый JS SHA-256 (работает даже по HTTP / «Не защищён», где window.crypto.subtle отключён браузером)
+    function sha256Pure(ascii) {
+      function rightRotate(v, a) { return (v >>> a) | (v << (32 - a)); }
+      var mathPow = Math.pow, maxWord = mathPow(2, 32), i, j, result = '',
+          words = [], asciiBitLength = ascii.length * 8,
+          hash = [], k = [], primeCounter = 0, isComposite = {};
+      for (var candidate = 2; primeCounter < 64; candidate++) {
+        if (!isComposite[candidate]) {
+          for (i = 0; i < 313; i += candidate) isComposite[i] = candidate;
+          hash[primeCounter] = (mathPow(candidate, .5) * maxWord) | 0;
+          k[primeCounter++] = (mathPow(candidate, 1 / 3) * maxWord) | 0;
+        }
       }
-      return Promise.resolve('');
+      ascii += '\x80';
+      while (ascii.length % 64 - 56) ascii += '\x00';
+      for (i = 0; i < ascii.length; i++) {
+        j = ascii.charCodeAt(i);
+        words[i >> 2] |= (j & 0xff) << ((3 - i) % 4) * 8;
+      }
+      words[words.length] = ((asciiBitLength / maxWord) | 0);
+      words[words.length] = (asciiBitLength);
+      for (j = 0; j < words.length;) {
+        var w = words.slice(j, j += 16), oldHash = hash;
+        hash = hash.slice(0, 8);
+        for (i = 0; i < 64; i++) {
+          var w15 = w[i - 15], w2 = w[i - 2], a = hash[0], e = hash[4],
+              temp1 = hash[7] + (rightRotate(e, 6) ^ rightRotate(e, 11) ^ rightRotate(e, 25)) +
+                      ((e & hash[5]) ^ ((~e) & hash[6])) + k[i] +
+                      (w[i] = (i < 16) ? w[i] : (w[i - 16] + (rightRotate(w15, 7) ^ rightRotate(w15, 18) ^ (w15 >>> 3)) + w[i - 7] + (rightRotate(w2, 17) ^ rightRotate(w2, 19) ^ (w2 >>> 10))) | 0),
+              temp2 = (rightRotate(a, 2) ^ rightRotate(a, 13) ^ rightRotate(a, 22)) + ((a & hash[1]) ^ (a & hash[2]) ^ (hash[1] & hash[2]));
+          hash = [(temp1 + temp2) | 0].concat(hash);
+          hash[4] = (hash[4] + temp1) | 0;
+        }
+        for (i = 0; i < 8; i++) hash[i] = (hash[i] + oldHash[i]) | 0;
+      }
+      for (i = 0; i < 8; i++) {
+        for (j = 3; j + 1; j--) {
+          var b = (hash[i] >> (j * 8)) & 255;
+          result += ((b < 16) ? 0 : '') + b.toString(16);
+        }
+      }
+      return result;
+    }
+
+    function sha256Hex(str) {
+      return Promise.resolve(sha256Pure(str));
     }
 
     function showPinModal() {
@@ -1120,12 +1157,12 @@
         '<div style="width:44px;height:44px;border-radius:12px;background:rgba(255,85,0,0.12);color:#FF5500;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:20px;font-weight:700;">🔒</div>' +
         '<h3 style="margin:0 0 6px;font-size:18px;font-weight:700;">Agentation Dev Mode</h3>' +
         '<p style="margin:0 0 16px;font-size:13px;color:#52525B;">Введите 4-значный PIN-код для запуска инструмента разметки</p>' +
-        '<form id="ag-pin-form" autocomplete="off">' +
-          '<input id="ag-pin-input" type="password" inputmode="numeric" autocomplete="new-password" maxlength="8" placeholder="••••" required ' +
-            'style="width:100%;box-sizing:border-box;padding:12px 14px;font-size:22px;letter-spacing:8px;text-align:center;border-radius:12px;border:1.5px solid rgba(24,24,27,0.18);background:#FFFFFF;color:#18181B;outline:none;margin-bottom:10px;font-weight:700;" />' +
+        '<div id="ag-pin-form">' +
+          '<input id="ag-pin-input" type="text" inputmode="numeric" autocomplete="off" data-lpignore="true" data-1p-ignore="true" maxlength="8" placeholder="••••" ' +
+            'style="width:100%;box-sizing:border-box;padding:12px 14px;font-size:22px;letter-spacing:8px;text-align:center;border-radius:12px;border:1.5px solid rgba(24,24,27,0.18);background:#FFFFFF;color:#18181B;outline:none;margin-bottom:10px;font-weight:700;-webkit-text-security:disc;" />' +
           '<div id="ag-pin-msg" style="min-height:18px;font-size:12px;color:#E11D48;margin-bottom:10px;font-weight:500;"></div>' +
-          '<button id="ag-pin-submit" type="submit" style="width:100%;padding:12px 16px;border-radius:999px;border:none;background:#FF5500;color:#FFFFFF;font-size:14px;font-weight:600;cursor:pointer;transition:opacity .15s;">Разблокировать</button>' +
-        '</form>';
+          '<button id="ag-pin-submit" type="button" style="width:100%;padding:12px 16px;border-radius:999px;border:none;background:#FF5500;color:#FFFFFF;font-size:14px;font-weight:600;cursor:pointer;transition:opacity .15s;">Разблокировать</button>' +
+        '</div>';
 
       overlay.appendChild(card);
       document.body.appendChild(overlay);
@@ -1133,7 +1170,6 @@
       var input = card.querySelector('#ag-pin-input');
       var msg = card.querySelector('#ag-pin-msg');
       var btn = card.querySelector('#ag-pin-submit');
-      var form = card.querySelector('#ag-pin-form');
       var closeBtn = card.querySelector('#ag-pin-close');
       var timerId = 0;
 
@@ -1182,8 +1218,7 @@
         }
       });
 
-      form.addEventListener('submit', function (e) {
-        e.preventDefault();
+      function submitPin() {
         if (updateLockUI()) return;
         var val = input.value.trim();
         if (!val) return;
@@ -1228,7 +1263,15 @@
               }
             }
           });
-        }, 350);
+        }, 250);
+      }
+
+      btn.addEventListener('click', submitPin);
+      input.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          submitPin();
+        }
       });
     }
 
