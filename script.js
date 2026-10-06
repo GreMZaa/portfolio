@@ -1007,7 +1007,7 @@
 
   /* ---------- Agentation (визуальные правки для ИИ-агента) ----------
      На бою защищено PIN-кодом (SHA-256) + Rate Limit (3 попытки / 15 минут).
-     Вызов: ?agentation=1 в URL или горячая клавиша Ctrl+Shift+A. */
+     Вызов: ?agentation=1, #agentation, Alt+Shift+A, Ctrl+Shift+X или 3 клика по логотипу SS. */
   (function () {
     var EXPECTED_HASH = '6ddb928b8b2f462aa5c711d46a9da295993e978581699fcaba2c4e787aa17138';
     var SALT = 'sharonov_ag_salt_v1:';
@@ -1017,25 +1017,62 @@
     var LOCKOUT_MS = 15 * 60 * 1000; // 15 минут
     var mounted = false;
 
-    function mountAgentation() {
-      if (mounted || document.getElementById('agentation-root')) return;
+    function showToast(text) {
+      var old = document.getElementById('ag-status-toast');
+      if (old) old.remove();
+      var t = document.createElement('div');
+      t.id = 'ag-status-toast';
+      t.style.cssText = 'position:fixed;bottom:24px;left:24px;z-index:999998;background:#18181B;color:#FFFFFF;padding:10px 16px;border-radius:999px;font-family:Inter,system-ui,sans-serif;font-size:13px;font-weight:600;box-shadow:0 10px 28px rgba(0,0,0,0.25);display:flex;align-items:center;gap:10px;border:1px solid rgba(255,85,0,0.4);';
+      t.innerHTML = '<span style="color:#FF5500;">●</span><span>' + text + '</span>';
+      document.body.appendChild(t);
+      setTimeout(function () { if (t.parentNode) t.remove(); }, 4000);
+    }
+
+    function mountAgentation(notify) {
+      if (mounted || document.getElementById('agentation-root')) {
+        if (notify) showToast('Agentation уже запущен (кнопка в правом нижнем углу)');
+        return;
+      }
       mounted = true;
-      Promise.all([
-        import('https://esm.sh/react@18.3.1'),
-        import('https://esm.sh/react-dom@18.3.1/client'),
-        import('https://esm.sh/agentation?deps=react@18.3.1,react-dom@18.3.1')
-      ]).then(function (mods) {
-        var React = mods[0].default || mods[0];
-        var createRoot = mods[1].createRoot;
-        var Agentation = mods[2].Agentation;
-        var host = document.createElement('div');
-        host.id = 'agentation-root';
-        document.body.appendChild(host);
-        createRoot(host).render(React.createElement(Agentation, { endpoint: 'http://localhost:4747' }));
-      }).catch(function (err) {
-        mounted = false;
-        console.warn('Agentation load error:', err);
-      });
+      if (notify) showToast('Запуск Agentation...');
+
+      function finishMount() {
+        if (typeof window.__mountAgentation === 'function') {
+          window.__mountAgentation('http://localhost:4747');
+          if (notify) showToast('Agentation активирован (справа внизу)');
+        }
+      }
+
+      if (typeof window.__mountAgentation === 'function') {
+        finishMount();
+        return;
+      }
+
+      var s = document.createElement('script');
+      s.src = 'agentation.bundle.js?v=20261006c';
+      s.onload = finishMount;
+      s.onerror = function () {
+        // Фолбэк на esm.sh, если локальный бандл недоступен
+        Promise.all([
+          import('https://esm.sh/react@18.3.1'),
+          import('https://esm.sh/react-dom@18.3.1/client'),
+          import('https://esm.sh/agentation?deps=react@18.3.1,react-dom@18.3.1')
+        ]).then(function (mods) {
+          var React = mods[0].default || mods[0];
+          var createRoot = mods[1].createRoot;
+          var Agentation = mods[2].Agentation;
+          var host = document.createElement('div');
+          host.id = 'agentation-root';
+          document.body.appendChild(host);
+          createRoot(host).render(React.createElement(Agentation, { endpoint: 'http://localhost:4747' }));
+          if (notify) showToast('Agentation активирован (справа внизу)');
+        }).catch(function (err) {
+          mounted = false;
+          showToast('Ошибка загрузки Agentation');
+          console.warn('Agentation load error:', err);
+        });
+      };
+      document.head.appendChild(s);
     }
 
     function getRateLimit() {
@@ -1058,12 +1095,15 @@
     }
 
     function sha256Hex(str) {
-      var buf = new TextEncoder().encode(str);
-      return crypto.subtle.digest('SHA-256', buf).then(function (hash) {
-        return Array.from(new Uint8Array(hash)).map(function (b) {
-          return b.toString(16).padStart(2, '0');
-        }).join('');
-      });
+      if (window.crypto && crypto.subtle && crypto.subtle.digest) {
+        var buf = new TextEncoder().encode(str);
+        return crypto.subtle.digest('SHA-256', buf).then(function (hash) {
+          return Array.from(new Uint8Array(hash)).map(function (b) {
+            return b.toString(16).padStart(2, '0');
+          }).join('');
+        });
+      }
+      return Promise.resolve('');
     }
 
     function showPinModal() {
@@ -1081,7 +1121,7 @@
         '<h3 style="margin:0 0 6px;font-size:18px;font-weight:700;">Agentation Dev Mode</h3>' +
         '<p style="margin:0 0 16px;font-size:13px;color:#52525B;">Введите 4-значный PIN-код для запуска инструмента разметки</p>' +
         '<form id="ag-pin-form" autocomplete="off">' +
-          '<input id="ag-pin-input" type="password" inputmode="numeric" maxlength="8" placeholder="••••" required ' +
+          '<input id="ag-pin-input" type="password" inputmode="numeric" autocomplete="new-password" maxlength="8" placeholder="••••" required ' +
             'style="width:100%;box-sizing:border-box;padding:12px 14px;font-size:22px;letter-spacing:8px;text-align:center;border-radius:12px;border:1.5px solid rgba(24,24,27,0.18);background:#FFFFFF;color:#18181B;outline:none;margin-bottom:10px;font-weight:700;" />' +
           '<div id="ag-pin-msg" style="min-height:18px;font-size:12px;color:#E11D48;margin-bottom:10px;font-weight:500;"></div>' +
           '<button id="ag-pin-submit" type="submit" style="width:100%;padding:12px 16px;border-radius:999px;border:none;background:#FF5500;color:#FFFFFF;font-size:14px;font-weight:600;cursor:pointer;transition:opacity .15s;">Разблокировать</button>' +
@@ -1157,12 +1197,12 @@
             if (digest === EXPECTED_HASH) {
               localStorage.removeItem(RL_KEY);
               try { sessionStorage.setItem(UNLOCK_KEY, EXPECTED_HASH.slice(0, 16)); } catch (err) {}
-              if (location.search.indexOf('agentation=1') !== -1) {
-                var cleanUrl = location.pathname + location.search.replace(/[?&]agentation=1/, '').replace(/^&/, '?') + location.hash;
-                history.replaceState(null, '', cleanUrl);
+              if (location.search.indexOf('agentation=1') !== -1 || location.hash === '#agentation') {
+                var cleanUrl = location.pathname + location.search.replace(/[?&]agentation=1/, '').replace(/^&/, '?') + (location.hash === '#agentation' ? '' : location.hash);
+                history.replaceState(null, '', cleanUrl || location.pathname);
               }
               close();
-              mountAgentation();
+              mountAgentation(true);
             } else {
               var rl = getRateLimit();
               rl.fails = (rl.fails || 0) + 1;
@@ -1188,31 +1228,59 @@
               }
             }
           });
-        }, 450);
+        }, 350);
       });
     }
 
-    try {
-      if (sessionStorage.getItem(UNLOCK_KEY) === EXPECTED_HASH.slice(0, 16)) {
-        mountAgentation();
-      } else if (location.search.indexOf('agentation=1') !== -1) {
+    function triggerAgentation() {
+      try {
+        if (sessionStorage.getItem(UNLOCK_KEY) === EXPECTED_HASH.slice(0, 16)) {
+          mountAgentation(true);
+        } else {
+          showPinModal();
+        }
+      } catch (e) {
         showPinModal();
+      }
+    }
+
+    try {
+      var hasUrlTrigger = location.search.indexOf('agentation=1') !== -1 || location.hash === '#agentation';
+      if (hasUrlTrigger) {
+        triggerAgentation();
+      } else if (sessionStorage.getItem(UNLOCK_KEY) === EXPECTED_HASH.slice(0, 16)) {
+        mountAgentation(false);
       }
     } catch (e) {}
 
-    // Горячая клавиша Ctrl+Shift+A (или Cmd+Shift+A) для вызова окна PIN-кода без изменения URL
+    window.addEventListener('hashchange', function () {
+      if (location.hash === '#agentation') triggerAgentation();
+    });
+
+    // Горячие клавиши: Alt+Shift+A, Ctrl+Shift+X или Ctrl+Shift+A (по физическому коду клавиши KeyA/KeyX)
     document.addEventListener('keydown', function (e) {
-      if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'A' || e.key === 'a' || e.key === 'Ф' || e.key === 'ф')) {
+      var isAltShiftA = e.altKey && e.shiftKey && (e.code === 'KeyA' || e.key === 'A' || e.key === 'a' || e.key === 'Ф' || e.key === 'ф');
+      var isCtrlShiftX = (e.ctrlKey || e.metaKey) && e.shiftKey && (e.code === 'KeyX' || e.key === 'X' || e.key === 'x' || e.key === 'Ч' || e.key === 'ч');
+      var isCtrlShiftA = (e.ctrlKey || e.metaKey) && e.shiftKey && (e.code === 'KeyA' || e.key === 'A' || e.key === 'a' || e.key === 'Ф' || e.key === 'ф');
+      if (isAltShiftA || isCtrlShiftX || isCtrlShiftA) {
         e.preventDefault();
-        try {
-          if (sessionStorage.getItem(UNLOCK_KEY) === EXPECTED_HASH.slice(0, 16)) {
-            mountAgentation();
-          } else {
-            showPinModal();
-          }
-        } catch (err) {
-          showPinModal();
-        }
+        triggerAgentation();
+      }
+    });
+
+    // Тройной клик по логотипу SS в шапке или подвале также открывает PIN-окно
+    var logoClicks = 0, logoTimer = 0;
+    document.addEventListener('click', function (e) {
+      var logo = e.target.closest('.brand__logo-box');
+      if (!logo) return;
+      logoClicks++;
+      clearTimeout(logoTimer);
+      if (logoClicks >= 3) {
+        e.preventDefault();
+        logoClicks = 0;
+        triggerAgentation();
+      } else {
+        logoTimer = setTimeout(function () { logoClicks = 0; }, 700);
       }
     });
   })();
