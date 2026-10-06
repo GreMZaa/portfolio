@@ -776,7 +776,7 @@ ul { list-style: none; padding: 0; }
 }
 .fgh__sub {
   font-family: var(--f-display);
-  font-size: clamp(1.4rem, 3.7vw, 2.25rem);
+  font-size: clamp(1.35rem, 2.5vw, 1.85rem);
   font-weight: 700; line-height: 1.2; letter-spacing: -.014em;
   color: #fff;
 }
@@ -2128,9 +2128,28 @@ label.cc__opt { cursor: pointer; }
 .addon {
   border-radius: var(--r-xl);
   padding: clamp(1.6rem, 3.4vw, 2.6rem);
-  background: linear-gradient(152deg, #FFFFFF 0%, #EEF4FE 46%, #BFDBFE 100%);
-  border: 1px solid rgba(255,255,255,.92);
-  box-shadow: var(--sh-3), inset 0 0 0 1px rgba(37,99,235,.09);
+  background: #FFFFFF;
+  border: 1px solid rgba(24, 24, 27, 0.08);
+  box-shadow: 0 12px 36px rgba(24, 24, 27, 0.05), 0 2px 8px rgba(24, 24, 27, 0.03);
+}
+.addon__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem 2.5rem;
+}
+.addon__price-box {
+  flex: none;
+  padding: .85rem 1.5rem;
+  border-radius: var(--r-lg);
+  background: #FAF8F5;
+  border: 1px solid rgba(255, 85, 0, 0.25);
+}
+.addon__price-box .tier__price {
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  font-weight: 700;
+  color: var(--green);
 }
 .care__when { font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; color: var(--green); margin-bottom: .5rem; }
 .care__h { font-family: var(--f-display); font-size: clamp(1.3rem, 2.1vw, 1.65rem); font-weight: 600; margin-top: .45rem; }
@@ -2391,7 +2410,7 @@ label.cc__opt { cursor: pointer; }
      либо растить карточку под мокап, либо мельчить мокап под карточку.
      Ширина и правый вылет сняты с макета: мокап 730 из 1494 ширины
      карточки, правый край почти вплотную к её кромке. */
-  .fgh__text { max-width: 46%; }
+  .fgh__text { max-width: 40%; }
   .fgh__phone {
     position: absolute; right: .3%; top: 50%;
     width: 48.86%; max-width: none; margin: 0;
@@ -2403,7 +2422,7 @@ label.cc__opt { cursor: pointer; }
   .fgh__nums { display: flex; flex-wrap: nowrap; gap: 0; }
   /* padding ужат с 2.3vw/2.1rem: с подписями «дней до запуска» и «страниц + CRM»
      ряд с прежними отступами не влезал в колонку и цифры наезжали на разделители */
-  .fgh__stat { padding-inline: clamp(.85rem, 1.4vw, 1.5rem); }
+  .fgh__stat { padding-inline: clamp(.55rem, 1vw, 1.1rem); }
   .fgh__stat:first-child { padding-left: 0; }
   .fgh__stat:last-child  { padding-right: 0; }
   .fgh__stat + .fgh__stat { border-left: 1px solid var(--case-hair); }
@@ -2456,9 +2475,9 @@ label.cc__opt { cursor: pointer; }
 
   /* правая колонка по ширине кнопки: долей (.6fr) она на 860–1000 px выходила
      уже кнопки, и та наезжала на заголовок */
-  .final__inner { grid-template-columns: minmax(0, 1fr) auto; padding-left: 32%; }
+  .final__inner { grid-template-columns: minmax(0, 1fr) auto; }
   .final__side { align-items: flex-end; text-align: right; }
-  .final__note { max-width: 14rem; }
+  .final__note { max-width: 16rem; }
 }
 
 @media (min-width: 1280px) {
