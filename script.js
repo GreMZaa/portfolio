@@ -1006,22 +1006,214 @@
   }
 
   /* ---------- Agentation (визуальные правки для ИИ-агента) ----------
-     Включается ТОЛЬКО локально на localhost / 127.0.0.1 */
-  if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
-    Promise.all([
-      import('https://esm.sh/react@18.3.1'),
-      import('https://esm.sh/react-dom@18.3.1/client'),
-      import('https://esm.sh/agentation?deps=react@18.3.1,react-dom@18.3.1')
-    ]).then(function (mods) {
-      var React = mods[0].default || mods[0];
-      var createRoot = mods[1].createRoot;
-      var Agentation = mods[2].Agentation;
-      var host = document.createElement('div');
-      host.id = 'agentation-root';
-      document.body.appendChild(host);
-      createRoot(host).render(React.createElement(Agentation, { endpoint: 'http://localhost:4747' }));
-    }).catch(function (err) {
-      console.warn('Agentation load error:', err);
+     На бою защищено PIN-кодом (SHA-256) + Rate Limit (3 попытки / 15 минут).
+     Вызов: ?agentation=1 в URL или горячая клавиша Ctrl+Shift+A. */
+  (function () {
+    var EXPECTED_HASH = '6ddb928b8b2f462aa5c711d46a9da295993e978581699fcaba2c4e787aa17138';
+    var SALT = 'sharonov_ag_salt_v1:';
+    var RL_KEY = 'ag_rl_v1';
+    var UNLOCK_KEY = 'ag_unlocked_v1';
+    var MAX_ATTEMPTS = 3;
+    var LOCKOUT_MS = 15 * 60 * 1000; // 15 минут
+    var mounted = false;
+
+    function mountAgentation() {
+      if (mounted || document.getElementById('agentation-root')) return;
+      mounted = true;
+      Promise.all([
+        import('https://esm.sh/react@18.3.1'),
+        import('https://esm.sh/react-dom@18.3.1/client'),
+        import('https://esm.sh/agentation?deps=react@18.3.1,react-dom@18.3.1')
+      ]).then(function (mods) {
+        var React = mods[0].default || mods[0];
+        var createRoot = mods[1].createRoot;
+        var Agentation = mods[2].Agentation;
+        var host = document.createElement('div');
+        host.id = 'agentation-root';
+        document.body.appendChild(host);
+        createRoot(host).render(React.createElement(Agentation, { endpoint: 'http://localhost:4747' }));
+      }).catch(function (err) {
+        mounted = false;
+        console.warn('Agentation load error:', err);
+      });
+    }
+
+    function getRateLimit() {
+      try {
+        var raw = localStorage.getItem(RL_KEY);
+        if (!raw) return { fails: 0, lockUntil: 0 };
+        var data = JSON.parse(raw);
+        if (data.lockUntil && Date.now() > data.lockUntil) {
+          localStorage.removeItem(RL_KEY);
+          return { fails: 0, lockUntil: 0 };
+        }
+        return { fails: data.fails || 0, lockUntil: data.lockUntil || 0 };
+      } catch (e) {
+        return { fails: 0, lockUntil: 0 };
+      }
+    }
+
+    function saveRateLimit(state) {
+      try { localStorage.setItem(RL_KEY, JSON.stringify(state)); } catch (e) {}
+    }
+
+    function sha256Hex(str) {
+      var buf = new TextEncoder().encode(str);
+      return crypto.subtle.digest('SHA-256', buf).then(function (hash) {
+        return Array.from(new Uint8Array(hash)).map(function (b) {
+          return b.toString(16).padStart(2, '0');
+        }).join('');
+      });
+    }
+
+    function showPinModal() {
+      if (document.getElementById('ag-pin-modal')) return;
+      var overlay = document.createElement('div');
+      overlay.id = 'ag-pin-modal';
+      overlay.style.cssText = 'position:fixed;inset:0;z-index:999999;background:rgba(24,24,27,0.55);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:16px;font-family:Inter,system-ui,sans-serif;';
+
+      var card = document.createElement('div');
+      card.style.cssText = 'background:#F6F7F4;color:#18181B;border:1px solid rgba(24,24,27,0.12);border-radius:20px;padding:24px;width:100%;max-width:340px;box-shadow:0 24px 48px rgba(0,0,0,0.18);text-align:center;position:relative;';
+
+      card.innerHTML =
+        '<button type="button" id="ag-pin-close" aria-label="Закрыть" style="position:absolute;top:12px;right:12px;width:30px;height:30px;border-radius:50%;border:none;background:rgba(24,24,27,0.06);color:#18181B;cursor:pointer;font-size:16px;line-height:1;">✕</button>' +
+        '<div style="width:44px;height:44px;border-radius:12px;background:rgba(255,85,0,0.12);color:#FF5500;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:20px;font-weight:700;">🔒</div>' +
+        '<h3 style="margin:0 0 6px;font-size:18px;font-weight:700;">Agentation Dev Mode</h3>' +
+        '<p style="margin:0 0 16px;font-size:13px;color:#52525B;">Введите 4-значный PIN-код для запуска инструмента разметки</p>' +
+        '<form id="ag-pin-form" autocomplete="off">' +
+          '<input id="ag-pin-input" type="password" inputmode="numeric" maxlength="8" placeholder="••••" required ' +
+            'style="width:100%;box-sizing:border-box;padding:12px 14px;font-size:22px;letter-spacing:8px;text-align:center;border-radius:12px;border:1.5px solid rgba(24,24,27,0.18);background:#FFFFFF;color:#18181B;outline:none;margin-bottom:10px;font-weight:700;" />' +
+          '<div id="ag-pin-msg" style="min-height:18px;font-size:12px;color:#E11D48;margin-bottom:10px;font-weight:500;"></div>' +
+          '<button id="ag-pin-submit" type="submit" style="width:100%;padding:12px 16px;border-radius:999px;border:none;background:#FF5500;color:#FFFFFF;font-size:14px;font-weight:600;cursor:pointer;transition:opacity .15s;">Разблокировать</button>' +
+        '</form>';
+
+      overlay.appendChild(card);
+      document.body.appendChild(overlay);
+
+      var input = card.querySelector('#ag-pin-input');
+      var msg = card.querySelector('#ag-pin-msg');
+      var btn = card.querySelector('#ag-pin-submit');
+      var form = card.querySelector('#ag-pin-form');
+      var closeBtn = card.querySelector('#ag-pin-close');
+      var timerId = 0;
+
+      function close() {
+        clearInterval(timerId);
+        overlay.remove();
+      }
+
+      function updateLockUI() {
+        var rl = getRateLimit();
+        if (rl.lockUntil && Date.now() < rl.lockUntil) {
+          var secLeft = Math.ceil((rl.lockUntil - Date.now()) / 1000);
+          var m = Math.floor(secLeft / 60);
+          var s = secLeft % 60;
+          input.disabled = true;
+          btn.disabled = true;
+          btn.style.opacity = '0.5';
+          msg.textContent = 'Лимит попыток исчерпан. Повторите через ' + (m > 0 ? m + ' мин ' : '') + s + ' сек.';
+          return true;
+        } else {
+          input.disabled = false;
+          btn.disabled = false;
+          btn.style.opacity = '1';
+          return false;
+        }
+      }
+
+      if (updateLockUI()) {
+        timerId = setInterval(function () {
+          if (!updateLockUI()) {
+            clearInterval(timerId);
+            msg.textContent = '';
+            input.focus();
+          }
+        }, 1000);
+      } else {
+        setTimeout(function () { input.focus(); }, 50);
+      }
+
+      closeBtn.addEventListener('click', close);
+      overlay.addEventListener('click', function (e) { if (e.target === overlay) close(); });
+      document.addEventListener('keydown', function onEsc(e) {
+        if (e.key === 'Escape') {
+          document.removeEventListener('keydown', onEsc);
+          close();
+        }
+      });
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        if (updateLockUI()) return;
+        var val = input.value.trim();
+        if (!val) return;
+        btn.disabled = true;
+        btn.style.opacity = '0.6';
+        msg.style.color = '#52525B';
+        msg.textContent = 'Проверка...';
+
+        setTimeout(function () {
+          sha256Hex(SALT + val).then(function (digest) {
+            if (digest === EXPECTED_HASH) {
+              localStorage.removeItem(RL_KEY);
+              try { sessionStorage.setItem(UNLOCK_KEY, EXPECTED_HASH.slice(0, 16)); } catch (err) {}
+              if (location.search.indexOf('agentation=1') !== -1) {
+                var cleanUrl = location.pathname + location.search.replace(/[?&]agentation=1/, '').replace(/^&/, '?') + location.hash;
+                history.replaceState(null, '', cleanUrl);
+              }
+              close();
+              mountAgentation();
+            } else {
+              var rl = getRateLimit();
+              rl.fails = (rl.fails || 0) + 1;
+              msg.style.color = '#E11D48';
+              input.value = '';
+              if (rl.fails >= MAX_ATTEMPTS) {
+                rl.lockUntil = Date.now() + LOCKOUT_MS;
+                saveRateLimit(rl);
+                updateLockUI();
+                timerId = setInterval(function () {
+                  if (!updateLockUI()) {
+                    clearInterval(timerId);
+                    msg.textContent = '';
+                    input.focus();
+                  }
+                }, 1000);
+              } else {
+                saveRateLimit(rl);
+                btn.disabled = false;
+                btn.style.opacity = '1';
+                msg.textContent = 'Неверный PIN. Осталось попыток: ' + (MAX_ATTEMPTS - rl.fails);
+                input.focus();
+              }
+            }
+          });
+        }, 450);
+      });
+    }
+
+    try {
+      if (sessionStorage.getItem(UNLOCK_KEY) === EXPECTED_HASH.slice(0, 16)) {
+        mountAgentation();
+      } else if (location.search.indexOf('agentation=1') !== -1) {
+        showPinModal();
+      }
+    } catch (e) {}
+
+    // Горячая клавиша Ctrl+Shift+A (или Cmd+Shift+A) для вызова окна PIN-кода без изменения URL
+    document.addEventListener('keydown', function (e) {
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'A' || e.key === 'a' || e.key === 'Ф' || e.key === 'ф')) {
+        e.preventDefault();
+        try {
+          if (sessionStorage.getItem(UNLOCK_KEY) === EXPECTED_HASH.slice(0, 16)) {
+            mountAgentation();
+          } else {
+            showPinModal();
+          }
+        } catch (err) {
+          showPinModal();
+        }
+      }
     });
-  }
+  })();
 })();
