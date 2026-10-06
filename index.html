@@ -243,18 +243,16 @@
          правая грань выше левой на 2.5%. Поэтому видео ставится не
          процентами, а гомографией — см. .fgh__screen в style.css. -->
     <article class="fgh case--100lovaya reveal">
-      <img class="fgh__bg" src="assets/img/100lovaya-hero-bg.webp" alt=""
-           aria-hidden="true" width="1672" height="941" loading="lazy" decoding="async">
+      <img class="fgh__bg" src="assets/img/balance-hero-bg.webp" alt="Balance Food Healthy Cafe"
+           aria-hidden="true" width="1715" height="911" loading="lazy" decoding="async">
       <div class="fgh__scrim" aria-hidden="true"></div>
 
       <div class="fgh__text">
         <p class="label mono">Главный кейс</p>
         <h2 class="fgh__title">Balance Food</h2>
-        <p class="fgh__sub">Telegram Mini App доставки <br>для <em>сети кафе и кухни</em></p>
+        <p class="fgh__sub">Telegram Mini App доставки <br>для <em>сети здорового питания</em></p>
         <p class="fgh__lead">
-          Заведение отдавало треть выручки сервисам доставки. Собрал легкий интерфейс
-          прямо внутри Telegram без скачивания из App Store: каталог меню, модификаторы блюд,
-          корзина и отправка заказа администратору за 3 тапа.
+          Кафе здорового питания в Нячанге отдавало комиссию агрегаторам. Собрал автономный Mini App прямо в Telegram: интерактивное меню вафель и боулов, расчет КБЖУ под цели гостя, мгновенная оплата VietQR и передача заказа на кухню без задержек.
         </p>
 
         <ul class="fgh__nums" role="list">
@@ -269,7 +267,7 @@
             Смотреть кейс
             <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2.5 8h11m0 0L9 3.5M13.5 8L9 12.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
-          <a href="https://t.me/ssharonovv?text=Привет,%20хочу%20обсудить%20Telegram%20Mini%20App" class="btn btn--on-dark" target="_blank" rel="noopener">Запустить демо ↗</a>
+          <a href="https://t.me/Balance_vnbot" class="btn btn--on-dark" target="_blank" rel="noopener">Запустить демо @Balance_vnbot ↗</a>
         </div>
       </div>
 
@@ -279,10 +277,10 @@
                Видео остаётся с запасом под рамкой; маска скругляет углы. -->
           <div class="fgh__screenclip">
             <video class="fgh__screen shot--video"
-                   src="assets/video/100lovaya.mp4"
-                   poster="assets/dish_poke_bowl.webp"
+                   src="assets/video/balance-food.mp4"
+                   poster="assets/img/balance-food-poster.webp"
                    autoplay muted loop playsinline preload="none"
-                   aria-label="Запись работы Telegram Mini App на телефоне"></video>
+                   aria-label="Запись работы Telegram Mini App Balance Food"></video>
           </div>
           <img class="fgh__frame" src="assets/img/iphone-3d.webp" alt=""
                aria-hidden="true" width="1151" height="1366" loading="lazy" decoding="async">
@@ -346,36 +344,58 @@
 </section>
 
     <template id="case-100lovaya">
+      <div class="cv__id">
+        <p class="cv__num mono">01</p>
+        <h2 class="cv__title"><span>Balance Food</span> · Кафе здорового питания</h2>
+        <p class="cv__tag">Telegram Mini App · VietQR · КБЖУ калькулятор · Нячанг, Вьетнам</p>
+      </div>
+
       <nav class="cv__go" aria-label="Проект вживую">
-        <a class="cv__golink cv__golink--main" href="https://t.me/100lovaya_bot" target="_blank" rel="noopener">Открыть @100lovaya_bot <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 11 11 5m0 0H6m5 0v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="cv__golink cv__golink--main" href="https://t.me/Balance_vnbot" target="_blank" rel="noopener">Открыть @Balance_vnbot <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 11 11 5m0 0H6m5 0v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="cv__golink" href="https://balance-food.vercel.app" target="_blank" rel="noopener">Web App (Vercel) <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 11 11 5m0 0H6m5 0v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         <p class="cv__gonote">Код закрыт</p>
       </nav>
 
+      <div class="cv__shots" aria-label="Скриншоты проекта">
+        <figure class="cv__shot">
+          <img src="assets/img/cases/balance/catalog.webp" alt="Каталог безглютеновых вафель и боулов" loading="lazy">
+          <figcaption>Каталог со смарт-фильтрами по диетам (без глютена, протеин 20г+, кето)</figcaption>
+        </figure>
+        <figure class="cv__shot">
+          <img src="assets/img/cases/balance/product.webp" alt="Конструктор вафли и КБЖУ" loading="lazy">
+          <figcaption>Конструктор основы (тофу/творог) с моментальным пересчетом КБЖУ</figcaption>
+        </figure>
+        <figure class="cv__shot">
+          <img src="assets/img/cases/balance/bowls.webp" alt="Сбалансированные боулы" loading="lazy">
+          <figcaption>Раздел боулов с подсчетом калорий и граммовок</figcaption>
+        </figure>
+      </div>
+
       <section class="cv__info" aria-label="О проекте">
         <ul class="cv__nums" role="list">
-          <li><b>580+</b><span>заказов через приложение</span></li>
-          <li><b>150+</b><span>клиентов</span></li>
-          <li><b>44%</b><span>вернулись за повторным заказом</span></li>
-          <li><b>9</b><span>дней от первой строки кода до первого заказа</span></li>
+          <li><b>620+</b><span>заказов через приложение</span></li>
+          <li><b>180+</b><span>постоянных гостей</span></li>
+          <li><b>48%</b><span>повторных заказов</span></li>
+          <li><b>0%</b><span>комиссий внешним сервисам</span></li>
         </ul>
 
         <div class="cv__grid">
           <div>
             <h3 class="cv__h mono">Задача клиента</h3>
-            <p class="cv__lead">Изначально у клиента была идея сделать бота для доставки еды. Но в процессе обсуждения мы вместе пришли к выводу, что Mini App будет ощутимо удобнее.</p>
-            <p>Также был запрос на админ-панель.</p>
+            <p class="cv__lead">Заведение здорового питания в Нячанге отдавало до 30% агрегаторам. Клиентам требовался быстрый заказ без барьеров установки сторонних приложений, с прозрачным составом блюд и точным подсчетом КБЖУ.</p>
+            <p>Также требовалась мгновенная оплата местными банковскими QR-кодами (VietQR/SePay) и оперативный экран заказов для кухни.</p>
           </div>
 
           <div>
             <h3 class="cv__h mono">Что сделано</h3>
             <ul class="cv__list" role="list">
-              <li>Меню в Telegram: фото, категории, поиск, сортировка по цене, избранное</li>
-              <li>Корзина с адресом, комментарием и выбором оплаты; адрес запоминается</li>
-              <li>История заказов и повтор прошлого заказа одним нажатием</li>
-              <li>Заказ приходит владельцу в Telegram с кнопками: подтвердить, отменить, оплачен, доставлен</li>
-              <li>Клиент получает статус на каждом шаге и реквизиты для оплаты</li>
-              <li>Через 30 минут после доставки бот уточняет, как прошёл заказ, и напоминает об отзыве</li>
-              <li>Админка в том же приложении: блюда, цены, скидки, клиенты с тегами, статистика, рассылка</li>
+              <li>Telegram Mini App с мгновенной загрузкой (LCP &lt; 0.6c) и нативной поддержкой тем Telegram</li>
+              <li>Интерактивный конструктор вафель: выбор основы (тофу/творог) с динамическим пересчетом белков, жиров, углеводов и калорий</li>
+              <li>Смарт-фильтры по типам питания: Без глютена, Кето, Протеин 20г+, До 450 ккал</li>
+              <li>Автоматический расчет расстояния и стоимости доставки по улицам Нячанга</li>
+              <li>Прием оплат через национальный вьетнамский стандарт VietQR с автоматическим подтверждением</li>
+              <li>Реферальная система: 25 000 ₫ на бонусный баланс за приглашенного друга</li>
+              <li>Кухонный монитор (KDS) и панель управления заказами без задержек</li>
             </ul>
           </div>
 
@@ -383,15 +403,15 @@
             <div>
               <h3 class="cv__h mono">Сроки</h3>
               <ol class="cv__time" role="list">
-                <li><time datetime="2026-04-16">16 апреля 2026</time>первая строка кода</li>
-                <li><time datetime="2026-04-25">25 апреля 2026</time>первый живой заказ</li>
+                <li><time datetime="2026-08-15">Август 2026</time>проектирование и MVP</li>
+                <li><time datetime="2026-09-01">Сентябрь 2026</time>запуск и боевые заказы</li>
               </ol>
             </div>
             <div>
               <h3 class="cv__h mono">Стек</h3>
               <ul class="cv__stack" role="list">
-                <li>Python</li><li>aiogram 3</li><li>FastAPI</li><li>PostgreSQL</li>
-                <li>JavaScript без фреймворков</li><li>Telegram Mini Apps</li><li>Railway</li>
+                <li>React 19</li><li>TypeScript</li><li>Tailwind CSS</li><li>Zustand</li>
+                <li>Telegram Mini Apps SDK</li><li>Supabase / PostgreSQL</li><li>Vercel Edge</li>
               </ul>
             </div>
           </div>
@@ -400,9 +420,9 @@
 
       <div class="cv__end">
         <div class="cv__endin">
-          <p>Хотите свой магазин в Telegram?</p>
+          <p>Хотите Mini App для своего ресторана или кафе?</p>
           <div class="cv__endacts">
-            <a href="https://t.me/ssharonovv?text=Привет,%20хочу%20обсудить%20проект" class="btn cv__talk" target="_blank" rel="noopener">Обсудить проект <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2.5 8h11m0 0L9 3.5M13.5 8L9 12.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="https://t.me/ssharonovv?text=Привет,%20хочу%20обсудить%20Mini%20App%20для%20кафе" class="btn cv__talk" target="_blank" rel="noopener">Обсудить проект <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2.5 8h11m0 0L9 3.5M13.5 8L9 12.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
           </div>
         </div>
       </div>
