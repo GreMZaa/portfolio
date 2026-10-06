@@ -1,13 +1,10 @@
 /**
- * Data Mesh & Cyber Grid — Высокотехнологичная интерактивная топология
+ * Data Mesh & Industrial Topology — Архитектурная координатная сеть
  * Разработано для портфолио Сергея Шаронова (E-commerce & 1C Architect)
  * 
- * Включает:
- * - Инженерную координатную сетку с микро-крестами (+)
- * - Граф узлов шины данных (брокеры очередей, 1С, WMS, API)
- * - Потоковую передачу светящихся пакетов данных
- * - Интерактивную реакцию на курсор (магнитный хаб, динамические связи)
- * - Оптимизацию 60 FPS, поддержку Retina (DPR) и энергосбережение
+ * Эстетика: Industrial Engineering & High-Precision Commerce
+ * Цвета: Чистый нейтральный графит, титановый белый и сигнальный индустриальный янтарь (#FF5500).
+ * Никаких синих/изумрудных градиентов и дешевых неонов.
  */
 (function () {
   'use strict';
@@ -31,20 +28,20 @@
     targetX: -9999,
     targetY: -9999,
     active: false,
-    radius: 170
+    radius: 180
   };
 
-  // Метки архитектуры для ключевых узлов
+  // Метки распределенной архитектуры
   const NODE_LABELS = [
-    '1C:ENTERPRISE',
+    '1C:ENTERPRISE_8.3',
     'QUEUE_BROKER',
-    'WMS_CORE',
-    'TELEGRAM_API',
+    'WMS_DISPATCH',
+    'TELEGRAM_GATEWAY',
     'ASYNC_STREAM',
     'REDIS_BUFFER',
     'EVENT_BUS',
-    'REST_GW',
-    'POSTGRES'
+    'REST_SYNC',
+    'POSTGRES_CORE'
   ];
 
   let nodes = [];
@@ -52,7 +49,6 @@
   let animId = null;
   let lastTime = performance.now();
 
-  // Настройка размеров
   function resize() {
     const rect = canvas.getBoundingClientRect();
     width = rect.width;
@@ -66,18 +62,17 @@
     initNodes();
   }
 
-  // Генерация топологии узлов
   function initNodes() {
     nodes = [];
     packets = [];
 
     const isMobile = width < 768;
     const isTablet = width >= 768 && width < 1200;
-    const nodeCount = isMobile ? 18 : isTablet ? 30 : 45;
+    const nodeCount = isMobile ? 18 : isTablet ? 30 : 44;
 
     for (let i = 0; i < nodeCount; i++) {
       const isHub = i < 4; // 4 главных опорных хаба
-      const hasLabel = i < NODE_LABELS.length && Math.random() < 0.6;
+      const hasLabel = i < NODE_LABELS.length && Math.random() < 0.65;
       const label = hasLabel ? NODE_LABELS[i] : null;
 
       nodes.push({
@@ -85,9 +80,9 @@
         y: Math.random() * height,
         baseX: 0,
         baseY: 0,
-        vx: (Math.random() - 0.5) * (reducedMotion ? 0.05 : 0.28),
-        vy: (Math.random() - 0.5) * (reducedMotion ? 0.05 : 0.28),
-        radius: isHub ? 3.8 : Math.random() * 1.5 + 2,
+        vx: (Math.random() - 0.5) * (reducedMotion ? 0.05 : 0.25),
+        vy: (Math.random() - 0.5) * (reducedMotion ? 0.05 : 0.25),
+        radius: isHub ? 3.5 : Math.random() * 1.4 + 2,
         isHub,
         label,
         pulsePhase: Math.random() * Math.PI * 2,
@@ -96,20 +91,17 @@
       });
     }
 
-    // Сохраняем базовые координаты
     nodes.forEach(n => {
       n.baseX = n.x;
       n.baseY = n.y;
     });
 
-    // Создаем начальный пул пакетов данных
-    const packetCount = isMobile ? 8 : 16;
+    const packetCount = isMobile ? 8 : 15;
     for (let i = 0; i < packetCount; i++) {
       spawnPacket();
     }
   }
 
-  // Запуск пакета данных по связям
   function spawnPacket() {
     if (nodes.length < 2) return;
     const fromIdx = Math.floor(Math.random() * nodes.length);
@@ -122,27 +114,26 @@
     const dy = toNode.y - fromNode.y;
     const dist = Math.hypot(dx, dy);
 
-    // Запускаем только если узлы в разумной дистанции
     const maxLinkDist = width < 768 ? 130 : 170;
-    if (dist < maxLinkDist && dist > 20) {
+    if (dist < maxLinkDist && dist > 25) {
       packets.push({
         from: fromNode,
         to: toNode,
         progress: 0,
         speed: (0.007 + Math.random() * 0.009) * (reducedMotion ? 0.4 : 1),
-        color: Math.random() > 0.35 ? '#38BDF8' : '#60A5FA',
+        color: Math.random() > 0.4 ? '#FF5500' : '#FFA860',
         size: Math.random() > 0.5 ? 2.5 : 2
       });
     }
   }
 
-  // Отрисовка координатной сетки с крестами (+)
+  // Отрисовка точной инженерной сетки с микро-крестами (+)
   function drawGrid() {
     const gridSize = width < 768 ? 44 : 56;
     ctx.lineWidth = 1;
 
-    // Тонкие направляющие
-    ctx.strokeStyle = 'rgba(56, 189, 248, 0.03)';
+    // Тонкие координатные линии
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.025)';
     ctx.beginPath();
     for (let x = 0; x <= width; x += gridSize) {
       ctx.moveTo(x, 0);
@@ -155,7 +146,7 @@
     ctx.stroke();
 
     // Микро-кресты (+) на узлах координат
-    ctx.strokeStyle = 'rgba(56, 189, 248, 0.08)';
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
     const arm = 3.5;
     ctx.beginPath();
     for (let x = gridSize; x < width; x += gridSize * 2) {
@@ -169,11 +160,10 @@
     ctx.stroke();
   }
 
-  // Отрисовка ореола курсора
+  // Деликатный световой акцент под курсором
   function drawMouseAura() {
     if (!mouse.active) return;
     
-    // Плавное следование за курсором
     mouse.x += (mouse.targetX - mouse.x) * 0.15;
     mouse.y += (mouse.targetY - mouse.y) * 0.15;
 
@@ -181,8 +171,8 @@
       mouse.x, mouse.y, 0,
       mouse.x, mouse.y, mouse.radius
     );
-    grad.addColorStop(0, 'rgba(56, 189, 248, 0.09)');
-    grad.addColorStop(0.5, 'rgba(37, 99, 235, 0.04)');
+    grad.addColorStop(0, 'rgba(255, 85, 0, 0.05)');
+    grad.addColorStop(0.5, 'rgba(255, 85, 0, 0.015)');
     grad.addColorStop(1, 'rgba(0, 0, 0, 0)');
 
     ctx.fillStyle = grad;
@@ -191,7 +181,6 @@
     ctx.fill();
   }
 
-  // Основной цикл анимации
   function frame(now) {
     animId = requestAnimationFrame(frame);
 
@@ -200,13 +189,9 @@
 
     ctx.clearRect(0, 0, width, height);
 
-    // 1. Отрисовка координатной сетки
     drawGrid();
-
-    // 2. Ореол под курсором
     drawMouseAura();
 
-    // 3. Обновление положения узлов
     const maxLinkDist = width < 768 ? 120 : 160;
 
     for (let i = 0; i < nodes.length; i++) {
@@ -214,17 +199,14 @@
       n.x += n.vx;
       n.y += n.vy;
 
-      // Отскок от границ
       if (n.x < 10) { n.x = 10; n.vx *= -1; }
       else if (n.x > width - 10) { n.x = width - 10; n.vx *= -1; }
       if (n.y < 10) { n.y = 10; n.vy *= -1; }
       else if (n.y > height - 10) { n.y = height - 10; n.vy *= -1; }
 
-      // Пульсация активности
       n.pulsePhase += n.pulseSpeed;
       if (n.activity > 0) n.activity -= dt * 1.5;
 
-      // Взаимодействие с курсором
       if (mouse.active) {
         const dx = mouse.x - n.x;
         const dy = mouse.y - n.y;
@@ -236,8 +218,8 @@
           n.y += dy * force;
           n.activity = Math.max(n.activity, (1 - dist / mouse.radius));
 
-          // Связь мыши с узлом
-          ctx.strokeStyle = `rgba(56, 189, 248, ${(1 - dist / mouse.radius) * 0.35})`;
+          // Связь мыши с узлом (сигнальный янтарный импульс)
+          ctx.strokeStyle = `rgba(255, 85, 0, ${(1 - dist / mouse.radius) * 0.35})`;
           ctx.lineWidth = 1;
           ctx.beginPath();
           ctx.moveTo(mouse.x, mouse.y);
@@ -247,7 +229,7 @@
       }
     }
 
-    // 4. Отрисовка связей графа
+    // Связи между узлами
     ctx.lineWidth = 1;
     for (let i = 0; i < nodes.length; i++) {
       const na = nodes[i];
@@ -258,9 +240,14 @@
         const dist = Math.hypot(dx, dy);
 
         if (dist < maxLinkDist) {
-          const alpha = (1 - dist / maxLinkDist) * 0.18;
-          const boost = Math.max(na.activity, nb.activity) * 0.25;
-          ctx.strokeStyle = `rgba(56, 189, 248, ${alpha + boost})`;
+          const alpha = (1 - dist / maxLinkDist) * 0.16;
+          const boost = Math.max(na.activity, nb.activity);
+          
+          if (boost > 0.1) {
+            ctx.strokeStyle = `rgba(255, 85, 0, ${alpha + boost * 0.3})`;
+          } else {
+            ctx.strokeStyle = `rgba(255, 255, 255, ${alpha})`;
+          }
           ctx.beginPath();
           ctx.moveTo(na.x, na.y);
           ctx.lineTo(nb.x, nb.y);
@@ -269,9 +256,9 @@
       }
     }
 
-    // 5. Отрисовка пакетов данных (Streaming Queue Pulses)
+    // Пакеты данных (Streaming Queue Pulses)
     ctx.save();
-    ctx.shadowBlur = 6;
+    ctx.shadowBlur = 5;
     for (let i = packets.length - 1; i >= 0; i--) {
       const p = packets[i];
       p.progress += p.speed;
@@ -294,41 +281,39 @@
     }
     ctx.restore();
 
-    // 6. Отрисовка самих узлов и меток
+    // Узлы и архитектурные метки
     for (let i = 0; i < nodes.length; i++) {
       const n = nodes[i];
       const pulse = Math.sin(n.pulsePhase) * 0.5 + 0.5;
-      const currentRadius = n.radius + pulse * 0.8 + n.activity * 1.5;
+      const currentRadius = n.radius + pulse * 0.6 + n.activity * 1.4;
 
-      // Внешний ореол узла
+      // Ореол узла
       ctx.fillStyle = n.isHub 
-        ? `rgba(37, 99, 235, ${0.18 + pulse * 0.15 + n.activity * 0.3})`
-        : `rgba(56, 189, 248, ${0.12 + pulse * 0.12 + n.activity * 0.25})`;
+        ? `rgba(255, 85, 0, ${0.16 + pulse * 0.15 + n.activity * 0.3})`
+        : `rgba(255, 255, 255, ${0.08 + pulse * 0.08 + n.activity * 0.2})`;
       ctx.beginPath();
-      ctx.arc(n.x, n.y, currentRadius * 2.4, 0, Math.PI * 2);
+      ctx.arc(n.x, n.y, currentRadius * 2.3, 0, Math.PI * 2);
       ctx.fill();
 
       // Ядро узла
-      ctx.fillStyle = n.isHub ? '#60A5FA' : (n.activity > 0.4 ? '#38BDF8' : '#CBD5E1');
+      ctx.fillStyle = n.isHub ? '#FF5500' : (n.activity > 0.4 ? '#FF8833' : '#E2E8F0');
       ctx.beginPath();
       ctx.arc(n.x, n.y, currentRadius, 0, Math.PI * 2);
       ctx.fill();
 
-      // Микро-лейбл в моноширинном шрифте
+      // Моноширинная метка узла
       if (n.label && width >= 860) {
         ctx.font = '500 8.5px "JetBrains Mono", monospace';
-        ctx.fillStyle = `rgba(163, 179, 205, ${0.45 + pulse * 0.25 + n.activity * 0.4})`;
+        ctx.fillStyle = `rgba(214, 211, 209, ${0.45 + pulse * 0.2 + n.activity * 0.35})`;
         ctx.fillText(n.label, n.x + currentRadius + 5, n.y + 3);
       }
     }
 
-    // Если пакетов стало мало, докидываем
-    if (packets.length < (width < 768 ? 6 : 14) && Math.random() < 0.08) {
+    if (packets.length < (width < 768 ? 6 : 13) && Math.random() < 0.08) {
       spawnPacket();
     }
   }
 
-  // Слушатели событий курсора
   function onMouseMove(e) {
     const rect = canvas.getBoundingClientRect();
     mouse.targetX = e.clientX - rect.left;
@@ -347,7 +332,6 @@
   window.addEventListener('mousemove', onMouseMove, { passive: true });
   document.addEventListener('mouseleave', onMouseLeave);
 
-  // Тач-устройства
   function onTouchMove(e) {
     if (!e.touches || !e.touches[0]) return;
     const rect = canvas.getBoundingClientRect();
@@ -362,7 +346,6 @@
   window.addEventListener('touchmove', onTouchMove, { passive: true });
   window.addEventListener('touchend', onMouseLeave, { passive: true });
 
-  // Энергосбережение при сворачивании вкладки
   document.addEventListener('visibilitychange', function () {
     if (document.hidden) {
       if (animId) cancelAnimationFrame(animId);
@@ -375,14 +358,12 @@
     }
   });
 
-  // Ресайз с троттлингом
   let resizeTimer = null;
   window.addEventListener('resize', function () {
     if (resizeTimer) clearTimeout(resizeTimer);
     resizeTimer = setTimeout(resize, 100);
   }, { passive: true });
 
-  // Старт
   resize();
   animId = requestAnimationFrame(frame);
 })();

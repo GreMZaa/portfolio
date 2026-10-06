@@ -46,57 +46,57 @@
 :root {
   color-scheme: dark;
 
-  /* Обсидиановая основа и глубокий кибер-титан (Cyber Obsidian) */
-  --paper:    #080B12;
-  --paper-2:  #0E1422;
-  --card:     #12192B;
-  --tint:     #162038;
+  /* Основа — глубокий нейтральный базальт и графит (Industrial Carbon) */
+  --paper:    #0B0D11;
+  --paper-2:  #11141B;
+  --card:     #151922;
+  --tint:     #1A202C;
 
-  /* Высококонтрастный текст для читаемости */
-  --ink:      #F8FAFC;
-  --ink-soft: #A3B3CD;
-  --ink-mute: #788BA8;
-  --ink-faint:#556783;
+  /* Высококонтрастный текст для читаемости (без градиентной ряби) */
+  --ink:      #FFFFFF;
+  --ink-soft: #9CA3AF;
+  --ink-mute: #6B7280;
+  --ink-faint:#4B5563;
 
   --line:     rgba(255, 255, 255, 0.08);
-  --line-2:   rgba(56, 189, 248, 0.25);
+  --line-2:   rgba(255, 85, 0, 0.35);
 
-  /* Электрик-Циан и Неоновый Сапфир */
-  --green:      #38BDF8;
-  --green-deep: #7DD3FC;
-  --green-dark: #070B14;
-  --green-soft: rgba(56, 189, 248, 0.12);
-  --on-accent:  #041021;
+  /* Сигнальный индустриальный янтарь (Signal Amber / Hardware Orange) */
+  --green:      #FF5500;
+  --green-deep: #FF661A;
+  --green-dark: #1F1512;
+  --green-soft: rgba(255, 85, 0, 0.12);
+  --on-accent:  #FFFFFF;
 
-  /* Технологичное стекло (Cyber Glass) */
-  --glass:     rgba(14, 20, 34, 0.55);
-  --glass-2:   rgba(18, 25, 43, 0.75);
-  --glass-3:   rgba(14, 19, 32, 0.96);
-  --sheen: linear-gradient(158deg, rgba(56, 189, 248, 0.12), rgba(255, 255, 255, 0) 48%);
+  /* Индустриальное матовое стекло */
+  --glass:     rgba(21, 25, 34, 0.65);
+  --glass-2:   rgba(26, 32, 44, 0.85);
+  --glass-3:   rgba(17, 20, 27, 0.96);
+  --sheen: linear-gradient(158deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0) 48%);
   --rim: linear-gradient(148deg,
-           rgba(56, 189, 248, 0.40) 0%,
-           rgba(255, 255, 255, 0.12) 26%,
+           rgba(255, 255, 255, 0.20) 0%,
+           rgba(255, 255, 255, 0.06) 26%,
            rgba(255, 255, 255, 0)    52%,
-           rgba(56, 189, 248, 0.08) 74%,
-           rgba(56, 189, 248, 0.25) 100%);
+           rgba(255, 85, 0, 0.10)   74%,
+           rgba(255, 85, 0, 0.30)   100%);
   --rim-pill: linear-gradient(172deg,
-           rgba(56, 189, 248, 0.45) 0%,
-           rgba(255, 255, 255, 0.15) 38%,
+           rgba(255, 85, 0, 0.50)   0%,
+           rgba(255, 255, 255, 0.12) 38%,
            rgba(255, 255, 255, 0.02) 62%,
-           rgba(56, 189, 248, 0.20) 100%);
+           rgba(255, 85, 0, 0.25)   100%);
   --rim-dark: linear-gradient(148deg,
-           rgba(56, 189, 248, 0.35) 0%,
-           rgba(255, 255, 255, 0.08) 30%,
+           rgba(255, 255, 255, 0.18) 0%,
+           rgba(255, 255, 255, 0.05) 30%,
            rgba(255, 255, 255, 0)    56%,
-           rgba(56, 189, 248, 0.06) 78%,
-           rgba(56, 189, 248, 0.22) 100%);
+           rgba(255, 85, 0, 0.08)   78%,
+           rgba(255, 85, 0, 0.20)   100%);
   --blur:    30px;
   --blur-sm: 18px;
 
   /* Тени глубокого космоса */
-  --sh-1: 0 1px 2px rgba(0, 0, 0, 0.40), 0 3px 10px rgba(0, 0, 0, 0.35);
-  --sh-2: 0 2px 6px rgba(0, 0, 0, 0.45), 0 16px 38px rgba(0, 0, 0, 0.50);
-  --sh-3: 0 6px 14px rgba(0, 0, 0, 0.50), 0 32px 74px rgba(0, 0, 0, 0.60);
+  --sh-1: 0 1px 2px rgba(0, 0, 0, 0.50), 0 3px 10px rgba(0, 0, 0, 0.40);
+  --sh-2: 0 2px 6px rgba(0, 0, 0, 0.55), 0 16px 38px rgba(0, 0, 0, 0.55);
+  --sh-3: 0 6px 14px rgba(0, 0, 0, 0.60), 0 32px 74px rgba(0, 0, 0, 0.65);
 
   /* типографика */
   --f-display: "Inter Tight", "Inter Tight Fallback", system-ui, sans-serif;
@@ -694,10 +694,10 @@ ul { list-style: none; padding: 0; }
    #0C8397 на тёмной воде даёт контраст около 1.9, читать его нельзя. */
 .case--100lovaya,
 .case--flyguru {
-  --case-ink:    #F8FAFC;
+  --case-ink:    #FFFFFF;
   --case-mute:   rgba(226, 232, 240, 0.85);
-  --case-accent: #38BDF8;
-  --case-cta:    #2563EB;
+  --case-accent: #FF5500;
+  --case-cta:    #FF5500;
   --case-hair:   rgba(255, 255, 255, 0.15);
 }
 
@@ -707,7 +707,7 @@ ul { list-style: none; padding: 0; }
   border-radius: var(--r-xl);
   overflow: hidden;
   color: var(--case-ink);
-  background: #063346;
+  background: #141720;
   box-shadow: inset 0 0 0 1px rgba(255,255,255,.08), var(--sh-3);
   padding: clamp(1.8rem, 6.3vw, 5.7rem) clamp(1.3rem, 4.8vw, 4.4rem)
            clamp(1.5rem, 4vw, 3.5rem);
@@ -825,16 +825,17 @@ ul { list-style: none; padding: 0; }
 /* В макете кнопки ниже базовых: 42px против 52. */
 .fgh .btn { padding: .72rem 1.4rem; font-size: .94rem; }
 
-/* Фирменная кнопка кейса — электрик кобальт */
+/* Фирменная кнопка кейса — сигнальный янтарь */
 .fgh .btn--brand {
   color: #FFFFFF !important;
-  background: linear-gradient(135deg, #1D4ED8 0%, #2563EB 100%) !important;
-  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  background: #FF5500 !important;
+  box-shadow: 0 4px 14px rgba(255, 85, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
 }
 .fgh .btn--brand:hover {
   transform: translateY(-2px);
-  filter: brightness(1.1);
-  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  background: #FF661A !important;
+  box-shadow: 0 6px 20px rgba(255, 85, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.35) !important;
 }
 
 /* ---------- 3D-мокап телефона ----------
@@ -855,7 +856,7 @@ ul { list-style: none; padding: 0; }
   content: "";
   position: absolute; inset: 11% 30% 12% 30%;
   border-radius: 18% / 8%;
-  box-shadow: 0 0 26px 5px rgba(34, 211, 224, .32);
+  box-shadow: 0 0 36px 8px rgba(255, 85, 0, .22), 0 20px 40px rgba(0, 0, 0, .6);
   pointer-events: none;
 }
 
@@ -863,7 +864,7 @@ ul { list-style: none; padding: 0; }
   position: absolute; inset: 0;
   -webkit-mask: url("assets/img/flyguru-screen-mask.svg") center / 100% 100% no-repeat;
   mask: url("assets/img/flyguru-screen-mask.svg") center / 100% 100% no-repeat;
-  background: #0C5A67;
+  background: #11141B;
 }
 .fgh__screen {
   position: absolute; left: 0; top: 0;
@@ -1462,7 +1463,7 @@ label.cc__opt { cursor: pointer; }
   --cv-bg:      #F6F8FC;
   --cv-ink:     #17211E;
   --cv-mute:    #5F6C67;
-  --cv-accent:  #2563EB;
+  --cv-accent:  var(--green);
   --cv-num:     var(--cv-accent);
   --cv-cta:     #141C1A;
   --cv-cta-ink: #FFFFFF;
@@ -2479,57 +2480,56 @@ label.cc__opt { cursor: pointer; }
 :root[data-scheme="dark"] {
   color-scheme: dark;
 
-  /* Обсидиановая бездна и глубокий кибер-титан (Cyber Obsidian) */
-  --paper:    #080B12;
-  --paper-2:  #0E1422;
-  --card:     #12192B;
-  --tint:     #162038;
+  /* Основа — глубокий нейтральный базальт и графит (Industrial Carbon) */
+  --paper:    #0B0D11;
+  --paper-2:  #11141B;
+  --card:     #151922;
+  --tint:     #1A202C;
 
-  --ink:      #F8FAFC;
-  --ink-soft: #A3B3CD;
-  --ink-mute: #788BA8;
-  --ink-faint:#556783;
+  /* Высококонтрастный текст для читаемости (без градиентной ряби) */
+  --ink:      #FFFFFF;
+  --ink-soft: #9CA3AF;
+  --ink-mute: #6B7280;
+  --ink-faint:#4B5563;
 
   --line:     rgba(255, 255, 255, 0.08);
-  --line-2:   rgba(56, 189, 248, 0.25);
+  --line-2:   rgba(255, 85, 0, 0.35);
 
-  /* Электрик-Циан и Неоновый Лед в тёмной теме */
-  --green:      #38BDF8;
-  --green-deep: #7DD3FC;
-  --green-dark: #070B14;
-  --green-soft: rgba(56,189,248,.12);
+  /* Сигнальный индустриальный янтарь (Signal Amber / Hardware Orange) */
+  --green:      #FF5500;
+  --green-deep: #FF661A;
+  --green-dark: #1F1512;
+  --green-soft: rgba(255, 85, 0, 0.12);
+  --on-accent:  #FFFFFF;
 
-  --glass:   rgba(14,20,34,.55);
-  --glass-2: rgba(18,25,43,.75);
-  --glass-3: rgba(14,19,32,.96);
-  --sheen: linear-gradient(158deg, rgba(56,189,248,.12), rgba(255,255,255,0) 48%);
+  /* Индустриальное матовое стекло */
+  --glass:     rgba(21, 25, 34, 0.65);
+  --glass-2:   rgba(26, 32, 44, 0.85);
+  --glass-3:   rgba(17, 20, 27, 0.96);
+  --sheen: linear-gradient(158deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0) 48%);
   --rim: linear-gradient(148deg,
-           rgba(56,189,248,.40) 0%,
-           rgba(255,255,255,.12) 26%,
-           rgba(255,255,255,0)   52%,
-           rgba(56,189,248,.08) 74%,
-           rgba(56,189,248,.25) 100%);
+           rgba(255, 255, 255, 0.20) 0%,
+           rgba(255, 255, 255, 0.06) 26%,
+           rgba(255, 255, 255, 0)    52%,
+           rgba(255, 85, 0, 0.10)   74%,
+           rgba(255, 85, 0, 0.30)   100%);
   --rim-pill: linear-gradient(172deg,
-           rgba(56,189,248,.45) 0%,
-           rgba(255,255,255,.15) 38%,
-           rgba(255,255,255,.02) 62%,
-           rgba(56,189,248,.20) 100%);
+           rgba(255, 85, 0, 0.50)   0%,
+           rgba(255, 255, 255, 0.12) 38%,
+           rgba(255, 255, 255, 0.02) 62%,
+           rgba(255, 85, 0, 0.25)   100%);
 
-  --sh-1: 0 1px 2px rgba(0,0,0,.40), 0 3px 10px rgba(0,0,0,.35);
-  --sh-2: 0 2px 6px rgba(0,0,0,.45), 0 16px 38px rgba(0,0,0,.50);
-  --sh-3: 0 6px 14px rgba(0,0,0,.50), 0 32px 74px rgba(0,0,0,.60);
+  --sh-1: 0 1px 2px rgba(0, 0, 0, 0.50), 0 3px 10px rgba(0, 0, 0, 0.40);
+  --sh-2: 0 2px 6px rgba(0, 0, 0, 0.55), 0 16px 38px rgba(0, 0, 0, 0.55);
+  --sh-3: 0 6px 14px rgba(0, 0, 0, 0.60), 0 32px 74px rgba(0, 0, 0, 0.65);
 
-  /* Градиенты тёмной темы */
-  --plate:   linear-gradient(152deg, #152037 0%, #10182A 46%, #0B101E 100%);
-  --hair:    rgba(56,189,248,.16);
-  --on-accent: #041021;   /* контрастный темный текст на ярком циане */
+  --plate:   linear-gradient(152deg, #1C202C 0%, #151922 46%, #0F1218 100%);
+  --hair:    rgba(255, 85, 0, 0.25);
+  --on-accent: #FFFFFF;
 }
 
-/* смена темы — плавным перетеканием снимков, где браузер это умеет */
-::view-transition-old(root), ::view-transition-new(root) { animation-duration: .45s; }
-
 [data-scheme="dark"] body { background-image: url("assets/img/cyber-grid-dark.svg"); }
-[data-scheme="dark"] ::selection { background: rgba(56,189,248,.30); }
+[data-scheme="dark"] ::selection { background: rgba(255, 85, 0, 0.35); color: #FFFFFF; }
 [data-scheme="dark"] .skip { color: var(--paper); }
 
 /* ---------- стекло и кнопки ---------- */
@@ -2577,7 +2577,7 @@ label.cc__opt { cursor: pointer; }
 [data-scheme="dark"] .scheme { background: rgba(255,255,255,.05); }
 [data-scheme="dark"] .scheme__knob {
   background: var(--green); color: var(--on-accent);
-  box-shadow: 0 1px 3px rgba(6,8,18,.4), 0 0 12px rgba(56,189,248,.35);
+  box-shadow: 0 1px 3px rgba(6,8,18,.4), 0 0 12px rgba(255,85,0,.35);
 }
 
 /* ---------- первый экран ---------- */
@@ -2586,7 +2586,7 @@ label.cc__opt { cursor: pointer; }
 [data-scheme="dark"] .rail::after { background: linear-gradient(90deg, rgba(30,35,52,0), rgba(30,35,52,.8)); }
 /* светящаяся вода под рейлом ярче дневной — вуаль плотнее */
 [data-scheme="dark"] .rail__inner { background: var(--sheen), rgba(36,41,60,.82); }
-[data-scheme="dark"] .rail__dot { box-shadow: 0 0 0 0 rgba(56,189,248,.5); }
+[data-scheme="dark"] .rail__dot { box-shadow: 0 0 0 0 rgba(255,85,0,.5); }
 /* галочки в рефе глуше кнопки — #8877C5, белый знак */
 [data-scheme="dark"] .tick { background: #8877C5; color: #fff; box-shadow: 0 2px 8px rgba(136,119,197,.35); }
 [data-scheme="dark"] .no-webgl .water--hero {
@@ -2600,7 +2600,7 @@ label.cc__opt { cursor: pointer; }
 /* ---------- заглушки кадров ---------- */
 [data-scheme="dark"] .shot {
   background:
-    linear-gradient(135deg, var(--green-soft), rgba(124,92,236,.08)),
+    linear-gradient(135deg, var(--green-soft), rgba(255,85,0,.06)),
     repeating-linear-gradient(45deg, var(--paper-2) 0 12px, #2A2F44 12px 24px);
 }
 [data-scheme="dark"] .shot__tag,
@@ -2610,7 +2610,7 @@ label.cc__opt { cursor: pointer; }
 /* ---------- системы ---------- */
 [data-scheme="dark"] .solutions__panel { border-color: var(--hair); }
 [data-scheme="dark"] .no-webgl .solutions__water { background: linear-gradient(0deg, #6A50D0, #3B3170 60%, transparent 80%); }
-[data-scheme="dark"] .solutions__link { border-bottom-color: rgba(56,189,248,.35); }
+[data-scheme="dark"] .solutions__link { border-bottom-color: rgba(255,85,0,.35); }
 /* Стекло плотное до строки «чем реализовано»: светящаяся вода под ней
    гасила бы мелкий моноширинный текст, а у дневной плёнки этой беды нет. */
 [data-scheme="dark"] .sol__card {
@@ -2626,12 +2626,12 @@ label.cc__opt { cursor: pointer; }
 /* ---------- процесс ---------- */
 [data-scheme="dark"] .step--on {
   background: linear-gradient(158deg, #16233B, #111B30 62%, #192742);
-  box-shadow: inset 0 0 0 1px rgba(56,189,248,.28), var(--sh-2);
+  box-shadow: inset 0 0 0 1px rgba(255,85,0,.28), var(--sh-2);
 }
 
 /* ---------- отзыв и проекты ---------- */
 [data-scheme="dark"] .review__src,
-[data-scheme="dark"] .work__link { border-bottom-color: rgba(56,189,248,.35); }
+[data-scheme="dark"] .work__link { border-bottom-color: rgba(255,85,0,.35); }
 [data-scheme="dark"] .work__link:hover, [data-scheme="dark"] .review__src:hover { border-bottom-color: var(--green); }
 [data-scheme="dark"] .work__case { border-bottom-color: var(--ink); }
 
@@ -2641,11 +2641,11 @@ label.cc__opt { cursor: pointer; }
   border-color: var(--hair);
   background: var(--plate);
 }
-[data-scheme="dark"] .addon { box-shadow: var(--sh-3), inset 0 0 0 1px rgba(56,189,248,.06); }
+[data-scheme="dark"] .addon { box-shadow: var(--sh-3), inset 0 0 0 1px rgba(255,85,0,.08); }
 /* в рефе заголовок цен белый, акцент остаётся на воде под ним */
 [data-scheme="dark"] .pricing__title { color: var(--ink); }
 [data-scheme="dark"] .no-webgl .pricing__water { background: linear-gradient(155deg, transparent 42%, #3B3170 62%, #6A50D0 85%, #2E2A55); }
-[data-scheme="dark"] .plan--on { background: linear-gradient(145deg, rgba(255,255,255,.02), rgba(124,92,236,.10)); }
+[data-scheme="dark"] .plan--on { background: linear-gradient(145deg, rgba(255,255,255,.02), rgba(255,85,0,.08)); }
 [data-scheme="dark"] .drum__win {
   box-shadow: inset 0 0 0 1px var(--line-2), inset 0 10px 14px -12px rgba(0,0,0,.6), inset 0 -10px 14px -12px rgba(0,0,0,.6);
 }
@@ -2653,7 +2653,7 @@ label.cc__opt { cursor: pointer; }
 [data-scheme="dark"] .kit__chip[aria-pressed="true"],
 [data-scheme="dark"] .swipe-tabs__tab[aria-current="true"] { background: var(--green); color: var(--on-accent); }
 [data-scheme="dark"] .kit__chip.is-fire[aria-pressed="true"] { color: #fff; }
-[data-scheme="dark"] .plan__alert { background: rgba(56,189,248,.08); box-shadow: inset 0 0 0 1px rgba(56,189,248,.22); }
+[data-scheme="dark"] .plan__alert { background: rgba(255,85,0,.08); box-shadow: inset 0 0 0 1px rgba(255,85,0,.22); }
 [data-scheme="dark"] .tiers,
 [data-scheme="dark"] .tier + .tier,
 [data-scheme="dark"] .tiers__terms { border-color: var(--line-2); }
@@ -2661,14 +2661,14 @@ label.cc__opt { cursor: pointer; }
    странице они уходят в глубокий фиолетовый, иначе не отличались бы от фона */
 [data-scheme="dark"] .extra {
   background: linear-gradient(145deg, #11203A, #0C162A);
-  box-shadow: inset 0 0 0 1px rgba(56,189,248,.14);
+  box-shadow: inset 0 0 0 1px rgba(255,85,0,.18);
   color: #BDB6DA;
 }
 
 /* ---------- вопросы ---------- */
 [data-scheme="dark"] .qa[open] .qa__ico::before,
 [data-scheme="dark"] .qa[open] .qa__ico::after { background: var(--on-accent); }
-[data-scheme="dark"] .qa__a a { text-decoration-color: rgba(56,189,248,.4); }
+[data-scheme="dark"] .qa__a a { text-decoration-color: rgba(255,85,0,.4); }
 
 /* ---------- финальный блок и футер ---------- */
 [data-scheme="dark"] .final__inner { box-shadow: inset 0 0 0 1px var(--hair); }
@@ -2706,15 +2706,15 @@ label.cc__opt { cursor: pointer; }
   justify-content: center;
   width: 38px;
   height: 38px;
-  background: linear-gradient(135deg, rgba(37,99,235,.20), rgba(56,189,248,.10));
-  border: 1px solid rgba(56,189,248,.35);
+  background: rgba(255, 85, 0, 0.10);
+  border: 1px solid rgba(255, 85, 0, 0.35);
   border-radius: 8px;
   font-family: var(--f-mono);
   font-weight: 700;
   font-size: .88rem;
   color: var(--green);
   letter-spacing: .04em;
-  box-shadow: 0 0 12px rgba(56,189,248,.20);
+  box-shadow: 0 0 12px rgba(255, 85, 0, 0.20);
 }
 
 .brand__meta {
@@ -2744,7 +2744,7 @@ label.cc__opt { cursor: pointer; }
   gap: .65rem;
   padding: .42rem .95rem;
   background: var(--glass-2);
-  border: 1px solid rgba(56,189,248,.25);
+  border: 1px solid rgba(255, 85, 0, 0.25);
   border-radius: 8px;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -2771,18 +2771,21 @@ label.cc__opt { cursor: pointer; }
   100% { box-shadow: 0 0 0 0 rgba(16,185,129,0); }
 }
 
-/* Gradient highlight text */
+/* Solid high-contrast accent text — NO AI-style gradient */
 .hero__gradient-text {
-  background: linear-gradient(135deg, #38BDF8 0%, #2563EB 50%, #60A5FA 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #FF5500;
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  -webkit-text-fill-color: initial !important;
   display: inline-block;
+  font-weight: 700;
 }
 
 [data-scheme="dark"] .hero__gradient-text {
-  background: linear-gradient(135deg, #38BDF8 0%, #60A5FA 60%, #93C5FD 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #FF5500;
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  -webkit-text-fill-color: initial !important;
 }
 
 /* Metric Cards Grid */
@@ -2806,8 +2809,8 @@ label.cc__opt { cursor: pointer; }
 
 .metric-card:hover {
   transform: translateY(-2px);
-  border-color: rgba(56,189,248,.4);
-  box-shadow: 0 8px 24px -6px rgba(37,99,235,.25);
+  border-color: rgba(255, 85, 0, 0.45);
+  box-shadow: 0 8px 24px -6px rgba(255, 85, 0, 0.25);
 }
 
 .metric-card__val {
@@ -2816,14 +2819,14 @@ label.cc__opt { cursor: pointer; }
   font-size: clamp(1.4rem, 2.5vw, 1.85rem);
   font-weight: 800;
   line-height: 1.1;
-  color: var(--ink);
+  color: #FFFFFF;
   margin-bottom: .35rem;
   letter-spacing: -.02em;
 }
 
 [data-scheme="dark"] .metric-card__val {
-  color: #F8FAFC;
-  text-shadow: 0 0 20px rgba(56,189,248,.25);
+  color: #FFFFFF;
+  text-shadow: none;
 }
 
 .metric-card__label {
@@ -2833,36 +2836,26 @@ label.cc__opt { cursor: pointer; }
   display: block;
 }
 
-/* Enhanced Buttons */
+/* Enhanced Buttons — Solid Industrial Amber */
 .btn {
   border-radius: 12px !important;
   font-weight: 600;
   letter-spacing: -.01em;
 }
 
-.btn--primary {
-  background: linear-gradient(135deg, #1D4ED8 0%, #2563EB 100%) !important;
-  color: #FFFFFF !important;
-  box-shadow: 0 4px 18px rgba(37,99,235,.35), inset 0 1px 0 rgba(255,255,255,.25) !important;
-  border: 1px solid rgba(255,255,255,.15);
-}
-
-.btn--primary:hover {
-  background: linear-gradient(135deg, #2563EB 0%, #3B82F6 100%) !important;
-  box-shadow: 0 8px 28px rgba(37,99,235,.50), inset 0 1px 0 rgba(255,255,255,.35) !important;
-  transform: translateY(-1px);
-}
-
+.btn--primary,
 [data-scheme="dark"] .btn--primary {
-  background: linear-gradient(135deg, #38BDF8 0%, #0284C7 100%) !important;
-  color: #030A16 !important;
-  box-shadow: 0 4px 22px rgba(56,189,248,.40), inset 0 1px 0 rgba(255,255,255,.4) !important;
-  border: none;
+  background: #FF5500 !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 4px 18px rgba(255, 85, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
 }
 
+.btn--primary:hover,
 [data-scheme="dark"] .btn--primary:hover {
-  background: linear-gradient(135deg, #7DD3FC 0%, #38BDF8 100%) !important;
-  box-shadow: 0 8px 30px rgba(56,189,248,.60) !important;
+  background: #FF661A !important;
+  box-shadow: 0 8px 28px rgba(255, 85, 0, 0.50), inset 0 1px 0 rgba(255, 255, 255, 0.35) !important;
+  transform: translateY(-1px);
 }
 
 .btn--ghost {
@@ -2886,11 +2879,11 @@ label.cc__opt { cursor: pointer; }
   align-items: center;
   gap: .5rem;
   padding: .35rem .75rem;
-  background: rgba(37,99,235,.15);
-  border: 1px solid rgba(56,189,248,.3);
+  background: rgba(255, 85, 0, 0.12);
+  border: 1px solid rgba(255, 85, 0, 0.35);
   border-radius: 6px;
   font-size: .75rem;
-  color: var(--green);
+  color: #FF5500;
   font-family: var(--f-mono);
   font-weight: 600;
   text-transform: uppercase;
