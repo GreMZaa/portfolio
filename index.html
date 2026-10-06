@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ru">
+<html lang="ru" data-scheme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,19 +9,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="assets/img/favicon-192.png">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
-<meta name="theme-color" content="#F6F8FC">
-<!-- Тема ставится до первой отрисовки: выбор переключателя, если он был,
-     иначе настройка системы. Позже — уже вспышка светлой страницы.
-     Тот же скрипт стоит в privacy.html. -->
-<script>
-(function () {
-  var s = null;
-  try { s = localStorage.getItem('ss_scheme'); } catch (e) {}
-  if (s !== 'light' && s !== 'dark') s = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-  document.documentElement.setAttribute('data-scheme', s);
-  if (s === 'dark') document.querySelector('meta[name="theme-color"]').content = '#080B12';
-})();
-</script>
+<meta name="theme-color" content="#080B12">
 
 <link rel="canonical" href="https://sharonovecom.ru/">
 <meta property="og:type" content="website">
@@ -43,8 +31,8 @@
 </head>
 <body>
 
-<!-- вода первого экрана: WebGL, уходит вместе с hero -->
-<canvas class="water water--hero" id="water-hero" aria-hidden="true"></canvas>
+<!-- Интерактивная топология Data Mesh & Cyber Grid -->
+<canvas class="cyber-canvas" id="cyber-canvas" aria-hidden="true"></canvas>
 
 <a class="skip" href="#main">К содержимому</a>
 
@@ -68,13 +56,6 @@
     </nav>
 
     <div class="header__actions">
-      <!-- Переключатель темы: aria-pressed="true" — тёмная. -->
-      <button class="scheme" type="button" aria-label="Тёмная тема" aria-pressed="false">
-        <span class="scheme__knob" aria-hidden="true">
-          <svg class="scheme__sun" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M8 1.2v1.6M8 13.2v1.6M1.2 8h1.6M13.2 8h1.6M3.2 3.2l1.1 1.1M11.7 11.7l1.1 1.1M3.2 12.8l1.1-1.1M11.7 4.3l1.1-1.1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-          <svg class="scheme__moon" viewBox="0 0 16 16" fill="none"><path d="M13.6 9.9A5.9 5.9 0 0 1 6.1 2.4a5.9 5.9 0 1 0 7.5 7.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
-        </span>
-      </button>
       <a href="https://t.me/ssharonovv?text=Привет,%20хочу%20обсудить%20проект" class="btn btn--primary btn--sm" target="_blank" rel="noopener">
         Написать в Telegram
         <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2.5 8h11m0 0L9 3.5M13.5 8L9 12.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -213,7 +194,6 @@
 <section class="solutions" id="solutions">
   <div class="wrap">
     <div class="solutions__panel">
-      <canvas class="water water--accent solutions__water" data-flow="basin" aria-hidden="true"></canvas>
       <header class="solutions__head reveal">
         <h2 class="h2">Системы под ваши задачи</h2>
         <p class="solutions__intro">Определяем, где вы тратите больше всего времени на ручную работу. Исходя из этого — собираю удобный инструмент.</p>
@@ -570,7 +550,6 @@
          плашками: в одной коробке они читались бы четвёртым тарифом. -->
     <div class="pricing__panel">
     <header class="pricing__head reveal">
-      <canvas class="water water--accent pricing__water" data-flow="rising" aria-hidden="true"></canvas>
       <h2 class="h2 pricing__title">Стоимость разработки</h2>
       <p class="pricing__terms"><strong>50% до старта · 50% после запуска</strong><span>Для крупных проектов — оплата по этапам</span></p>
     </header>
@@ -841,7 +820,6 @@
 <section class="final" id="contact">
   <div class="wrap">
     <div class="final__inner reveal">
-      <canvas class="water water--dark" data-tone="dark" aria-hidden="true"></canvas>
       <div>
         <h2 class="final__h">Обсудим ваш проект?</h2>
         <p>Расскажите, что съедает больше всего времени. Разберу процесс, предложу решение и назову срок с ценой до начала работ.</p>
@@ -992,7 +970,7 @@
   </div>
 </aside>
 
-<script type="module" src="water.js"></script>
+<script type="module" src="cybergrid.js"></script>
 <script type="module" src="script.js"></script>
 </body>
 </html>

@@ -216,42 +216,7 @@
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
 
-  /* ---------- тема ----------
-     Стартовую тему ставит скрипт в <head> (до отрисовки). Здесь только
-     переключатель: нажатие запоминает выбор, и дальше сайт держит его.
-     Пока выбора нет, тема идёт за системой — в том числе если её
-     переключили при открытой странице. Вода в water.js смотрит на
-     атрибут data-scheme сама. */
-  var SCHEME_KEY = 'dn_scheme';
-  var root = document.documentElement;
-  var schemeBtn = document.querySelector('.scheme');
-  var schemeMeta = document.querySelector('meta[name="theme-color"]');
-  var sysDark = window.matchMedia('(prefers-color-scheme: dark)');
 
-  function setScheme(s, smooth) {
-    var go = function () {
-      root.setAttribute('data-scheme', s);
-      if (schemeMeta) schemeMeta.content = s === 'dark' ? '#080B12' : '#F6F8FC';
-      if (schemeBtn) schemeBtn.setAttribute('aria-pressed', String(s === 'dark'));
-    };
-    // плавная смена — снимком страницы, там где браузер это умеет
-    if (smooth && !reduced && document.startViewTransition) document.startViewTransition(go);
-    else go();
-  }
-
-  if (schemeBtn) {
-    schemeBtn.setAttribute('aria-pressed', String(root.getAttribute('data-scheme') === 'dark'));
-    schemeBtn.addEventListener('click', function () {
-      var s = root.getAttribute('data-scheme') === 'dark' ? 'light' : 'dark';
-      try { localStorage.setItem(SCHEME_KEY, s); } catch (e) {}
-      setScheme(s, true);
-    });
-  }
-  sysDark.addEventListener('change', function (e) {
-    var saved = null;
-    try { saved = localStorage.getItem(SCHEME_KEY); } catch (err) {}
-    if (saved !== 'light' && saved !== 'dark') setScheme(e.matches ? 'dark' : 'light', true);
-  });
 
   /* ---------- язык ----------
      Список языков — нативный <details>, он раскрывается и без скрипта.

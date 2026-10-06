@@ -44,61 +44,59 @@
 }
 
 :root {
-  /* Поверхности — холодный титановый лед / платина (Cyber Ice) */
-  --paper:    #F6F8FC;
-  --paper-2:  #ECF1F8;
-  --card:     #FFFFFF;
-  --tint:     #EEF4FE;   /* подсвеченная ячейка */
+  color-scheme: dark;
 
-  /* Чернила — глубокий полуночный графит */
-  --ink:      #0C1222;
-  --ink-soft: #3E4B65;
-  --ink-mute: #5A6A88;
-  --ink-faint:#798CA8;
+  /* Обсидиановая основа и глубокий кибер-титан (Cyber Obsidian) */
+  --paper:    #080B12;
+  --paper-2:  #0E1422;
+  --card:     #12192B;
+  --tint:     #162038;
 
-  --line:     #E1E7F2;
-  --line-2:   #CBD6E8;
+  /* Высококонтрастный текст для читаемости */
+  --ink:      #F8FAFC;
+  --ink-soft: #A3B3CD;
+  --ink-mute: #788BA8;
+  --ink-faint:#556783;
 
-  /* Фирменный цвет: Электрик-Кобальт и Сапфир */
-  --green:      #2563EB;
-  --green-deep: #1D4ED8;
-  --green-dark: #091326;   /* тёмный баннер */
-  --green-soft: rgba(37,99,235,.08);
+  --line:     rgba(255, 255, 255, 0.08);
+  --line-2:   rgba(56, 189, 248, 0.25);
 
-  /* стекло — три уровня. Уровень задаёт не только альфу, но и блюр:
-     чем прозрачнее плашка, тем сильнее она обязана размывать воду,
-     иначе текст садится на рябь и блок перестаёт читаться. */
-  --glass:     rgba(255,255,255,.30);   /* лежит на воде: pill, рейл, ghost */
-  --glass-2:   rgba(255,255,255,.54);   /* контент на воде: карточка, стат-бар */
-  --glass-3:   rgba(255,255,255,.96);   /* плашка там, где воды уже нет */
-  /* верхний блик: в референсе стекло светится в углу входа света */
-  --sheen: linear-gradient(158deg, rgba(255,255,255,.30), rgba(255,255,255,0) 48%);
-  /* зеркальная кромка: ярко в одном углу, гаснет, слабый возврат
-     в противоположном — этим Liquid Glass отличается от ровной обводки */
+  /* Электрик-Циан и Неоновый Сапфир */
+  --green:      #38BDF8;
+  --green-deep: #7DD3FC;
+  --green-dark: #070B14;
+  --green-soft: rgba(56, 189, 248, 0.12);
+  --on-accent:  #041021;
+
+  /* Технологичное стекло (Cyber Glass) */
+  --glass:     rgba(14, 20, 34, 0.55);
+  --glass-2:   rgba(18, 25, 43, 0.75);
+  --glass-3:   rgba(14, 19, 32, 0.96);
+  --sheen: linear-gradient(158deg, rgba(56, 189, 248, 0.12), rgba(255, 255, 255, 0) 48%);
   --rim: linear-gradient(148deg,
-           rgba(255,255,255,.98) 0%,
-           rgba(255,255,255,.34) 26%,
-           rgba(255,255,255,0)   52%,
-           rgba(255,255,255,.12) 74%,
-           rgba(255,255,255,.52) 100%);
+           rgba(56, 189, 248, 0.40) 0%,
+           rgba(255, 255, 255, 0.12) 26%,
+           rgba(255, 255, 255, 0)    52%,
+           rgba(56, 189, 248, 0.08) 74%,
+           rgba(56, 189, 248, 0.25) 100%);
   --rim-pill: linear-gradient(172deg,
-           rgba(255,255,255,1)   0%,
-           rgba(255,255,255,.40) 38%,
-           rgba(255,255,255,.04) 62%,
-           rgba(255,255,255,.50) 100%);
+           rgba(56, 189, 248, 0.45) 0%,
+           rgba(255, 255, 255, 0.15) 38%,
+           rgba(255, 255, 255, 0.02) 62%,
+           rgba(56, 189, 248, 0.20) 100%);
   --rim-dark: linear-gradient(148deg,
-           rgba(255,255,255,.34) 0%,
-           rgba(255,255,255,.08) 30%,
-           rgba(255,255,255,0)   56%,
-           rgba(255,255,255,.06) 78%,
-           rgba(255,255,255,.22) 100%);
+           rgba(56, 189, 248, 0.35) 0%,
+           rgba(255, 255, 255, 0.08) 30%,
+           rgba(255, 255, 255, 0)    56%,
+           rgba(56, 189, 248, 0.06) 78%,
+           rgba(56, 189, 248, 0.22) 100%);
   --blur:    30px;
   --blur-sm: 18px;
 
-  /* тени — мягкие, предмет лежит на воде */
-  --sh-1: 0 1px 2px rgba(10,16,30,.03), 0 3px 10px rgba(10,16,30,.04);
-  --sh-2: 0 2px 6px rgba(10,16,30,.04), 0 16px 38px rgba(10,16,30,.07);
-  --sh-3: 0 6px 14px rgba(10,16,30,.05), 0 32px 74px rgba(10,16,30,.10);
+  /* Тени глубокого космоса */
+  --sh-1: 0 1px 2px rgba(0, 0, 0, 0.40), 0 3px 10px rgba(0, 0, 0, 0.35);
+  --sh-2: 0 2px 6px rgba(0, 0, 0, 0.45), 0 16px 38px rgba(0, 0, 0, 0.50);
+  --sh-3: 0 6px 14px rgba(0, 0, 0, 0.50), 0 32px 74px rgba(0, 0, 0, 0.60);
 
   /* типографика */
   --f-display: "Inter Tight", "Inter Tight Fallback", system-ui, sans-serif;
@@ -146,7 +144,7 @@ html {
 body {
   position: relative;
   background-color: var(--paper);
-  background-image: url("assets/img/cyber-grid.svg");
+  background-image: url("assets/img/cyber-grid-dark.svg");
   background-size: 1152px 1152px;
   color: var(--ink);
   font-family: var(--f-text);
@@ -163,53 +161,26 @@ a { color: inherit; text-decoration: none; }
 button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
 ul { list-style: none; padding: 0; }
 
-::selection { background: rgba(37,99,235,.18); color: var(--ink); }
+::selection { background: rgba(56, 189, 248, 0.30); color: #F8FAFC; }
 :focus-visible { outline: 2px solid var(--green); outline-offset: 3px; border-radius: 4px; }
 
-.skip { position: absolute; left: -9999px; background: var(--ink); color: #fff; padding: .7rem 1.1rem; border-radius: var(--r-sm); z-index: 200; }
+.skip { position: absolute; left: -9999px; background: var(--card); color: #fff; padding: .7rem 1.1rem; border-radius: var(--r-sm); z-index: 200; box-shadow: 0 0 0 1px var(--line-2); }
 .skip:focus { left: 1rem; top: 1rem; }
 
 /* ============================================================
-   ВОДА
-   Канвас WebGL. Живёт в потоке страницы, а не fixed: в референсе
-   вода принадлежит первому экрану и уходит вместе с ним.
+   ИНТЕРАКТИВНАЯ ТОПОЛОГИЯ (DATA MESH & CYBER GRID)
    ============================================================ */
-.water {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
+.cyber-canvas {
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: min(1200px, 135vh);
   z-index: 0; pointer-events: none;
   display: block;
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 78%, transparent 100%);
+          mask-image: linear-gradient(to bottom, #000 0%, #000 78%, transparent 100%);
 }
-.water--hero {
-  position: absolute; top: 0; left: 0;
-  height: min(1180px, 132vh);
-  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 81%, transparent 100%);
-          mask-image: linear-gradient(to bottom, #000 0%, #000 81%, transparent 100%);
-}
-/* На телефоне высота волны считается от ШИРИНЫ, а не от vh.
-   Причина: при скролле мобильный браузер прячет адресную строку,
-   vh пересчитывается, канвас меняет высоту — а форма волны в шейдере
-   строится от соотношения сторон (asp = uRes.x / uRes.y). Смена высоты
-   на сотню пикселей перестраивает композицию, и волна скачком съезжает.
-   Ширина при вертикальном скролле не меняется никогда, поэтому
-   285vw даёт ту же высоту, что и 132vh на 390×844, но стабильную.
-   Побочный плюс: соотношение сторон канваса теперь одинаково
-   на всех телефонах, то есть волна везде выглядит так же. */
 @media (max-width: 819px) and (orientation: portrait) {
-  .water--hero { height: min(1180px, 285vw); }
+  .cyber-canvas { height: min(1200px, 280vw); }
 }
-
-/* фолбэк без WebGL: не пустота, а мягкая мятная заливка.
-   Пятна выставлены по той же диагонали, что и волна в шейдере:
-   низкий вход слева — центр — гребень в правой верхней трети. */
-.no-webgl .water--hero {
-  background:
-    radial-gradient(85% 55% at 78% 26%, rgba(88,186,160,.34), transparent 62%),
-    radial-gradient(90% 55% at 52% 52%, rgba(140,214,192,.28), transparent 66%),
-    radial-gradient(70% 45% at 18% 72%, rgba(140,214,192,.16), transparent 62%),
-    radial-gradient(60% 40% at 99% 40%, rgba(60,150,128,.20), transparent 60%);
-}
-.no-webgl .water--dark { background: linear-gradient(135deg, #0B2519, #14483A 55%, #0C2C22); }
 
 .header, main { position: relative; z-index: 2; }
 
@@ -932,19 +903,12 @@ ul { list-style: none; padding: 0; }
 .solutions { padding-block: var(--sec-pad); }
 .solutions__panel {
   position: relative; isolation: isolate; overflow: hidden;
-  display: grid; border: 1px solid #fff; border-radius: var(--r-xl);
-  background: var(--tint); box-shadow: var(--sh-2);
+  display: grid;
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  border-radius: var(--r-xl);
+  background: linear-gradient(135deg, rgba(18, 25, 43, 0.85) 0%, rgba(8, 11, 18, 0.95) 100%);
+  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
-.water--accent {
-  /* Материал тот же, что на первом экране; гасить его вуалью незачем —
-     плотность задаёт сам шейдер маской, а не прозрачность канваса. */
-  opacity: 1;
-}
-.no-webgl .solutions__water { background: linear-gradient(0deg, #38BDF8, #93C5FD 60%, transparent 80%); }
-.no-webgl .pricing__water { background: linear-gradient(155deg, transparent 42%, #A9DCCD 62%, #73BEAA 85%, #93C5FD); }
-/* Канвасы совпадают с границами плашек. Силуэт потока задаёт шейдер,
-   скругления и стенки — overflow родителя; радиальной растушёвки нет. */
-.solutions__water { inset: auto 0 0; width: 100%; height: min(55%, 300px); }
 .solutions__head { position: relative; padding: clamp(1.5rem, 3.3vw, 2.7rem); }
 .solutions__head .h2 { max-width: 13ch; text-wrap: balance; }
 .solutions__intro { margin-top: 1.1rem; color: var(--ink-soft); font-size: .95rem; line-height: 1.6; max-width: 34ch; }
@@ -1025,15 +989,12 @@ ul { list-style: none; padding: 0; }
   position: relative; isolation: isolate;
   border-radius: var(--r-xl);
   overflow: hidden;
-  background: var(--green-dark);
+  background: linear-gradient(135deg, #091326 0%, #0F2042 50%, #070B14 100%);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.12);
   padding: clamp(2.25rem, 5.5vw, 4rem) clamp(1.5rem, 4vw, 3.25rem);
   display: grid; gap: clamp(1.5rem, 3.5vw, 2.5rem); align-items: center;
   color: #E2E8F0;
-}
-.final__inner .water {
-  z-index: -1; opacity: .9;
-  -webkit-mask-image: linear-gradient(to right, #000 0 22%, rgba(0,0,0,.4) 28%, transparent 34%);
-          mask-image: linear-gradient(to right, #000 0 22%, rgba(0,0,0,.4) 28%, transparent 34%);
 }
 .final__h { font-family: var(--f-display); font-size: clamp(1.65rem, 3.6vw, 2.5rem); font-weight: 600; letter-spacing: -.01em; line-height: 1.15; color: #fff; }
 .final p { color: rgba(234,243,239,.78); margin-top: .8rem; max-width: 46ch; }
@@ -1926,9 +1887,9 @@ label.cc__opt { cursor: pointer; }
    не трогается — его значение лежит константой PAPER в шейдере воды. */
 .pricing__panel {
   overflow: hidden; border-radius: var(--r-xl);
-  border: 1px solid rgba(255,255,255,.92);
-  background: linear-gradient(152deg, #FFFFFF 0%, #F1F8F5 40%, #DBEAFE 100%);
-  box-shadow: var(--sh-3);
+  border: 1px solid rgba(56, 189, 248, 0.22);
+  background: linear-gradient(152deg, rgba(18, 25, 43, 0.85) 0%, rgba(8, 11, 18, 0.95) 100%);
+  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 /* Заголовок по центру плашки, условия оплаты — строкой под ним. */
 .pricing__head {
@@ -1937,7 +1898,6 @@ label.cc__opt { cursor: pointer; }
   padding: clamp(1.6rem, 4vw, 3rem) clamp(1.4rem, 4vw, 3rem);
   border-bottom: 1px solid var(--line-2);
 }
-.pricing__water { inset: 0; width: 100%; height: 100%; z-index: -1; }
 /* Заголовок секции — сам зелёный: отдельной подписи над ним больше нет. */
 .pricing__title { color: var(--green); }
 .pricing__terms { color: var(--ink-soft); font-size: .8rem; }
