@@ -5,7 +5,10 @@ dist
 .env
 .env.local
 .chrome-temp/
+__pycache__/
 *.png
+!assets/img/*.png
+!assets/img/**/*.png
 !assets/hero_title_artwork_clean@3x.png
 !assets/sergey_cutout_clean.png
 !assets/sticker_code_create_elevate@3x.png
@@ -15,6 +18,8 @@ dist
 !assets/mockup_4.png
 !assets/badge_edition_doodle@3x.png
 !assets/sticker_code_create_elevate.png
+snap_*.png
+screenshot_*.png
 assets/ref_*
 assets/test_*
 assets/c1_*
