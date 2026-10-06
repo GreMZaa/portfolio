@@ -121,7 +121,7 @@
         to: toNode,
         progress: 0,
         speed: (0.007 + Math.random() * 0.009) * (reducedMotion ? 0.4 : 1),
-        color: Math.random() > 0.4 ? '#FF5500' : '#FFA860',
+        color: Math.random() > 0.4 ? '#BCA8FD' : '#DDD6FE',
         size: Math.random() > 0.5 ? 2.5 : 2
       });
     }
@@ -133,7 +133,7 @@
     ctx.lineWidth = 1;
 
     // Тонкие координатные линии
-    ctx.strokeStyle = 'rgba(24, 24, 27, 0.038)';
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.04)';
     ctx.beginPath();
     for (let x = 0; x <= width; x += gridSize) {
       ctx.moveTo(x, 0);
@@ -146,7 +146,7 @@
     ctx.stroke();
 
     // Микро-кресты (+) на узлах координат
-    ctx.strokeStyle = 'rgba(24, 24, 27, 0.12)';
+    ctx.strokeStyle = 'rgba(188, 168, 253, 0.16)';
     const arm = 3.5;
     ctx.beginPath();
     for (let x = gridSize; x < width; x += gridSize * 2) {
@@ -171,9 +171,9 @@
       mouse.x, mouse.y, 0,
       mouse.x, mouse.y, mouse.radius
     );
-    grad.addColorStop(0, 'rgba(255, 85, 0, 0.08)');
-    grad.addColorStop(0.5, 'rgba(255, 85, 0, 0.025)');
-    grad.addColorStop(1, 'rgba(250, 248, 245, 0)');
+    grad.addColorStop(0, 'rgba(188, 168, 253, 0.09)');
+    grad.addColorStop(0.5, 'rgba(139, 92, 246, 0.03)');
+    grad.addColorStop(1, 'rgba(13, 15, 34, 0)');
 
     ctx.fillStyle = grad;
     ctx.beginPath();
@@ -218,8 +218,8 @@
           n.y += dy * force;
           n.activity = Math.max(n.activity, (1 - dist / mouse.radius));
 
-          // Связь мыши с узлом (сигнальный янтарный импульс)
-          ctx.strokeStyle = `rgba(255, 85, 0, ${(1 - dist / mouse.radius) * 0.45})`;
+          // Связь мыши с узлом (лавандовый импульс)
+          ctx.strokeStyle = `rgba(188, 168, 253, ${(1 - dist / mouse.radius) * 0.45})`;
           ctx.lineWidth = 1;
           ctx.beginPath();
           ctx.moveTo(mouse.x, mouse.y);
@@ -244,9 +244,9 @@
           const boost = Math.max(na.activity, nb.activity);
           
           if (boost > 0.1) {
-            ctx.strokeStyle = `rgba(255, 85, 0, ${alpha + boost * 0.35})`;
+            ctx.strokeStyle = `rgba(188, 168, 253, ${alpha + boost * 0.35})`;
           } else {
-            ctx.strokeStyle = `rgba(24, 24, 27, ${alpha * 0.65})`;
+            ctx.strokeStyle = `rgba(255, 255, 255, ${alpha * 0.45})`;
           }
           ctx.beginPath();
           ctx.moveTo(na.x, na.y);
@@ -289,14 +289,14 @@
 
       // Ореол узла
       ctx.fillStyle = n.isHub 
-        ? `rgba(255, 85, 0, ${0.16 + pulse * 0.15 + n.activity * 0.3})`
-        : `rgba(24, 24, 27, ${0.05 + pulse * 0.05 + n.activity * 0.15})`;
+        ? `rgba(188, 168, 253, ${0.16 + pulse * 0.15 + n.activity * 0.3})`
+        : `rgba(255, 255, 255, ${0.05 + pulse * 0.05 + n.activity * 0.15})`;
       ctx.beginPath();
       ctx.arc(n.x, n.y, currentRadius * 2.3, 0, Math.PI * 2);
       ctx.fill();
 
       // Ядро узла
-      ctx.fillStyle = n.isHub ? '#FF5500' : (n.activity > 0.4 ? '#FF7722' : '#71717A');
+      ctx.fillStyle = n.isHub ? '#BCA8FD' : (n.activity > 0.4 ? '#DDD6FE' : '#8B5CF6');
       ctx.beginPath();
       ctx.arc(n.x, n.y, currentRadius, 0, Math.PI * 2);
       ctx.fill();
@@ -304,7 +304,7 @@
       // Моноширинная метка узла
       if (n.label && width >= 860) {
         ctx.font = '600 8.5px "JetBrains Mono", monospace';
-        ctx.fillStyle = `rgba(39, 39, 42, ${0.65 + pulse * 0.2 + n.activity * 0.25})`;
+        ctx.fillStyle = `rgba(221, 214, 254, ${0.65 + pulse * 0.2 + n.activity * 0.25})`;
         ctx.fillText(n.label, n.x + currentRadius + 5, n.y + 3);
       }
     }
