@@ -1560,15 +1560,14 @@ label.cc__opt { cursor: pointer; }
 
 /* Лист выезжает снизу и проявляется из размытия: края мягкие, пока он
    в пути, и собираются в чёткие к концу. Закрытие доигрывает script.js */
-.cv[open] .cv__bar, .cv[open] .cv__sheet { animation: cv-in .72s cubic-bezier(.16,1,.3,1) both; }
-.cv[open] .cv__sheet { animation-delay: .05s; }
-.cv.is-closing .cv__bar, .cv.is-closing .cv__sheet { animation: cv-out .34s cubic-bezier(.5,0,.75,0) forwards; }
+.cv[open] .cv__bar, .cv[open] .cv__sheet { animation: cv-in .48s cubic-bezier(.16,1,.3,1) both; will-change: transform, opacity; }
+.cv[open] .cv__sheet { animation-delay: .03s; }
+.cv.is-closing .cv__bar, .cv.is-closing .cv__sheet { animation: cv-out .26s cubic-bezier(.5,0,.75,0) forwards; }
 @keyframes cv-in {
-  from { opacity: 0; transform: translateY(min(26vh, 220px)); filter: blur(14px); }
-  55%  { filter: blur(0); }
-  to   { opacity: 1; transform: none; filter: none; }
+  from { opacity: 0; transform: translate3d(0, 36px, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
 }
-@keyframes cv-out { to { opacity: 0; transform: translateY(min(18vh, 150px)); filter: blur(10px); } }
+@keyframes cv-out { to { opacity: 0; transform: translate3d(0, 24px, 0); } }
 
 /* FlyGuru: светлый фон и тиловая шапка сайта, оранжевая кнопка записи.
    Шапка на тон глубже сайтовой #0C8498: белый на ней даёт 4.9, а не 4.4 */
@@ -1585,12 +1584,14 @@ label.cc__opt { cursor: pointer; }
 }
 /* Balance Food: свежий светлый фон, изумрудный и фирменный акцент оранжевого */
 .cv[data-theme="100lovaya"] {
-  --cv-bg:      #F8FAFC;
-  --cv-ink:     #0F172A;
-  --cv-mute:    #64748B;
-  --cv-accent:  #FF5500;
-  --cv-cta:     #10B981;
+  --cv-bg:      #F6F7F4;
+  --cv-ink:     #18181B;
+  --cv-mute:    #52525B;
+  --cv-accent:  #10B981;
+  --cv-cta:     #FF5500;
   --cv-cta-ink: #FFFFFF;
+  --cv-go:      #10B981;
+  --cv-go-ink:  #FFFFFF;
 }
 /* MoodBot: синяя шапка и жёлтая кнопка с тёмно-синей подписью, как на лендинге */
 .cv[data-theme="mood"] {
