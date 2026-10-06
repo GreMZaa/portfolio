@@ -1004,4 +1004,32 @@
 
     targets.forEach(function (t) { navIO.observe(t); });
   }
+
+  /* ---------- Agentation (визуальные правки для ИИ-агента) ----------
+     Включается автоматически на localhost / 127.0.0.1 или по ?agentation=1 */
+  if (
+    location.hostname === 'localhost' ||
+    location.hostname === '127.0.0.1' ||
+    location.search.indexOf('agentation=1') !== -1 ||
+    sessionStorage.getItem('agentation') === '1'
+  ) {
+    if (location.search.indexOf('agentation=1') !== -1) {
+      try { sessionStorage.setItem('agentation', '1'); } catch (e) {}
+    }
+    Promise.all([
+      import('https://esm.sh/react@18.3.1'),
+      import('https://esm.sh/react-dom@18.3.1/client'),
+      import('https://esm.sh/agentation?deps=react@18.3.1,react-dom@18.3.1')
+    ]).then(function (mods) {
+      var React = mods[0].default || mods[0];
+      var createRoot = mods[1].createRoot;
+      var Agentation = mods[2].Agentation;
+      var host = document.createElement('div');
+      host.id = 'agentation-root';
+      document.body.appendChild(host);
+      createRoot(host).render(React.createElement(Agentation, { endpoint: 'http://localhost:4747' }));
+    }).catch(function (err) {
+      console.warn('Agentation load error:', err);
+    });
+  }
 })();
