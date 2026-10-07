@@ -1291,8 +1291,6 @@
       var hasUrlTrigger = location.search.indexOf('agentation=1') !== -1 || location.hash === '#agentation';
       if (hasUrlTrigger) {
         triggerAgentation();
-      } else if (sessionStorage.getItem(UNLOCK_KEY) === EXPECTED_HASH.slice(0, 16)) {
-        mountAgentation(false);
       }
     } catch (e) {}
 
