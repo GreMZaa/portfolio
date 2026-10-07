@@ -2767,15 +2767,20 @@ label.cc__opt { cursor: pointer; }
   justify-content: center;
   width: 38px;
   height: 38px;
-  background: #FFFFFF;
-  border: 1px solid rgba(255, 85, 0, 0.35);
-  border-radius: 8px;
-  font-family: var(--f-mono);
-  font-weight: 700;
-  font-size: .88rem;
-  color: #FF5500;
-  letter-spacing: .04em;
-  box-shadow: 0 2px 8px rgba(255, 85, 0, 0.12);
+  flex: none;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 3px 10px rgba(255, 85, 0, 0.24);
+  transition: transform .25s var(--ease), box-shadow .25s var(--ease);
+}
+.brand__logo-box img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.brand:hover .brand__logo-box {
+  transform: translateY(-1px) scale(1.03);
+  box-shadow: 0 5px 14px rgba(255, 85, 0, 0.34);
 }
 
 .brand__meta {

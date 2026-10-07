@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="16" y1="8" x2="176" y2="188" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FF6B1A"/>
+      <stop offset="52%" stop-color="#FF5500"/>
+      <stop offset="100%" stop-color="#D93D00"/>
+    </linearGradient>
+    <linearGradient id="rim" x1="96" y1="4" x2="96" y2="188" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.48"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.1"/>
+    </linearGradient>
+    <filter id="sh" x="20" y="24" width="152" height="152" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="5" stdDeviation="5" flood-color="#6E1B00" flood-opacity="0.32"/>
+    </filter>
+  </defs>
+  <rect x="4" y="4" width="184" height="184" rx="44" fill="url(#bg)"/>
+  <rect x="6" y="6" width="180" height="180" rx="42" stroke="url(#rim)" stroke-width="3.5"/>
+  <g filter="url(#sh)">
+    <!-- Precision Geometric S Monogram -->
+    <path d="M126 54H75C63.402 54 54 63.402 54 75C54 86.598 63.402 96 75 96H117C128.598 96 138 105.402 138 117C138 128.598 128.598 138 117 138H66"
+          stroke="#FFFFFF" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Architectural Accent Terminal Dots -->
+    <circle cx="132" cy="54" r="12" fill="#FFFFFF"/>
+    <circle cx="60" cy="138" r="12" fill="#FFFFFF"/>
+  </g>
+</svg>
